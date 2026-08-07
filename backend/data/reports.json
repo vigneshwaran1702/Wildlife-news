@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pdf_718f31d0",
+    "title": "Morning Wildlife Alert Bulletin - 07 Aug 2026, 08:00 AM",
+    "report_type": "Daily Morning Briefing (Yesterday & Early AM Data)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_718f31d0.pdf",
+    "download_url": "/pdfs/WildTN_Report_pdf_718f31d0.pdf",
+    "created_at": "2026-08-07 18:10:26.086115",
+    "article_count": 14,
+    "filter_criteria": {
+      "Time Window": "Yesterday 08:00 AM to Today 08:00 AM"
+    }
+  },
+  {
+    "id": "pdf_1bca8bce",
+    "title": "Evening Wildlife Summary Briefing - 07 Aug 2026, 05:30 PM",
+    "report_type": "Daily Evening Briefing (08:00 AM - 05:00 PM Data)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_1bca8bce.pdf",
+    "download_url": "/pdfs/WildTN_Report_pdf_1bca8bce.pdf",
+    "created_at": "2026-08-07 18:10:26.152539",
+    "article_count": 14,
+    "filter_criteria": {
+      "Time Window": "Today 08:00 AM to 05:00 PM"
+    }
+  }
+]
