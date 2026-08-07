@@ -601,5 +601,45 @@
     "created_at": "2026-08-07 18:12:17.114003",
     "views_count": 0,
     "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu Budget 2026: TVK-led government’s first financial blueprint",
+    "title_ta": "[தமிழ் அறிக்கை] Tamil Nadu Budget 2026: TVK-led government’s first financial blueprint",
+    "content_en": "A compilation of stories related to the Tamil Nadu Budget 2026-27",
+    "content_ta": "A compilation of stories related to the Tamil Nadu Budget 2026-27",
+    "summary_en": "• A compilation of stories related to the Tamil Nadu Budget 2026-27\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• A compilation of stories related to the Tamil Nadu Budget 2026-27\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "General Wildlife",
+    "conflict_level": "None",
+    "district": "Tamil Nadu (State Wide)",
+    "species": [
+      "Wildlife"
+    ],
+    "source_name": "The Hindu - Tamil Nadu",
+    "source_url": "https://www.thehindu.com/news/national/tamil-nadu/tamil-nadu-budget-2026-package-tvk-led-governments-first-financial-blueprint/article71317299.ece",
+    "published_at": "2026-08-07 18:37:06.760287",
+    "tags": [
+      "General Wildlife",
+      "Tamil Nadu (State Wide)",
+      "Wildlife"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Tamil Nadu (State Wide)"
+      ],
+      "species": [
+        "Wildlife"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "No reported human casualties."
+    },
+    "sentiment": "Neutral",
+    "id": "art_0ee2da09",
+    "created_at": "2026-08-07 18:37:06.760287",
+    "views_count": 0,
+    "is_bookmarked": false
   }
 ]
