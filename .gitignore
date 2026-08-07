@@ -1,0 +1,27 @@
+# Node modules
+frontend/node_modules/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+backend/venv/
+
+# Environment files
+.env
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# Build outputs
+frontend/dist/
+
+# Logs
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
