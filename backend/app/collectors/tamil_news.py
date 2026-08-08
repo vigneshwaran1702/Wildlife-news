@@ -36,8 +36,8 @@ class TamilNewsCollector:
 
                 title_en, content_en = ArticleTranslator.translate_to_english(title_ta, content_ta)
 
-                # Filter strictly for Tamil Nadu relevance
-                if not ArticleClassifier.is_tamil_nadu_relevant(title_en, content_en):
+                # Filter strictly for Tamil Nadu + forest/wildlife relevance
+                if not ArticleClassifier.is_tamil_nadu_relevant(title_en, content_en) or not ArticleClassifier.is_forest_or_wildlife_relevant(title_en, content_en):
                     continue
 
                 existing = [a for a in db_storage.articles.values() if a.source_url == link or a.title_ta == title_ta]

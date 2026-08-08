@@ -194,7 +194,7 @@ class PDFReportGenerator:
             title=title,
             report_type=report_type,
             file_path=file_path,
-            download_url=f"/pdfs/{filename}",
+            download_url=f"/api/pdf/download/{report_id}",
             created_at=datetime.now(),
             article_count=len(articles),
             filter_criteria=filter_criteria or {}

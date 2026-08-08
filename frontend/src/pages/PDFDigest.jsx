@@ -32,12 +32,24 @@ export default function PDFDigest() {
     loadReports();
   }, []);
 
+  const downloadReport = (report) => {
+    if (!report?.download_url) return;
+    const link = document.createElement('a');
+    link.href = report.download_url;
+    link.setAttribute('download', `${report.title || 'wildtn-report'}.pdf`);
+    link.setAttribute('target', '_blank');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const handleGenerate = async (e) => {
     e.preventDefault();
     setGenerating(true);
     try {
       const newReport = await generatePDFReport(form);
       setReports([newReport, ...reports]);
+      downloadReport(newReport);
       confetti({ particleCount: 60, spread: 60, origin: { y: 0.7 } });
     } catch (err) {
       alert("Failed to generate PDF report: " + err.message);
@@ -203,6 +215,7 @@ export default function PDFDigest() {
 
                   <a
                     href={rep.download_url}
+                    download
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-primary"

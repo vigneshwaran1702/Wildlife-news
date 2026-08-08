@@ -29,8 +29,8 @@ class EnglishNewsCollector:
                 # Strip HTML
                 content_en = content_en.replace("<p>", "").replace("</p>", "").replace("<br>", "\n").strip()
 
-                # Filter strictly for Tamil Nadu relevance
-                if not ArticleClassifier.is_tamil_nadu_relevant(title_en, content_en):
+                # Filter strictly for Tamil Nadu + forest/wildlife relevance
+                if not ArticleClassifier.is_tamil_nadu_relevant(title_en, content_en) or not ArticleClassifier.is_forest_or_wildlife_relevant(title_en, content_en):
                     continue
 
                 existing = [a for a in db_storage.articles.values() if a.source_url == link or a.title_en == title_en]

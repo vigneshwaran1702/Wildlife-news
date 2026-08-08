@@ -66,6 +66,19 @@ class ArticleClassifier:
         return any(kw in text for kw in tn_keywords)
 
     @staticmethod
+    def is_forest_or_wildlife_relevant(title: str, content: str) -> bool:
+        text = f"{title} {content}".lower()
+        wildlife_keywords = [
+            "wildlife", "forest department", "forest dept", "forest guard", "sanctuary", "reserve", "national park",
+            "tiger", "leopard", "elephant", "gaur", "wild boar", "sloth bear", "tahr", "crocodile", "macaque",
+            "poaching", "animal", "rescue", "habitat", "biodiversity", "conservation", "anti-poaching", "patrol",
+            "protected area", "protected forest", "human-wildlife", "human animal", "village", "crop raid", "attack",
+            "trapped", "relocated", "wild animal", "forest range", "animal movement", "wildlife act",
+            "வனத்துறை", "காட்டு", "விலங்கு", "புலி", "யானை", "சிறுத்தை", "காட்டுப்பன்றி", "கரடி", "ஆமை", "பராமரிப்பு"
+        ]
+        return any(kw in text for kw in wildlife_keywords)
+
+    @staticmethod
     def classify(title: str, content: str) -> Dict:
         text = f"{title} {content}".lower()
 

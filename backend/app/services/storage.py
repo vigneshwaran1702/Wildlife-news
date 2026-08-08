@@ -3,6 +3,7 @@ import os
 from typing import List, Optional, Dict
 from datetime import datetime
 import uuid
+from app.ai.classifier import ArticleClassifier
 from app.models.schemas import Article, PDFReport, CollectorLog
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")
@@ -73,6 +74,13 @@ class StorageService:
     ) -> List[Article]:
         results = list(self.articles.values())
         
+        # Only expose Tamil Nadu wildlife / forest department news
+        results = [
+            a for a in results
+            if ArticleClassifier.is_tamil_nadu_relevant(a.title_en, a.content_en)
+            and ArticleClassifier.is_forest_or_wildlife_relevant(a.title_en, a.content_en)
+        ]
+
         if category and category != "All":
             results = [a for a in results if a.category.lower() == category.lower()]
         

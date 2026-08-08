@@ -40,8 +40,8 @@ class RSSCollector:
                     # Clean HTML tags from content
                     clean_content = content.replace("<p>", "").replace("</p>", "").replace("<br>", "\n").strip()
 
-                    # Check if relevant to Tamil Nadu state
-                    if not ArticleClassifier.is_tamil_nadu_relevant(title, clean_content):
+                    # Check if relevant to Tamil Nadu + forest/wildlife news
+                    if not ArticleClassifier.is_tamil_nadu_relevant(title, clean_content) or not ArticleClassifier.is_forest_or_wildlife_relevant(title, clean_content):
                         continue
 
                     # Check if already exists

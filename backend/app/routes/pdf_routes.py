@@ -1,4 +1,7 @@
+import os
+
 from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional, Dict
 from app.models.schemas import PDFReport
@@ -43,3 +46,12 @@ def generate_pdf_report(payload: PDFGenerateRequest):
     )
 
     return report
+
+@router.get("/download/{report_id}")
+def download_pdf(report_id: str):
+    report = db_storage.reports.get(report_id)
+    if not report:
+        raise HTTPException(status_code=404, detail="Report not found")
+    if not report.file_path or not os.path.exists(report.file_path):
+        raise HTTPException(status_code=404, detail="PDF file not found")
+    return FileResponse(report.file_path, media_type="application/pdf", filename=os.path.basename(report.file_path))
