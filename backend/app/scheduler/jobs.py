@@ -21,76 +21,26 @@ def run_collection_job():
 
 def generate_shift1_day_digest_job():
     """
-    Auto-generates Shift 1 PDF Digest (Today 8:00 AM to 5:00 PM Daytime News) at 5:00 PM (17:00).
+    Auto-generates Shift 1 PDF Digest (Today 8:00 AM to 5:00 PM Daytime News) at 5:00 PM (17:00 IST).
     """
-    now = datetime.now()
-    start_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
-    end_time = now.replace(hour=17, minute=0, second=0, microsecond=0)
-
-    all_articles = db_storage.get_articles()
-    shift1_articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
-    if not shift1_articles:
-        shift1_articles = [a for a in all_articles if a.published_at >= start_time] or all_articles[:15]
-
-    report = PDFReportGenerator.generate_report(
-        title=f"Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - {now.strftime('%d %b %Y')}",
-        report_type="Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
-        articles=shift1_articles,
-        filter_criteria={
-            "Time Window": "Today 08:00 AM to 05:00 PM",
-            "Auto Schedule": "17:00 (5:00 PM) Daily Trigger"
-        }
-    )
+    from app.routes.pdf_routes import generate_shift_pdf_by_id
+    report = generate_shift_pdf_by_id(1)
     print(f"Generated automated Shift 1 (08:00 AM - 05:00 PM) PDF report: {report.download_url}")
 
 def generate_shift2_evening_digest_job():
     """
-    Auto-generates Shift 2 PDF Digest (Today 5:00 PM to 9:00 PM Evening News) at 9:00 PM (21:00).
+    Auto-generates Shift 2 PDF Digest (Today 5:00 PM to 9:00 PM Evening News) at 9:00 PM (21:00 IST).
     """
-    now = datetime.now()
-    start_time = now.replace(hour=17, minute=0, second=0, microsecond=0)
-    end_time = now.replace(hour=21, minute=0, second=0, microsecond=0)
-
-    all_articles = db_storage.get_articles()
-    shift2_articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
-    if not shift2_articles:
-        shift2_articles = [a for a in all_articles if a.published_at >= start_time] or all_articles[:15]
-
-    report = PDFReportGenerator.generate_report(
-        title=f"Shift 2 Evening Bulletin (5:00 PM - 9:00 PM) - {now.strftime('%d %b %Y')}",
-        report_type="Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)",
-        articles=shift2_articles,
-        filter_criteria={
-            "Time Window": "Today 05:00 PM to 09:00 PM",
-            "Deduplication": "Excludes Shift 1 (8am-5pm) News",
-            "Auto Schedule": "21:00 (9:00 PM) Daily Trigger"
-        }
-    )
+    from app.routes.pdf_routes import generate_shift_pdf_by_id
+    report = generate_shift_pdf_by_id(2)
     print(f"Generated automated Shift 2 (05:00 PM - 09:00 PM) PDF report: {report.download_url}")
 
 def generate_shift3_night_digest_job():
     """
-    Auto-generates Shift 3 PDF Digest (Yesterday 9:00 PM to Today 8:00 AM Overnight News) at 8:00 AM (08:00).
+    Auto-generates Shift 3 PDF Digest (Yesterday 9:00 PM to Today 8:00 AM Overnight News) at 8:00 AM (08:00 IST).
     """
-    now = datetime.now()
-    end_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
-    start_time = (end_time - timedelta(days=1)).replace(hour=21, minute=0, second=0, microsecond=0)
-
-    all_articles = db_storage.get_articles()
-    shift3_articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
-    if not shift3_articles:
-        shift3_articles = [a for a in all_articles if a.published_at <= end_time] or all_articles[:15]
-
-    report = PDFReportGenerator.generate_report(
-        title=f"Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - {now.strftime('%d %b %Y')}",
-        report_type="Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)",
-        articles=shift3_articles,
-        filter_criteria={
-            "Time Window": "Yesterday 09:00 PM to Today 08:00 AM",
-            "Deduplication": "Excludes Daytime & Evening News",
-            "Auto Schedule": "08:00 (8:00 AM) Daily Trigger"
-        }
-    )
+    from app.routes.pdf_routes import generate_shift_pdf_by_id
+    report = generate_shift_pdf_by_id(3)
     print(f"Generated automated Shift 3 (09:00 PM - 08:00 AM) PDF report: {report.download_url}")
 
 def check_and_generate_due_pdfs():
