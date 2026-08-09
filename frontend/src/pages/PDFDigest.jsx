@@ -30,6 +30,8 @@ export default function PDFDigest() {
       try {
         await clearReportsHistory();
         setReports([]);
+        const data = await fetchReports();
+        setReports(data);
       } catch (err) {
         alert("Failed to clear history: " + err.message);
       }

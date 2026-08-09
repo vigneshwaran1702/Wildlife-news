@@ -158,6 +158,16 @@ class StorageService:
                     os.remove(report.file_path)
                 except Exception as e:
                     print(f"Error removing file {report.file_path}: {e}")
+
+        pdf_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "pdfs")
+        if os.path.exists(pdf_dir):
+            for fname in os.listdir(pdf_dir):
+                if fname.endswith(".pdf"):
+                    try:
+                        os.remove(os.path.join(pdf_dir, fname))
+                    except Exception as e:
+                        print(f"Error deleting pdf file {fname}: {e}")
+
         self.reports.clear()
         self.save_data()
 

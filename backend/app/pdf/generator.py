@@ -126,16 +126,29 @@ class PDFReportGenerator:
         now_str = datetime.now().strftime("%b %d, %Y")
         time_str = datetime.now().strftime("%I:%M %p IST")
 
+        # Determine Scan Window text
+        scan_window_text = "8am-5pm"
+        if filter_criteria and "Time Window" in filter_criteria:
+            tw = str(filter_criteria["Time Window"])
+            if "Shift 1" in tw or "08:00 AM" in tw or "8am" in tw:
+                scan_window_text = "8am-5pm"
+            elif "Shift 2" in tw or "05:00 PM to 09:00 PM" in tw or "5pm-9pm" in tw:
+                scan_window_text = "5pm-9pm"
+            elif "Shift 3" in tw or "09:00 PM to" in tw or "9pm-8am" in tw:
+                scan_window_text = "9pm-8am"
+            else:
+                scan_window_text = tw
+
         # 1. Main Official Banner Box
         banner_left = [
             Paragraph("<b>TAMIL NADU FOREST DEPARTMENT</b>", hdr_title_style),
             Spacer(1, 2),
-            Paragraph(f"Daily Media Scan Bulletin — Exhaustive Evening Edition ({now_str})", hdr_sub_style)
+            Paragraph(f"Daily Media Scan Bulletin — Exhaustive Edition ({now_str})", hdr_sub_style)
         ]
 
         banner_right = [
             Paragraph(f"<b>Date:</b> {now_str} | {time_str}", hdr_meta_style),
-            Paragraph("<b>Scan Window:</b> 08:00 AM – 05:30 PM", hdr_meta_style),
+            Paragraph(f"<b>Scan Window:</b> {scan_window_text}", hdr_meta_style),
             Paragraph("<b>Issued By:</b> Vigneshwaran", hdr_meta_style)
         ]
 
@@ -175,7 +188,7 @@ class PDFReportGenerator:
         elements.append(Spacer(1, 8))
 
         # 3. Section 1 Header & Press Coverage Index Table
-        sec1_hdr = Table([[Paragraph("1. PRESS COVERAGE INDEX (08:00 AM TO 05:30 PM WINDOW)", sec_hdr_style)]], colWidths=[556])
+        sec1_hdr = Table([[Paragraph(f"1. PRESS COVERAGE INDEX ({scan_window_text.upper()} WINDOW)", sec_hdr_style)]], colWidths=[556])
         sec1_hdr.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, -1), HEADER_DARK),
             ('PADDING', (0, 0), (-1, -1), 5),
@@ -220,7 +233,7 @@ class PDFReportGenerator:
         elements.append(Spacer(1, 10))
 
         # 4. Section 2 Header & Exhaustive Press Summaries
-        sec2_hdr = Table([[Paragraph("2. EXHAUSTIVE EVENING PRESS SUMMARIES (08:00 AM TO 05:30 PM)", sec_hdr_style)]], colWidths=[556])
+        sec2_hdr = Table([[Paragraph(f"2. EXHAUSTIVE PRESS SUMMARIES ({scan_window_text.upper()})", sec_hdr_style)]], colWidths=[556])
         sec2_hdr.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, -1), HEADER_DARK),
             ('PADDING', (0, 0), (-1, -1), 5),
