@@ -123,6 +123,12 @@ def trigger_shift_pdf(shift_id: int, as_json: bool = False):
 def list_pdf_reports():
     return db_storage.get_reports()
 
+@router.delete("/clear-history")
+@router.post("/clear-history")
+def clear_pdf_history():
+    db_storage.clear_reports()
+    return {"status": "Success", "message": "PDF reports history cleared successfully"}
+
 @router.post("/generate", response_model=PDFReport)
 def generate_pdf_report(payload: PDFGenerateRequest):
     articles = db_storage.get_articles(

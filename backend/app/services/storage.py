@@ -151,6 +151,16 @@ class StorageService:
         reports.sort(key=lambda x: x.created_at, reverse=True)
         return reports
 
+    def clear_reports(self):
+        for report in list(self.reports.values()):
+            if report.file_path and os.path.exists(report.file_path):
+                try:
+                    os.remove(report.file_path)
+                except Exception as e:
+                    print(f"Error removing file {report.file_path}: {e}")
+        self.reports.clear()
+        self.save_data()
+
     def add_log(self, log: CollectorLog):
         self.logs.insert(0, log)
         if len(self.logs) > 100:
