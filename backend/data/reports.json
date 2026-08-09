@@ -1018,5 +1018,49 @@
       "Auto Schedule": "08:00 (8:00 AM) Daily Trigger",
       "Endpoint": "/api/pdf/trigger-shift/3"
     }
+  },
+  {
+    "id": "pdf_7b3ce0bc",
+    "title": "Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - 09 Aug 2026",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)",
+    "file_path": "c:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_7b3ce0bc.pdf",
+    "download_url": "/api/pdf/download/pdf_7b3ce0bc",
+    "created_at": "2026-08-09 18:46:50.821319",
+    "article_count": 3,
+    "filter_criteria": {
+      "Time Window": "Yesterday 09:00 PM to Today 08:00 AM",
+      "Deduplication": "Excludes Daytime & Evening News",
+      "Auto Schedule": "08:00 (8:00 AM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/3"
+    }
+  },
+  {
+    "id": "pdf_7b5d3aa1",
+    "title": "Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - 09 Aug 2026",
+    "report_type": "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+    "file_path": "c:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_7b5d3aa1.pdf",
+    "download_url": "/api/pdf/download/pdf_7b5d3aa1",
+    "created_at": "2026-08-09 18:46:50.837637",
+    "article_count": 2,
+    "filter_criteria": {
+      "Time Window": "Today 08:00 AM to 05:00 PM",
+      "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/1"
+    }
+  },
+  {
+    "id": "pdf_63c714d5",
+    "title": "Shift 2 Evening Bulletin (5:00 PM - 9:00 PM) - 09 Aug 2026",
+    "report_type": "Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)",
+    "file_path": "c:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_63c714d5.pdf",
+    "download_url": "/api/pdf/download/pdf_63c714d5",
+    "created_at": "2026-08-09 18:46:50.876975",
+    "article_count": 5,
+    "filter_criteria": {
+      "Time Window": "Today 05:00 PM to 09:00 PM",
+      "Deduplication": "Excludes Shift 1 (8am-5pm) News",
+      "Auto Schedule": "21:00 (9:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/2"
+    }
   }
 ]
