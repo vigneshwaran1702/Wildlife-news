@@ -1,1 +1,31 @@
-[]
+[
+  {
+    "id": "pdf_9fe24687",
+    "title": "Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - 09 Aug 2026",
+    "report_type": "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+    "file_path": "c:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_9fe24687.pdf",
+    "download_url": "/api/pdf/download/pdf_9fe24687",
+    "created_at": "2026-08-09 19:07:29.540918",
+    "article_count": 2,
+    "filter_criteria": {
+      "Time Window": "Today 08:00 AM to 05:00 PM",
+      "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/1"
+    }
+  },
+  {
+    "id": "pdf_8c0678e4",
+    "title": "Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - 09 Aug 2026",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)",
+    "file_path": "c:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_8c0678e4.pdf",
+    "download_url": "/api/pdf/download/pdf_8c0678e4",
+    "created_at": "2026-08-09 19:09:05.710506",
+    "article_count": 3,
+    "filter_criteria": {
+      "Time Window": "Yesterday 09:00 PM to Today 08:00 AM",
+      "Deduplication": "Excludes Daytime & Evening News",
+      "Auto Schedule": "08:00 (8:00 AM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/3"
+    }
+  }
+]

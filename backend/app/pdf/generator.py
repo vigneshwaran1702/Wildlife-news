@@ -127,15 +127,15 @@ class PDFReportGenerator:
         time_str = datetime.now().strftime("%I:%M %p IST")
 
         # Determine Scan Window text
-        scan_window_text = "8am-5pm"
+        scan_window_text = "08:00 AM – 05:00 PM"
         if filter_criteria and "Time Window" in filter_criteria:
             tw = str(filter_criteria["Time Window"])
             if "Shift 1" in tw or "08:00 AM" in tw or "8am" in tw:
-                scan_window_text = "8am-5pm"
-            elif "Shift 2" in tw or "05:00 PM to 09:00 PM" in tw or "5pm-9pm" in tw:
-                scan_window_text = "5pm-9pm"
-            elif "Shift 3" in tw or "09:00 PM to" in tw or "9pm-8am" in tw:
-                scan_window_text = "9pm-8am"
+                scan_window_text = "08:00 AM – 05:00 PM"
+            elif "Shift 2" in tw or "05:00 PM" in tw or "5pm" in tw:
+                scan_window_text = "05:00 PM – 09:00 PM"
+            elif "Shift 3" in tw or "09:00 PM" in tw or "9pm" in tw:
+                scan_window_text = "09:00 PM – 08:00 AM"
             else:
                 scan_window_text = tw
 
