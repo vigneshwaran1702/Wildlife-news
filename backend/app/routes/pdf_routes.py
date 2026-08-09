@@ -1,9 +1,10 @@
+import os
 from datetime import datetime, timedelta, time
 
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Any
 from app.models.schemas import PDFReport
 from app.pdf.generator import PDFReportGenerator
 from app.services.storage import db_storage
@@ -21,12 +22,17 @@ class PDFGenerateRequest(BaseModel):
 
 from app.scheduler.jobs import scheduler
 
-def make_naive(dt: Optional[datetime]) -> datetime:
+def make_naive(dt: Any) -> datetime:
     if dt is None:
         return datetime.now()
-    if dt.tzinfo is not None:
+    if isinstance(dt, str):
+        try:
+            dt = datetime.fromisoformat(dt)
+        except Exception:
+            return datetime.now()
+    if hasattr(dt, 'tzinfo') and dt.tzinfo is not None:
         return dt.astimezone().replace(tzinfo=None)
-    return dt
+    return dt if isinstance(dt, datetime) else datetime.now()
 
 def generate_shift_pdf_by_id(shift_id: int, target_date: Optional[str] = None) -> PDFReport:
     now = datetime.now()
@@ -126,21 +132,27 @@ def get_pdf_schedule():
 @router.get("/trigger-shift/{shift_id}")
 @router.post("/trigger-shift/{shift_id}")
 def trigger_shift_pdf(shift_id: int, target_date: Optional[str] = Query(None), as_json: bool = False):
-    report = generate_shift_pdf_by_id(shift_id, target_date=target_date)
+    try:
+        report = generate_shift_pdf_by_id(shift_id, target_date=target_date)
 
-    if as_json:
-        return report
+        if as_json:
+            return report
 
-    if not report.file_path or not os.path.exists(report.file_path):
-        raise HTTPException(status_code=500, detail="Generated PDF file not found")
+        if not report.file_path or not os.path.exists(report.file_path):
+            raise HTTPException(status_code=404, detail=f"Generated PDF file not found at path '{report.file_path}'")
 
-    filename = os.path.basename(report.file_path)
-    return FileResponse(
-        report.file_path,
-        media_type="application/pdf",
-        filename=filename,
-        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
-    )
+        filename = os.path.basename(report.file_path)
+        return FileResponse(
+            report.file_path,
+            media_type="application/pdf",
+            filename=filename
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"PDF Generation Error: {str(e)}")
 
 @router.get("/reports", response_model=List[PDFReport])
 def list_pdf_reports():
