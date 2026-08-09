@@ -68,6 +68,16 @@ export default function PDFDigest() {
     }
   ];
 
+  const [selectedShift, setSelectedShift] = useState(1);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [generating, setGenerating] = useState(false);
+
+  const handleGenerateShiftForDate = (shiftId) => {
+    const url = `${getShiftTriggerUrl(shiftId)}?target_date=${selectedDate}`;
+    window.open(url, '_blank');
+    setTimeout(loadReports, 1500);
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Header Banner */}
@@ -103,15 +113,36 @@ export default function PDFDigest() {
         </div>
       </div>
 
-      {/* Automated Shift Schedules Overview */}
-      <div className="glass-card" style={{ background: 'rgba(5, 18, 12, 0.7)', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
-        <h3 style={{ fontSize: '1rem', color: '#ffffff', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <Clock color="var(--primary-emerald)" size={18} />
-          Automated Shift Schedule Matrix
-        </h3>
-        <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
-          The backend automatically scans news feeds, generates executive PDF reports, and downloads binary files at exact shift intervals:
-        </p>
+      {/* Date-Specific On-Demand Shift PDF Generator */}
+      <div className="glass-card" style={{ background: 'rgba(5, 18, 12, 0.8)', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+          <div>
+            <h3 style={{ fontSize: '1rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <Clock color="var(--primary-emerald)" size={18} />
+              On-Demand Shift Bulletin Generator
+            </h3>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
+              Select a target date to generate executive PDF bulletins strictly filtered for that shift's timing window.
+            </p>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+            <label style={{ fontSize: '0.78rem', color: '#34d399', fontWeight: '600' }}>Select Date:</label>
+            <input
+              type="date"
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              style={{
+                background: 'rgba(0, 0, 0, 0.6)',
+                border: '1px solid rgba(16, 185, 129, 0.4)',
+                color: '#ffffff',
+                padding: '0.35rem 0.65rem',
+                borderRadius: '6px',
+                fontSize: '0.8rem',
+                outline: 'none'
+              }}
+            />
+          </div>
+        </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
           {shiftSchedules.map((s) => {
@@ -137,15 +168,12 @@ export default function PDFDigest() {
                   <div style={{ fontSize: '0.95rem', fontWeight: '700', color: '#fff', marginTop: '0.4rem' }}>{s.label}</div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{s.range}</div>
                   <div style={{ fontSize: '0.72rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: '0.4rem' }}>
-                    <CheckCircle size={12} /> {s.status}
+                    <CheckCircle size={12} /> Strictly Filtered ({selectedDate})
                   </div>
                 </div>
 
-                <a
-                  href={getShiftTriggerUrl(s.shiftId)}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => handleGenerateShiftForDate(s.shiftId)}
                   className="btn"
                   style={{
                     background: `${s.color}20`,
@@ -157,14 +185,14 @@ export default function PDFDigest() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: '0.4rem',
-                    textDecoration: 'none',
                     borderRadius: '6px',
                     fontWeight: '600',
-                    marginTop: '0.25rem'
+                    marginTop: '0.25rem',
+                    cursor: 'pointer'
                   }}
                 >
-                  <Download size={13} /> Download Shift {s.shiftId} PDF
-                </a>
+                  <Download size={13} /> Generate & Download Shift {s.shiftId} PDF
+                </button>
               </div>
             );
           })}

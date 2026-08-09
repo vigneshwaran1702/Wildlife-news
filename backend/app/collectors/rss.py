@@ -109,6 +109,16 @@ class RSSCollector:
                     sum_en = ArticleSummarizer.summarize_en(title_en, content_en)
                     sum_ta = ArticleSummarizer.summarize_ta(title_ta, content_ta)
 
+                    # Parse actual publication date from RSS feed entry if available
+                    pub_dt = None
+                    if hasattr(entry, 'published_parsed') and entry.published_parsed:
+                        try:
+                            pub_dt = datetime(*entry.published_parsed[:6])
+                        except Exception:
+                            pub_dt = None
+                    if not pub_dt:
+                        pub_dt = datetime.now()
+
                     art = Article(
                         id=f"art_{uuid.uuid4().hex[:8]}",
                         title_en=title_en,
@@ -123,7 +133,7 @@ class RSSCollector:
                         species=ai_meta["species"],
                         source_name=feed_info["name"],
                         source_url=link,
-                        published_at=datetime.now(),
+                        published_at=pub_dt,
                         tags=[ai_meta["category"], ai_meta["district"]] + ai_meta["species"],
                         key_entities=ai_meta["key_entities"],
                         sentiment=ai_meta["sentiment"]
