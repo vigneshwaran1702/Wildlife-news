@@ -80,3 +80,35 @@ export async function clearReportsHistory() {
   return res.json();
 }
 
+export async function downloadPdfFile(urlOrId, filename = 'TN_Forest_Bulletin.pdf') {
+  let targetUrl = urlOrId;
+  if (!targetUrl.startsWith('http') && !targetUrl.startsWith('/')) {
+    targetUrl = `${API_BASE}/pdf/download/${targetUrl}`;
+  }
+
+  const res = await fetch(targetUrl);
+  if (!res.ok) {
+    throw new Error(`Failed to download PDF report (HTTP ${res.status})`);
+  }
+  const blob = await res.blob();
+  const blobUrl = window.URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = blobUrl;
+  link.download = filename.endsWith('.pdf') ? filename : `${filename}.pdf`;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.URL.revokeObjectURL(blobUrl);
+}
+
+export function getViewPdfUrl(reportId) {
+  const cleanId = reportId.replace('/api/pdf/download/', '').replace('/api/pdf/view/', '');
+  return `${API_BASE}/pdf/view/${cleanId}`;
+}
+
+export function getDownloadPdfUrl(reportId) {
+  const cleanId = reportId.replace('/api/pdf/download/', '').replace('/api/pdf/view/', '');
+  return `${API_BASE}/pdf/download/${cleanId}`;
+}
+
+
