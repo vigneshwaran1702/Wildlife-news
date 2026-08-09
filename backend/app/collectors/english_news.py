@@ -14,7 +14,7 @@ class EnglishNewsCollector:
         """
         Fetches 100% live news directly from open source web RSS feeds for Tamil Nadu wildlife.
         """
-        feed_url = "https://news.google.com/rss/search?q=Tamil+Nadu+wildlife+OR+elephant+OR+tiger+OR+leopard+OR+forest+department&hl=en-IN&gl=IN&ceid=IN:en"
+        feed_url = "https://news.google.com/rss/search?q=Tamil+Nadu+wildlife+OR+forest+department+OR+forest+fire+OR+wildlife+crime+OR+protected+area+OR+rescue+OR+seizure+OR+encroachment+OR+forest+policy&hl=en-IN&gl=IN&ceid=IN:en"
         added = 0
         try:
             feed = feedparser.parse(feed_url)
@@ -29,8 +29,8 @@ class EnglishNewsCollector:
                 # Strip HTML
                 content_en = content_en.replace("<p>", "").replace("</p>", "").replace("<br>", "\n").strip()
 
-                # Filter strictly for Tamil Nadu relevance
-                if not ArticleClassifier.is_tamil_nadu_relevant(title_en, content_en):
+                # Filter strictly for Tamil Nadu + forest/wildlife relevance
+                if not ArticleClassifier.is_tamil_nadu_relevant(title_en, content_en) or not ArticleClassifier.is_forest_or_wildlife_relevant(title_en, content_en):
                     continue
 
                 existing = [a for a in db_storage.articles.values() if a.source_url == link or a.title_en == title_en]

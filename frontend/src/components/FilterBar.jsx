@@ -10,17 +10,29 @@ const DISTRICTS = [
   'Theni & Megamalai',
   'Dindigul & Kodaikanal',
   'Tirunelveli & KMTR',
-  'Kanyakumari'
+  'Kanyakumari',
+  'Dharmapuri & Krishnagiri',
+  'Salem & Yercaud',
+  'Ramanathapuram & Gulf of Mannar',
+  'Chennai & Vandalur',
+  'Chengalpattu & Vedanthangal',
+  'Nagapattinam & Point Calimere',
+  'Tiruchirappalli & Namakkal',
+  'Tiruvannamalai & Vellore',
+  'Thanjavur & Tiruvarur',
+  'Tenkasi & Virudhunagar',
+  'Villupuram & Cuddalore'
 ];
 
 const CATEGORIES = [
   'All',
   'Human-Wildlife Conflict',
-  'Rescue & Rehabilitation',
-  'Forest Dept & Policy',
+  'Eco-Tourism & Sanctuaries',
+  'Wildlife Crime & Rescue',
+  'Forest Fire & Safety',
+  'Forest Encroachment',
   'Species Conservation',
-  'Anti-Poaching & Crime',
-  'Eco-Tourism & Sanctuaries'
+  'Forest Dept & Policy'
 ];
 
 const CONFLICT_LEVELS = ['All', 'High', 'Medium', 'Low', 'None'];
@@ -114,6 +126,31 @@ export default function FilterBar({ filters, setFilters }) {
             }}
           >
             {CONFLICT_LEVELS.map(cl => <option key={cl} value={cl} style={{ background: '#0a1610' }}>{cl}</option>)}
+          </select>
+        </div>
+
+        {/* Everyday Date Filter */}
+        <div>
+          <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.3rem' }}>
+            📅 Date Filter
+          </label>
+          <select
+            value={filters.dateFilter || 'All'}
+            onChange={(e) => setFilters({ ...filters, dateFilter: e.target.value })}
+            style={{
+              width: '100%',
+              padding: '0.5rem',
+              background: 'rgba(0, 0, 0, 0.4)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '6px',
+              color: 'var(--text-main)',
+              fontSize: '0.85rem'
+            }}
+          >
+            <option value="All" style={{ background: '#0a1610' }}>All Dates</option>
+            <option value="TODAY" style={{ background: '#0a1610' }}>🗓️ TODAY</option>
+            <option value="YESTERDAY" style={{ background: '#0a1610' }}>📆 YESTERDAY</option>
+            <option value="OLD" style={{ background: '#0a1610' }}>📁 OLDER</option>
           </select>
         </div>
       </div>

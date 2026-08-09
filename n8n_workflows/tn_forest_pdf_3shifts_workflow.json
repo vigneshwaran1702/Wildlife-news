@@ -1,0 +1,307 @@
+{
+  "name": "TN Forest PDF 3-Shift Automation Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 17 * * *"
+            }
+          ]
+        }
+      },
+      "id": "trigger-shift1",
+      "name": "Shift 1 Cron (5:00 PM Daily)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        200,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/pdf/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"title\": \"Shift 1 Day Bulletin (08:00 AM - 05:00 PM)\",\n  \"report_type\": \"Shift 1: Day Bulletin (8:00 AM - 5:00 PM)\"\n}",
+        "options": {}
+      },
+      "id": "generate-shift1",
+      "name": "Generate Shift 1 PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        420,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=http://localhost:8000{{ $json.download_url }}",
+        "responseFormat": "file",
+        "options": {}
+      },
+      "id": "download-shift1",
+      "name": "Download Shift 1 PDF Binary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        640,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/pdfs/n8n_shift1_day_{{ $now.format('yyyy-MM-dd') }}.pdf"
+      },
+      "id": "save-shift1",
+      "name": "Save Shift 1 PDF to Disk",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        860,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 21 * * *"
+            }
+          ]
+        }
+      },
+      "id": "trigger-shift2",
+      "name": "Shift 2 Cron (9:00 PM Daily)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        200,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/pdf/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"title\": \"Shift 2 Evening Bulletin (05:00 PM - 09:00 PM)\",\n  \"report_type\": \"Shift 2: Evening Bulletin (5:00 PM - 9:00 PM)\"\n}",
+        "options": {}
+      },
+      "id": "generate-shift2",
+      "name": "Generate Shift 2 PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        420,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=http://localhost:8000{{ $json.download_url }}",
+        "responseFormat": "file",
+        "options": {}
+      },
+      "id": "download-shift2",
+      "name": "Download Shift 2 PDF Binary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        640,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/pdfs/n8n_shift2_evening_{{ $now.format('yyyy-MM-dd') }}.pdf"
+      },
+      "id": "save-shift2",
+      "name": "Save Shift 2 PDF to Disk",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        860,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * *"
+            }
+          ]
+        }
+      },
+      "id": "trigger-shift3",
+      "name": "Shift 3 Cron (8:00 AM Daily)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        200,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://localhost:8000/api/pdf/generate",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"title\": \"Shift 3 Night Bulletin (09:00 PM - 08:00 AM)\",\n  \"report_type\": \"Shift 3: Night & Early Morning Bulletin (9:00 PM - 8:00 AM)\"\n}",
+        "options": {}
+      },
+      "id": "generate-shift3",
+      "name": "Generate Shift 3 PDF",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        420,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "url": "=http://localhost:8000{{ $json.download_url }}",
+        "responseFormat": "file",
+        "options": {}
+      },
+      "id": "download-shift3",
+      "name": "Download Shift 3 PDF Binary",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        640,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "fileName": "=/pdfs/n8n_shift3_night_{{ $now.format('yyyy-MM-dd') }}.pdf"
+      },
+      "id": "save-shift3",
+      "name": "Save Shift 3 PDF to Disk",
+      "type": "n8n-nodes-base.writeBinaryFile",
+      "typeVersion": 1,
+      "position": [
+        860,
+        600
+      ]
+    }
+  ],
+  "connections": {
+    "Shift 1 Cron (5:00 PM Daily)": {
+      "main": [
+        [
+          {
+            "node": "Generate Shift 1 PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Shift 1 PDF": {
+      "main": [
+        [
+          {
+            "node": "Download Shift 1 PDF Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Shift 1 PDF Binary": {
+      "main": [
+        [
+          {
+            "node": "Save Shift 1 PDF to Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shift 2 Cron (9:00 PM Daily)": {
+      "main": [
+        [
+          {
+            "node": "Generate Shift 2 PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Shift 2 PDF": {
+      "main": [
+        [
+          {
+            "node": "Download Shift 2 PDF Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Shift 2 PDF Binary": {
+      "main": [
+        [
+          {
+            "node": "Save Shift 2 PDF to Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Shift 3 Cron (8:00 AM Daily)": {
+      "main": [
+        [
+          {
+            "node": "Generate Shift 3 PDF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Shift 3 PDF": {
+      "main": [
+        [
+          {
+            "node": "Download Shift 3 PDF Binary",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Shift 3 PDF Binary": {
+      "main": [
+        [
+          {
+            "node": "Save Shift 3 PDF to Disk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
