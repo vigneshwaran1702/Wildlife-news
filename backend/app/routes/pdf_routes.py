@@ -251,7 +251,11 @@ def get_fresh_pdf_path(report_id: str) -> str:
             fresh_report = generate_shift_pdf_by_id(3, target_date=target_date)
             return fresh_report.file_path
         else:
-            articles = db_storage.get_articles()
+            articles = db_storage.get_articles(
+                category=report.filter_criteria.get("Category"),
+                district=report.filter_criteria.get("District"),
+                conflict_level=report.filter_criteria.get("Risk Level")
+            )
             fresh_report = PDFReportGenerator.generate_report(
                 title=report.title,
                 report_type=report.report_type,
@@ -260,7 +264,14 @@ def get_fresh_pdf_path(report_id: str) -> str:
             )
             return fresh_report.file_path
 
-    return resolve_pdf_file_path(report_id)
+    # Fallback: parse shift from clean_id or generate fresh Shift 1 bulletin
+    cid = clean_id.lower()
+    if "shift2" in cid or "shift_2" in cid or "evening" in cid:
+        return generate_shift_pdf_by_id(2).file_path
+    elif "shift3" in cid or "shift_3" in cid or "night" in cid:
+        return generate_shift_pdf_by_id(3).file_path
+    else:
+        return generate_shift_pdf_by_id(1).file_path
 
 @router.get("/download/{report_id}")
 def download_pdf(report_id: str):
@@ -282,6 +293,7 @@ def view_pdf(report_id: str):
         media_type="application/pdf",
         headers={"Content-Disposition": f"inline; filename=\"{filename}\""}
     )
+
 
 
 
