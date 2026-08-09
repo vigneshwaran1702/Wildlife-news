@@ -230,10 +230,41 @@ def resolve_pdf_file_path(report_id: str, report: Optional[PDFReport] = None) ->
 
     raise HTTPException(status_code=404, detail=f"PDF report file for ID '{report_id}' not found on server")
 
+def get_fresh_pdf_path(report_id: str) -> str:
+    clean_id = report_id.replace(".pdf", "").replace("TN_Forest_Media_Scan_", "")
+    report = db_storage.reports.get(clean_id) or db_storage.reports.get(report_id)
+    if report:
+        rt = (report.report_type or "").lower()
+        target_date = None
+        if report.filter_criteria and "Endpoint" in report.filter_criteria:
+            ep = report.filter_criteria["Endpoint"]
+            if "target_date=" in ep:
+                target_date = ep.split("target_date=")[-1].split("&")[0]
+
+        if "shift 1" in rt or "day" in rt:
+            fresh_report = generate_shift_pdf_by_id(1, target_date=target_date)
+            return fresh_report.file_path
+        elif "shift 2" in rt or "evening" in rt:
+            fresh_report = generate_shift_pdf_by_id(2, target_date=target_date)
+            return fresh_report.file_path
+        elif "shift 3" in rt or "night" in rt:
+            fresh_report = generate_shift_pdf_by_id(3, target_date=target_date)
+            return fresh_report.file_path
+        else:
+            articles = db_storage.get_articles()
+            fresh_report = PDFReportGenerator.generate_report(
+                title=report.title,
+                report_type=report.report_type,
+                articles=articles,
+                filter_criteria=report.filter_criteria
+            )
+            return fresh_report.file_path
+
+    return resolve_pdf_file_path(report_id)
+
 @router.get("/download/{report_id}")
 def download_pdf(report_id: str):
-    report = db_storage.reports.get(report_id)
-    file_path = resolve_pdf_file_path(report_id, report)
+    file_path = get_fresh_pdf_path(report_id)
     filename = os.path.basename(file_path)
     return FileResponse(
         file_path,
@@ -244,13 +275,13 @@ def download_pdf(report_id: str):
 
 @router.get("/view/{report_id}")
 def view_pdf(report_id: str):
-    report = db_storage.reports.get(report_id)
-    file_path = resolve_pdf_file_path(report_id, report)
+    file_path = get_fresh_pdf_path(report_id)
     filename = os.path.basename(file_path)
     return FileResponse(
         file_path,
         media_type="application/pdf",
         headers={"Content-Disposition": f"inline; filename=\"{filename}\""}
     )
+
 
 

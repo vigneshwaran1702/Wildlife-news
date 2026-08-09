@@ -28,5 +28,53 @@
       "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
       "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-09"
     }
+  },
+  {
+    "id": "pdf_bc1820da",
+    "title": "Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - 09 Aug 2026",
+    "report_type": "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_bc1820da.pdf",
+    "download_url": "/api/pdf/download/pdf_bc1820da",
+    "created_at": "2026-08-09 21:28:46.664073",
+    "article_count": 6,
+    "filter_criteria": {
+      "Time Window": "Aug 09, 2026 08:00 AM to 05:00 PM",
+      "Deduplication": "Excludes Evening (5pm-9pm) & Night (9pm-8am) News",
+      "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-09",
+      "Downloaded At": "Date: Aug 09, 2026 | 09:28 PM IST"
+    }
+  },
+  {
+    "id": "pdf_e27b1f62",
+    "title": "Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - 09 Aug 2026",
+    "report_type": "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_e27b1f62.pdf",
+    "download_url": "/api/pdf/download/pdf_e27b1f62",
+    "created_at": "2026-08-09 21:30:48.801731",
+    "article_count": 6,
+    "filter_criteria": {
+      "Time Window": "Aug 09, 2026 08:00 AM to 05:00 PM",
+      "Deduplication": "Excludes Evening (5pm-9pm) & Night (9pm-8am) News",
+      "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-09",
+      "Downloaded At": "Date: Aug 09, 2026 | 09:30 PM IST"
+    }
+  },
+  {
+    "id": "pdf_2dc861bc",
+    "title": "Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - 09 Aug 2026",
+    "report_type": "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_2dc861bc.pdf",
+    "download_url": "/api/pdf/download/pdf_2dc861bc",
+    "created_at": "2026-08-09 21:30:49.884835",
+    "article_count": 6,
+    "filter_criteria": {
+      "Time Window": "Aug 09, 2026 08:00 AM to 05:00 PM",
+      "Deduplication": "Excludes Evening (5pm-9pm) & Night (9pm-8am) News",
+      "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-09",
+      "Downloaded At": "Date: Aug 09, 2026 | 09:30 PM IST"
+    }
   }
 ]
