@@ -17,7 +17,9 @@ def get_articles(
     conflict_level: Optional[str] = Query(None, description="Conflict level filter"),
     species: Optional[str] = Query(None, description="Species filter"),
     search: Optional[str] = Query(None, description="Keyword search query"),
-    bookmarked_only: bool = Query(False, description="Show bookmarked only")
+    bookmarked_only: bool = Query(False, description="Show bookmarked only"),
+    todays_only: bool = Query(False, description="Show today's news only"),
+    date_status: Optional[str] = Query(None, description="Date status filter: TODAY, YESTERDAY, OLD")
 ):
     return db_storage.get_articles(
         category=category,
@@ -25,7 +27,9 @@ def get_articles(
         conflict_level=conflict_level,
         species=species,
         search=search,
-        bookmarked_only=bookmarked_only
+        bookmarked_only=bookmarked_only,
+        todays_only=todays_only,
+        date_status=date_status
     )
 
 @router.get("/{article_id}", response_model=Article)

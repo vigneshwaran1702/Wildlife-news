@@ -123,9 +123,12 @@ export default function PDFDigest() {
                     fontSize: '0.85rem'
                   }}
                 >
-                  <option value="Daily Bulletin" style={{ background: '#0a1610' }}>Daily Bulletin</option>
-                  <option value="Conflict Briefing" style={{ background: '#0a1610' }}>Conflict Briefing</option>
-                  <option value="Weekly Digest" style={{ background: '#0a1610' }}>Weekly Conservation Digest</option>
+                  <option value="Shift 1: Day Bulletin (8:00 AM - 5:00 PM)" style={{ background: '#0a1610' }}>🌅 Shift 1: Day Bulletin (08:00 AM – 05:00 PM)</option>
+                  <option value="Shift 2: Evening Bulletin (5:00 PM - 9:00 PM)" style={{ background: '#0a1610' }}>🌇 Shift 2: Evening Bulletin (05:00 PM – 09:00 PM)</option>
+                  <option value="Shift 3: Night & Early Morning Bulletin (9:00 PM - 8:00 AM)" style={{ background: '#0a1610' }}>🌙 Shift 3: Night & Early Morning Bulletin (09:00 PM – 08:00 AM)</option>
+                  <option value="Daily Bulletin" style={{ background: '#0a1610' }}>📰 Full Daily Bulletin (All Today's News)</option>
+                  <option value="Conflict Briefing" style={{ background: '#0a1610' }}>🚨 High Risk Conflict Briefing</option>
+                  <option value="Weekly Digest" style={{ background: '#0a1610' }}>📊 Weekly Conservation Digest</option>
                 </select>
               </div>
 
@@ -144,34 +147,70 @@ export default function PDFDigest() {
                     fontSize: '0.85rem'
                   }}
                 >
-                  <option value="All" style={{ background: '#0a1610' }}>All Districts</option>
-                  <option value="Coimbatore" style={{ background: '#0a1610' }}>Coimbatore</option>
-                  <option value="Nilgiris" style={{ background: '#0a1610' }}>Nilgiris</option>
-                  <option value="Erode & Sathyamangalam" style={{ background: '#0a1610' }}>Erode & STR</option>
-                  <option value="Tiruppur & Anamalai" style={{ background: '#0a1610' }}>Anamalai</option>
+                  <option value="All" style={{ background: '#0a1610' }}>All TN Districts</option>
+                  <option value="Coimbatore" style={{ background: '#0a1610' }}>Coimbatore & Valparai</option>
+                  <option value="Nilgiris" style={{ background: '#0a1610' }}>Nilgiris & Mudumalai</option>
+                  <option value="Erode & Sathyamangalam" style={{ background: '#0a1610' }}>Erode & Sathyamangalam</option>
+                  <option value="Tiruppur & Anamalai" style={{ background: '#0a1610' }}>Tiruppur & Anamalai</option>
+                  <option value="Theni & Megamalai" style={{ background: '#0a1610' }}>Theni & Megamalai</option>
+                  <option value="Dindigul & Kodaikanal" style={{ background: '#0a1610' }}>Dindigul & Kodaikanal</option>
+                  <option value="Tirunelveli & KMTR" style={{ background: '#0a1610' }}>Tirunelveli & KMTR</option>
+                  <option value="Kanyakumari" style={{ background: '#0a1610' }}>Kanyakumari Sanctuary</option>
+                  <option value="Dharmapuri & Krishnagiri" style={{ background: '#0a1610' }}>Dharmapuri & Krishnagiri</option>
+                  <option value="Salem & Yercaud" style={{ background: '#0a1610' }}>Salem & Yercaud</option>
+                  <option value="Ramanathapuram & Gulf of Mannar" style={{ background: '#0a1610' }}>Ramanathapuram & Marine NP</option>
+                  <option value="Chennai & Vandalur" style={{ background: '#0a1610' }}>Chennai & Vandalur Zoo</option>
+                  <option value="Chengalpattu & Vedanthangal" style={{ background: '#0a1610' }}>Vedanthangal Sanctuary</option>
+                  <option value="Nagapattinam & Point Calimere" style={{ background: '#0a1610' }}>Point Calimere Sanctuary</option>
                 </select>
               </div>
             </div>
 
-            <div>
-              <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>Risk Filter</label>
-              <select
-                value={form.conflict_level}
-                onChange={(e) => setForm({ ...form, conflict_level: e.target.value })}
-                style={{
-                  width: '100%',
-                  padding: '0.55rem',
-                  background: 'rgba(0, 0, 0, 0.4)',
-                  border: '1px solid var(--border-color)',
-                  borderRadius: '6px',
-                  color: '#fff',
-                  fontSize: '0.85rem'
-                }}
-              >
-                <option value="All" style={{ background: '#0a1610' }}>All Risk Levels</option>
-                <option value="High" style={{ background: '#0a1610' }}>High Risk Only</option>
-                <option value="Medium" style={{ background: '#0a1610' }}>Medium Risk Only</option>
-              </select>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+              <div>
+                <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>Category Filter</label>
+                <select
+                  value={form.category}
+                  onChange={(e) => setForm({ ...form, category: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '0.55rem',
+                    background: 'rgba(0, 0, 0, 0.4)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '6px',
+                    color: '#fff',
+                    fontSize: '0.85rem'
+                  }}
+                >
+                  <option value="All" style={{ background: '#0a1610' }}>All Categories</option>
+                  <option value="Human-Wildlife Conflict" style={{ background: '#0a1610' }}>Human-Wildlife Conflict</option>
+                  <option value="Eco-Tourism & Sanctuaries" style={{ background: '#0a1610' }}>Eco-Tourism & Sanctuaries</option>
+                  <option value="Wildlife Crime & Rescue" style={{ background: '#0a1610' }}>Wildlife Crime & Rescue</option>
+                  <option value="Forest Fire & Safety" style={{ background: '#0a1610' }}>Forest Fire & Safety</option>
+                  <option value="Forest Encroachment" style={{ background: '#0a1610' }}>Forest Encroachment</option>
+                </select>
+              </div>
+
+              <div>
+                <label style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.3rem' }}>Risk Filter</label>
+                <select
+                  value={form.conflict_level}
+                  onChange={(e) => setForm({ ...form, conflict_level: e.target.value })}
+                  style={{
+                    width: '100%',
+                    padding: '0.55rem',
+                    background: 'rgba(0, 0, 0, 0.4)',
+                    border: '1px solid var(--border-color)',
+                    borderRadius: '6px',
+                    color: '#fff',
+                    fontSize: '0.85rem'
+                  }}
+                >
+                  <option value="All" style={{ background: '#0a1610' }}>All Risk Levels</option>
+                  <option value="High" style={{ background: '#0a1610' }}>High Risk Only</option>
+                  <option value="Medium" style={{ background: '#0a1610' }}>Medium Risk Only</option>
+                </select>
+              </div>
             </div>
 
             <button type="submit" className="btn btn-amber" disabled={generating} style={{ marginTop: '0.5rem' }}>

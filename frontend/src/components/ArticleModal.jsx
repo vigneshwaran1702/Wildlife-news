@@ -11,6 +11,20 @@ export default function ArticleModal({ article, onClose, onToggleBookmark }) {
   const content = (isTamil && article.content_ta) ? article.content_ta : article.content_en;
   const summary = (isTamil && article.summary_ta) ? article.summary_ta : article.summary_en;
 
+  const handleOpenSource = (e, url) => {
+    e.stopPropagation();
+    e.preventDefault();
+    if (!url) return;
+    try {
+      const win = window.open(url, '_blank', 'noopener,noreferrer');
+      if (!win) {
+        window.location.href = url;
+      }
+    } catch (err) {
+      window.location.href = url;
+    }
+  };
+
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -81,9 +95,14 @@ export default function ArticleModal({ article, onClose, onToggleBookmark }) {
           </div>
         )}
 
-        {/* Article Full Content */}
-        <div className={isTamil ? 'tamil-font' : ''} style={{ fontSize: '0.95rem', lineHeight: '1.6', color: 'var(--text-main)', marginBottom: '1.5rem' }}>
-          {content}
+        {/* Article Full Content (What Happened) */}
+        <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ fontSize: '0.8rem', fontWeight: '700', color: 'var(--primary-emerald)', textTransform: 'uppercase', marginBottom: '0.4rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <Sparkles size={14} /> ⚡ WHAT HAPPENED
+          </div>
+          <div className={isTamil ? 'tamil-font' : ''} style={{ fontSize: '0.95rem', lineHeight: '1.6', color: 'var(--text-main)' }}>
+            {content}
+          </div>
         </div>
 
         {/* Footer Actions */}
@@ -95,28 +114,9 @@ export default function ArticleModal({ article, onClose, onToggleBookmark }) {
             <Bookmark size={16} fill={article.is_bookmarked ? "#10b981" : "none"} />
             {article.is_bookmarked ? 'Saved in Bookmarks' : 'Save Article'}
           </button>
-
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            <a 
-              href={article.source_url} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              Visit Original Source ({article.source_name})
-              <ExternalLink size={14} />
-            </a>
-            <a 
-              href={`https://news.google.com/search?q=${encodeURIComponent(article.title_en + ' Tamil Nadu')}`} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-              style={{ borderColor: 'rgba(59, 130, 246, 0.4)', color: '#6ee7b7' }}
-            >
-              Google News Coverage
-              <ExternalLink size={14} />
-            </a>
-          </div>
+          <button className="btn btn-primary" onClick={onClose}>
+            Close Brief
+          </button>
         </div>
       </div>
     </div>

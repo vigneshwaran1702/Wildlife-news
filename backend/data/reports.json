@@ -22,5 +22,913 @@
     "filter_criteria": {
       "Time Window": "Today 08:00 AM to 05:00 PM"
     }
+  },
+  {
+    "id": "pdf_0e3a360e",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_0e3a360e.pdf",
+    "download_url": "/api/pdf/download/pdf_0e3a360e",
+    "created_at": "2026-08-08 15:11:29.815561",
+    "article_count": 6,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Conflict Level": "All"
+    }
+  },
+  {
+    "id": "pdf_a6ffd453",
+    "title": "Forest Fire Bulletin",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_a6ffd453.pdf",
+    "download_url": "/api/pdf/download/pdf_a6ffd453",
+    "created_at": "2026-08-08 15:23:29.074118",
+    "article_count": 2,
+    "filter_criteria": {
+      "Category": "Forest Fire & Safety",
+      "District": "All",
+      "Conflict Level": "All"
+    }
+  },
+  {
+    "id": "pdf_8d50ca53",
+    "title": "August 8, 2026 - Wildlife Intelligence Bulletin",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_8d50ca53.pdf",
+    "download_url": "/api/pdf/download/pdf_8d50ca53",
+    "created_at": "2026-08-08 15:27:47.722008",
+    "article_count": 21,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Conflict Level": "All"
+    }
+  },
+  {
+    "id": "pdf_3a10a93b",
+    "title": "Tamil Nadu Wildlife Intelligence Bulletin - Aug 8, 2026",
+    "report_type": "Daily TN Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_3a10a93b.pdf",
+    "download_url": "/api/pdf/download/pdf_3a10a93b",
+    "created_at": "2026-08-08 15:33:54.109685",
+    "article_count": 21,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Conflict Level": "All"
+    }
+  },
+  {
+    "id": "pdf_f00e470c",
+    "title": "Tamil Nadu News Feed Digest (Aug 7 & 8, 2026)",
+    "report_type": "Today & Yesterday Digest",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_f00e470c.pdf",
+    "download_url": "/api/pdf/download/pdf_f00e470c",
+    "created_at": "2026-08-08 15:44:53.979378",
+    "article_count": 21,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Conflict Level": "All"
+    }
+  },
+  {
+    "id": "pdf_d90672a9",
+    "title": "Morning Bulletin - 8:00 AM",
+    "report_type": "Morning Bulletin (8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_d90672a9.pdf",
+    "download_url": "/api/pdf/download/pdf_d90672a9",
+    "created_at": "2026-08-08 15:48:49.899666",
+    "article_count": 4,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Yesterday 05:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_16264c7f",
+    "title": "Evening Bulletin - 5:30 PM",
+    "report_type": "Evening Bulletin (5:30 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_16264c7f.pdf",
+    "download_url": "/api/pdf/download/pdf_16264c7f",
+    "created_at": "2026-08-08 15:48:51.999639",
+    "article_count": 2,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Today 08:00 AM to 05:00 PM (No Duplicate Morning News)"
+    }
+  },
+  {
+    "id": "pdf_5567bcdc",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_5567bcdc.pdf",
+    "download_url": "/api/pdf/download/pdf_5567bcdc",
+    "created_at": "2026-08-08 15:51:44.552253",
+    "article_count": 21,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_78f78e42",
+    "title": "Refreshed TN Forest & Wildlife Bulletin",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_78f78e42.pdf",
+    "download_url": "/api/pdf/download/pdf_78f78e42",
+    "created_at": "2026-08-08 16:01:05.926822",
+    "article_count": 20,
+    "filter_criteria": {}
+  },
+  {
+    "id": "pdf_d7f91d39",
+    "title": "Refreshed TN Forest & Wildlife Bulletin (Aug 7 & 8, 2026)",
+    "report_type": "Refreshed TN Digest",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_d7f91d39.pdf",
+    "download_url": "/api/pdf/download/pdf_d7f91d39",
+    "created_at": "2026-08-08 16:02:38.307060",
+    "article_count": 20,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_028d9a91",
+    "title": "August 2026 - TN Wildlife & Conservation Intelligence Bulletin",
+    "report_type": "August 2026 Digest",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_028d9a91.pdf",
+    "download_url": "/api/pdf/download/pdf_028d9a91",
+    "created_at": "2026-08-08 16:05:35.119617",
+    "article_count": 20,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_fbc38ae5",
+    "title": "2026 Tamil Nadu Wildlife & Forest Department Intelligence Digest",
+    "report_type": "2026 Annual Digest",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_fbc38ae5.pdf",
+    "download_url": "/api/pdf/download/pdf_fbc38ae5",
+    "created_at": "2026-08-08 16:08:08.787600",
+    "article_count": 20,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_ca8aaca1",
+    "title": "Post-May 2026 TN Wildlife & Forest Department Intelligence Digest",
+    "report_type": "Post-May 2026 Digest",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_ca8aaca1.pdf",
+    "download_url": "/api/pdf/download/pdf_ca8aaca1",
+    "created_at": "2026-08-08 16:11:04.416865",
+    "article_count": 20,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_51b1ff1f",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Morning Bulletin (8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_51b1ff1f.pdf",
+    "download_url": "/api/pdf/download/pdf_51b1ff1f",
+    "created_at": "2026-08-08 16:12:47.723835",
+    "article_count": 19,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Yesterday 05:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_2443600f",
+    "title": "All Tamil Nadu Districts Wildlife & Conservation Intelligence Digest",
+    "report_type": "All Districts TN Digest",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_2443600f.pdf",
+    "download_url": "/api/pdf/download/pdf_2443600f",
+    "created_at": "2026-08-08 16:26:46.599260",
+    "article_count": 24,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_7c508df8",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_7c508df8.pdf",
+    "download_url": "/api/pdf/download/pdf_7c508df8",
+    "created_at": "2026-08-08 16:53:59.934544",
+    "article_count": 24,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_cbdc49fb",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_cbdc49fb.pdf",
+    "download_url": "/api/pdf/download/pdf_cbdc49fb",
+    "created_at": "2026-08-08 17:01:03.163231",
+    "article_count": 24,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_64a44d0a",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_64a44d0a.pdf",
+    "download_url": "/api/pdf/download/pdf_64a44d0a",
+    "created_at": "2026-08-08 17:01:41.769260",
+    "article_count": 24,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_93ed6c57",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_93ed6c57.pdf",
+    "download_url": "/api/pdf/download/pdf_93ed6c57",
+    "created_at": "2026-08-08 17:01:42.357641",
+    "article_count": 24,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_a6d8e625",
+    "title": "Forest & Wildlife News Bulletin",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_a6d8e625.pdf",
+    "download_url": "/api/pdf/download/pdf_a6d8e625",
+    "created_at": "2026-08-08 21:03:52.416388",
+    "article_count": 34,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_3fcf0ba8",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_3fcf0ba8.pdf",
+    "download_url": "/api/pdf/download/pdf_3fcf0ba8",
+    "created_at": "2026-08-08 21:05:48.234926",
+    "article_count": 34,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_e3df4534",
+    "title": "Live Newspaper Tamil Nadu Wildlife Intelligence Report",
+    "report_type": "Live Newspaper Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_e3df4534.pdf",
+    "download_url": "/api/pdf/download/pdf_e3df4534",
+    "created_at": "2026-08-08 21:09:49.592933",
+    "article_count": 34,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_d2aa3979",
+    "title": "Up-To-Date Tamil Nadu Forest & Wildlife Intelligence Bulletin",
+    "report_type": "Up-To-Date Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_d2aa3979.pdf",
+    "download_url": "/api/pdf/download/pdf_d2aa3979",
+    "created_at": "2026-08-08 21:11:27.224162",
+    "article_count": 48,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_2e1a08ec",
+    "title": "Working Live Links Tamil Nadu Wildlife Digest",
+    "report_type": "Live Working Links Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_2e1a08ec.pdf",
+    "download_url": "/api/pdf/download/pdf_2e1a08ec",
+    "created_at": "2026-08-08 21:12:47.159348",
+    "article_count": 48,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_bd733877",
+    "title": "Up-To-Date Tamil Nadu Forest & Wildlife News Bulletin",
+    "report_type": "Up-To-Date Daily Digest",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_bd733877.pdf",
+    "download_url": "/api/pdf/download/pdf_bd733877",
+    "created_at": "2026-08-08 21:15:01.740548",
+    "article_count": 37,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_a8904de3",
+    "title": "Official Newspaper Channel Links Digest",
+    "report_type": "Official Links Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_a8904de3.pdf",
+    "download_url": "/api/pdf/download/pdf_a8904de3",
+    "created_at": "2026-08-08 21:16:20.298949",
+    "article_count": 37,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_e931fb4c",
+    "title": "Direct Live Links Tamil Nadu Wildlife Digest",
+    "report_type": "Direct Links Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_e931fb4c.pdf",
+    "download_url": "/api/pdf/download/pdf_e931fb4c",
+    "created_at": "2026-08-08 21:18:00.519123",
+    "article_count": 37,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_885bed66",
+    "title": "Latest Up-To-Date Tamil Nadu Wildlife Feed Digest",
+    "report_type": "Latest Feed Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_885bed66.pdf",
+    "download_url": "/api/pdf/download/pdf_885bed66",
+    "created_at": "2026-08-08 21:19:53.097168",
+    "article_count": 51,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_5cf2e808",
+    "title": "Today Everyday Tamil Nadu Forest & Wildlife Bulletin",
+    "report_type": "Morning Bulletin (8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_5cf2e808.pdf",
+    "download_url": "/api/pdf/download/pdf_5cf2e808",
+    "created_at": "2026-08-08 21:22:13.717272",
+    "article_count": 9,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Yesterday 05:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_db9eee89",
+    "title": "22-Source Tamil Nadu Wildlife & Official Forest Department Digest",
+    "report_type": "All 22 Sources Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_db9eee89.pdf",
+    "download_url": "/api/pdf/download/pdf_db9eee89",
+    "created_at": "2026-08-08 21:26:14.541373",
+    "article_count": 67,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_51122a96",
+    "title": "Today Exclusive Tamil Nadu Forest & Wildlife Intelligence Digest",
+    "report_type": "Today Exclusive Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_51122a96.pdf",
+    "download_url": "/api/pdf/download/pdf_51122a96",
+    "created_at": "2026-08-08 21:27:51.029316",
+    "article_count": 67,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_ef60d0e7",
+    "title": "Today Exclusive Fresh Tamil Nadu Wildlife Intelligence Digest",
+    "report_type": "Today Fresh Digest",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_ef60d0e7.pdf",
+    "download_url": "/api/pdf/download/pdf_ef60d0e7",
+    "created_at": "2026-08-08 21:29:26.474853",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_1db7f0e2",
+    "title": "Today (Aug 8, 2026) Exclusive Tamil Nadu Wildlife Intelligence Digest",
+    "report_type": "Today Exclusive Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_1db7f0e2.pdf",
+    "download_url": "/api/pdf/download/pdf_1db7f0e2",
+    "created_at": "2026-08-08 21:31:19.751890",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_60ae5a3f",
+    "title": "Direct Newspaper Section Links Digest",
+    "report_type": "Direct Section Links Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_60ae5a3f.pdf",
+    "download_url": "/api/pdf/download/pdf_60ae5a3f",
+    "created_at": "2026-08-08 21:32:38.649487",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_79ddaede",
+    "title": "Guaranteed Working Source Links Bulletin",
+    "report_type": "Working Links Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\WildTN_Report_pdf_79ddaede.pdf",
+    "download_url": "/api/pdf/download/pdf_79ddaede",
+    "created_at": "2026-08-08 21:34:35.062992",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_1d204d11",
+    "title": "TAMIL NADU FOREST DEPARTMENT Daily Media Scan Bulletin",
+    "report_type": "Exhaustive Evening Edition",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_1d204d11.pdf",
+    "download_url": "/api/pdf/download/pdf_1d204d11",
+    "created_at": "2026-08-08 21:46:40.979004",
+    "article_count": 7,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Today 08:00 AM to 05:00 PM (No Duplicate Morning News)"
+    }
+  },
+  {
+    "id": "pdf_1386d4fc",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_1386d4fc.pdf",
+    "download_url": "/api/pdf/download/pdf_1386d4fc",
+    "created_at": "2026-08-08 21:48:21.201917",
+    "article_count": 7,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_66af25f7",
+    "title": "TAMIL NADU FOREST DEPARTMENT Daily Media Scan Bulletin",
+    "report_type": "Exhaustive Evening Edition (Aug 08, 2026)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_66af25f7.pdf",
+    "download_url": "/api/pdf/download/pdf_66af25f7",
+    "created_at": "2026-08-08 21:50:14.627207",
+    "article_count": 36,
+    "filter_criteria": {}
+  },
+  {
+    "id": "pdf_bc66d428",
+    "title": "TAMIL NADU FOREST DEPARTMENT Daily Media Scan Bulletin",
+    "report_type": "Exhaustive Evening Edition (Aug 08, 2026)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_bc66d428.pdf",
+    "download_url": "/api/pdf/download/pdf_bc66d428",
+    "created_at": "2026-08-08 21:50:19.890231",
+    "article_count": 36,
+    "filter_criteria": {}
+  },
+  {
+    "id": "pdf_f2dd74f3",
+    "title": "TAMIL NADU FOREST DEPARTMENT Daily Media Scan Bulletin",
+    "report_type": "Exhaustive Evening Edition (Aug 08, 2026)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_f2dd74f3.pdf",
+    "download_url": "/api/pdf/download/pdf_f2dd74f3",
+    "created_at": "2026-08-08 21:50:56.804746",
+    "article_count": 7,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Today 08:00 AM to 05:00 PM (No Duplicate Morning News)"
+    }
+  },
+  {
+    "id": "pdf_2f55106a",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_2f55106a.pdf",
+    "download_url": "/api/pdf/download/pdf_2f55106a",
+    "created_at": "2026-08-08 21:51:29.349903",
+    "article_count": 36,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_965d7ff5",
+    "title": "TAMIL NADU FOREST DEPARTMENT Black Edition Media Scan",
+    "report_type": "Black Edition Evening Scan (Aug 08, 2026)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_965d7ff5.pdf",
+    "download_url": "/api/pdf/download/pdf_965d7ff5",
+    "created_at": "2026-08-08 21:54:23.493591",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Today 08:00 AM to 05:00 PM (No Duplicate Morning News)"
+    }
+  },
+  {
+    "id": "pdf_d8b44d1b",
+    "title": "Black Edition Official Clean Links Digest",
+    "report_type": "Clean Links Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_d8b44d1b.pdf",
+    "download_url": "/api/pdf/download/pdf_d8b44d1b",
+    "created_at": "2026-08-08 21:56:17.797498",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_61de5a6a",
+    "title": "Original News Article Links Black Edition Digest",
+    "report_type": "Original Links Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_61de5a6a.pdf",
+    "download_url": "/api/pdf/download/pdf_61de5a6a",
+    "created_at": "2026-08-08 21:58:14.764773",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_ed158921",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Daily Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_ed158921.pdf",
+    "download_url": "/api/pdf/download/pdf_ed158921",
+    "created_at": "2026-08-08 22:05:18.668070",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_5ef20e10",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Evening Bulletin (5:30 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_5ef20e10.pdf",
+    "download_url": "/api/pdf/download/pdf_5ef20e10",
+    "created_at": "2026-08-08 22:05:47.300457",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Today 08:00 AM to 05:00 PM (No Duplicate Morning News)"
+    }
+  },
+  {
+    "id": "pdf_486c9042",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Morning Bulletin (8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_486c9042.pdf",
+    "download_url": "/api/pdf/download/pdf_486c9042",
+    "created_at": "2026-08-08 22:07:16.248539",
+    "article_count": 8,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Yesterday 05:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_6221ea63",
+    "title": "Shift 1 Day Bulletin (08:00 AM - 05:00 PM)",
+    "report_type": "Shift 1: Day Bulletin (8:00 AM - 5:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_6221ea63.pdf",
+    "download_url": "/api/pdf/download/pdf_6221ea63",
+    "created_at": "2026-08-08 22:10:50.072433",
+    "article_count": 6,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 1: Today 08:00 AM to 05:00 PM"
+    }
+  },
+  {
+    "id": "pdf_ed70ac53",
+    "title": "Shift 2 Evening Bulletin (05:00 PM - 09:00 PM)",
+    "report_type": "Shift 2: Evening Bulletin (5:00 PM - 9:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_ed70ac53.pdf",
+    "download_url": "/api/pdf/download/pdf_ed70ac53",
+    "created_at": "2026-08-08 22:10:52.204940",
+    "article_count": 4,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 2: Today 05:00 PM to 09:00 PM (No Duplicate Shift 1 News)"
+    }
+  },
+  {
+    "id": "pdf_dc246229",
+    "title": "Shift 3 Night Bulletin (09:00 PM - 08:00 AM)",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (9:00 PM - 8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_dc246229.pdf",
+    "download_url": "/api/pdf/download/pdf_dc246229",
+    "created_at": "2026-08-08 22:10:54.290870",
+    "article_count": 1,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 3: Yesterday 09:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_ad797e20",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 1: Day Bulletin (8:00 AM - 5:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_ad797e20.pdf",
+    "download_url": "/api/pdf/download/pdf_ad797e20",
+    "created_at": "2026-08-08 22:11:40.092082",
+    "article_count": 6,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 1: Today 08:00 AM to 05:00 PM"
+    }
+  },
+  {
+    "id": "pdf_4182c2ab",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 1: Day Bulletin (8:00 AM - 5:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_4182c2ab.pdf",
+    "download_url": "/api/pdf/download/pdf_4182c2ab",
+    "created_at": "2026-08-08 22:12:09.069076",
+    "article_count": 6,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 1: Today 08:00 AM to 05:00 PM"
+    }
+  },
+  {
+    "id": "pdf_2666fec2",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 2: Evening Bulletin (5:00 PM - 9:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_2666fec2.pdf",
+    "download_url": "/api/pdf/download/pdf_2666fec2",
+    "created_at": "2026-08-08 22:12:59.875654",
+    "article_count": 4,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 2: Today 05:00 PM to 09:00 PM (No Duplicate Shift 1 News)"
+    }
+  },
+  {
+    "id": "pdf_a5a68748",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (9:00 PM - 8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_a5a68748.pdf",
+    "download_url": "/api/pdf/download/pdf_a5a68748",
+    "created_at": "2026-08-08 22:13:24.500687",
+    "article_count": 1,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 3: Yesterday 09:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_ad9c164c",
+    "title": "TAMIL NADU FOREST DEPARTMENT Media Bulletin (Vigneshwaran)",
+    "report_type": "Vigneshwaran Official Edition",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_ad9c164c.pdf",
+    "download_url": "/api/pdf/download/pdf_ad9c164c",
+    "created_at": "2026-08-08 22:16:12.193655",
+    "article_count": 13,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_0844dc79",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 1: Day Bulletin (8:00 AM - 5:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_0844dc79.pdf",
+    "download_url": "/api/pdf/download/pdf_0844dc79",
+    "created_at": "2026-08-08 22:16:49.491231",
+    "article_count": 6,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 1: Today 08:00 AM to 05:00 PM"
+    }
+  },
+  {
+    "id": "pdf_9fe6b387",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 2: Evening Bulletin (5:00 PM - 9:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_9fe6b387.pdf",
+    "download_url": "/api/pdf/download/pdf_9fe6b387",
+    "created_at": "2026-08-08 22:16:59.131990",
+    "article_count": 4,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 2: Today 05:00 PM to 09:00 PM (No Duplicate Shift 1 News)"
+    }
+  },
+  {
+    "id": "pdf_ad6339c6",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (9:00 PM - 8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_ad6339c6.pdf",
+    "download_url": "/api/pdf/download/pdf_ad6339c6",
+    "created_at": "2026-08-08 22:17:08.983129",
+    "article_count": 1,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 3: Yesterday 09:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_6c2d3b0f",
+    "title": "Structured Intelligence Bulletin (No Source Links)",
+    "report_type": "Structured Heading Where What Happened Bulletin",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_6c2d3b0f.pdf",
+    "download_url": "/api/pdf/download/pdf_6c2d3b0f",
+    "created_at": "2026-08-08 22:26:17.564814",
+    "article_count": 13,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All"
+    }
+  },
+  {
+    "id": "pdf_a6693b2a",
+    "title": "Shift 1 Day Bulletin (08:00 AM - 05:00 PM)",
+    "report_type": "Shift 1: Day Bulletin (8:00 AM - 5:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_a6693b2a.pdf",
+    "download_url": "/api/pdf/download/pdf_a6693b2a",
+    "created_at": "2026-08-08 22:43:02.480911",
+    "article_count": 6,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 1: Today 08:00 AM to 05:00 PM"
+    }
+  },
+  {
+    "id": "pdf_cfef7a42",
+    "title": "Shift 2 Evening Bulletin (05:00 PM - 09:00 PM)",
+    "report_type": "Shift 2: Evening Bulletin (5:00 PM - 9:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_cfef7a42.pdf",
+    "download_url": "/api/pdf/download/pdf_cfef7a42",
+    "created_at": "2026-08-08 22:43:06.695319",
+    "article_count": 4,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 2: Today 05:00 PM to 09:00 PM (No Duplicate Shift 1 News)"
+    }
+  },
+  {
+    "id": "pdf_8f705820",
+    "title": "Shift 3 Night Bulletin (09:00 PM - 08:00 AM)",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (9:00 PM - 8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_8f705820.pdf",
+    "download_url": "/api/pdf/download/pdf_8f705820",
+    "created_at": "2026-08-08 22:43:10.915961",
+    "article_count": 1,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 3: Yesterday 09:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_6fb4cb3b",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (9:00 PM - 8:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_6fb4cb3b.pdf",
+    "download_url": "/api/pdf/download/pdf_6fb4cb3b",
+    "created_at": "2026-08-09 08:48:37.667708",
+    "article_count": 2,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 3: Yesterday 09:00 PM to Today 08:00 AM (Overnight)"
+    }
+  },
+  {
+    "id": "pdf_9cc30793",
+    "title": "Tamil Nadu Wildlife Alert Digest",
+    "report_type": "Shift 1: Day Bulletin (8:00 AM - 5:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_9cc30793.pdf",
+    "download_url": "/api/pdf/download/pdf_9cc30793",
+    "created_at": "2026-08-09 10:05:30.978203",
+    "article_count": 2,
+    "filter_criteria": {
+      "Category": "All",
+      "District": "All",
+      "Risk Level": "All",
+      "Time Window": "Shift 1: Today 08:00 AM to 05:00 PM"
+    }
   }
 ]

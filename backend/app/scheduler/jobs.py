@@ -1,5 +1,5 @@
 from apscheduler.schedulers.background import BackgroundScheduler
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from app.collectors.rss import RSSCollector
 from app.collectors.tamil_news import TamilNewsCollector
@@ -19,68 +19,107 @@ def run_collection_job():
     en_count = EnglishNewsCollector.scrape_latest()
     print(f"Job Finished. Articles fetched -> RSS: {rss_count}, Tamil: {ta_count}, English: {en_count}")
 
-from datetime import datetime, timedelta
-
-def generate_morning_digest_job():
+def generate_shift1_day_digest_job():
     """
-    Auto-generates Morning 8:00 AM Wildlife Alert PDF Digest (Yesterday's + Early Morning News).
+    Auto-generates Shift 1 PDF Digest (Today 8:00 AM to 5:00 PM Daytime News) at 5:00 PM (17:00).
     """
     now = datetime.now()
-    morning_cutoff = now.replace(hour=8, minute=0, second=0, microsecond=0)
-    cutoff_24h_ago = morning_cutoff - timedelta(hours=24)
+    start_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
+    end_time = now.replace(hour=17, minute=0, second=0, microsecond=0)
 
     all_articles = db_storage.get_articles()
-    morning_articles = [
-        a for a in all_articles
-        if cutoff_24h_ago <= a.published_at <= morning_cutoff
-    ]
-    if not morning_articles:
-        morning_articles = [a for a in all_articles if a.published_at <= morning_cutoff] or all_articles[:15]
+    shift1_articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
+    if not shift1_articles:
+        shift1_articles = [a for a in all_articles if a.published_at >= start_time] or all_articles[:15]
 
     report = PDFReportGenerator.generate_report(
-        title=f"Morning Wildlife Alert Bulletin - {now.strftime('%d %b %Y, 08:00 AM')}",
-        report_type="Daily Morning Briefing (Yesterday & Early AM Data)",
-        articles=morning_articles[:15],
-        filter_criteria={"Time Window": "Yesterday 08:00 AM to Today 08:00 AM"}
+        title=f"Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - {now.strftime('%d %b %Y')}",
+        report_type="Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+        articles=shift1_articles,
+        filter_criteria={
+            "Time Window": "Today 08:00 AM to 05:00 PM",
+            "Auto Schedule": "17:00 (5:00 PM) Daily Trigger"
+        }
     )
-    print(f"Generated automated 08:00 AM morning PDF report: {report.download_url}")
+    print(f"Generated automated Shift 1 (08:00 AM - 05:00 PM) PDF report: {report.download_url}")
 
-def generate_evening_digest_job():
+def generate_shift2_evening_digest_job():
     """
-    Auto-generates Evening 5:30 PM Wildlife Alert PDF Digest (8:00 AM to 5:00 PM Daytime News).
+    Auto-generates Shift 2 PDF Digest (Today 5:00 PM to 9:00 PM Evening News) at 9:00 PM (21:00).
     """
     now = datetime.now()
-    start_8am = now.replace(hour=8, minute=0, second=0, microsecond=0)
-    end_5pm = now.replace(hour=17, minute=0, second=0, microsecond=0)
+    start_time = now.replace(hour=17, minute=0, second=0, microsecond=0)
+    end_time = now.replace(hour=21, minute=0, second=0, microsecond=0)
 
     all_articles = db_storage.get_articles()
-    daytime_articles = [
-        a for a in all_articles
-        if start_8am <= a.published_at <= end_5pm
-    ]
-    if not daytime_articles:
-        daytime_articles = [a for a in all_articles if a.published_at >= start_8am] or all_articles[:15]
+    shift2_articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
+    if not shift2_articles:
+        shift2_articles = [a for a in all_articles if a.published_at >= start_time] or all_articles[:15]
 
     report = PDFReportGenerator.generate_report(
-        title=f"Evening Wildlife Summary Briefing - {now.strftime('%d %b %Y, 05:30 PM')}",
-        report_type="Daily Evening Briefing (08:00 AM - 05:00 PM Data)",
-        articles=daytime_articles[:15],
-        filter_criteria={"Time Window": "Today 08:00 AM to 05:00 PM"}
+        title=f"Shift 2 Evening Bulletin (5:00 PM - 9:00 PM) - {now.strftime('%d %b %Y')}",
+        report_type="Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)",
+        articles=shift2_articles,
+        filter_criteria={
+            "Time Window": "Today 05:00 PM to 09:00 PM",
+            "Deduplication": "Excludes Shift 1 (8am-5pm) News",
+            "Auto Schedule": "21:00 (9:00 PM) Daily Trigger"
+        }
     )
-    print(f"Generated automated 05:30 PM evening PDF report: {report.download_url}")
+    print(f"Generated automated Shift 2 (05:00 PM - 09:00 PM) PDF report: {report.download_url}")
+
+def generate_shift3_night_digest_job():
+    """
+    Auto-generates Shift 3 PDF Digest (Yesterday 9:00 PM to Today 8:00 AM Overnight News) at 8:00 AM (08:00).
+    """
+    now = datetime.now()
+    end_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
+    start_time = (end_time - timedelta(days=1)).replace(hour=21, minute=0, second=0, microsecond=0)
+
+    all_articles = db_storage.get_articles()
+    shift3_articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
+    if not shift3_articles:
+        shift3_articles = [a for a in all_articles if a.published_at <= end_time] or all_articles[:15]
+
+    report = PDFReportGenerator.generate_report(
+        title=f"Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - {now.strftime('%d %b %Y')}",
+        report_type="Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)",
+        articles=shift3_articles,
+        filter_criteria={
+            "Time Window": "Yesterday 09:00 PM to Today 08:00 AM",
+            "Deduplication": "Excludes Daytime & Evening News",
+            "Auto Schedule": "08:00 (8:00 AM) Daily Trigger"
+        }
+    )
+    print(f"Generated automated Shift 3 (09:00 PM - 08:00 AM) PDF report: {report.download_url}")
 
 def start_scheduler():
     if not scheduler.running:
-        # Schedule news fetch every 15 minutes
-        scheduler.add_job(run_collection_job, 'interval', minutes=15, id='news_fetch_job')
-        # Schedule morning PDF strictly at 08:00 AM
-        scheduler.add_job(generate_morning_digest_job, 'cron', hour=8, minute=0, id='morning_digest_job')
-        # Schedule evening PDF strictly at 05:30 PM (17:30)
-        scheduler.add_job(generate_evening_digest_job, 'cron', hour=17, minute=30, id='evening_digest_job')
+        # Continuous Scheduled Collector: Every 3 hours
+        scheduler.add_job(run_collection_job, 'interval', hours=3, id='news_fetch_job')
+
+        # ── SHIFT 1: 08:00 AM ➔ 05:00 PM ──
+        # 8:00 AM: Start collecting Morning Shift news
+        scheduler.add_job(run_collection_job, 'cron', hour=8, minute=0, id='start_shift1_collect_job')
+        # 5:00 PM (17:00): Generate Morning Shift PDF (Covers 8:00 AM - 5:00 PM)
+        scheduler.add_job(generate_shift1_day_digest_job, 'cron', hour=17, minute=0, id='shift1_digest_job')
+
+        # ── SHIFT 2: 05:00 PM ➔ 09:00 PM ──
+        # 5:00 PM (17:00): Start collecting Evening Shift new news
+        scheduler.add_job(run_collection_job, 'cron', hour=17, minute=0, id='start_shift2_collect_job')
+        # 9:00 PM (21:00): Generate Evening Shift PDF (Covers 5:00 PM - 9:00 PM)
+        scheduler.add_job(generate_shift2_evening_digest_job, 'cron', hour=21, minute=0, id='shift2_digest_job')
+
+        # ── SHIFT 3: 09:00 PM ➔ 08:00 AM (Next Day) ──
+        # 9:00 PM (21:00): Start collecting Night Shift new news
+        scheduler.add_job(run_collection_job, 'cron', hour=21, minute=0, id='start_shift3_collect_job')
+        # 8:00 AM (08:00 Next Day): Generate Night Shift PDF (Covers 9:00 PM - 8:00 AM)
+        scheduler.add_job(generate_shift3_night_digest_job, 'cron', hour=8, minute=0, id='shift3_digest_job')
         
         scheduler.start()
-        print("APScheduler active: Auto-generating PDF digests EXCLUSIVELY at 08:00 AM and 05:30 PM.")
+        print("APScheduler active: 3 Shifts (8:00 AM-5:00 PM, 5:00 PM-9:00 PM, 9:00 PM-8:00 AM) collection & PDF generation scheduled.")
 
 def stop_scheduler():
     if scheduler.running:
         scheduler.shutdown()
+

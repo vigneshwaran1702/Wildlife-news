@@ -21,7 +21,10 @@ export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated }) {
   const loadData = async () => {
     setLoading(true);
     try {
-      const data = await fetchArticles({ ...filters, bookmarkedOnly });
+      let data = await fetchArticles({ ...filters, bookmarkedOnly, date_status: filters.dateFilter !== 'All' ? filters.dateFilter : undefined });
+      if (filters.dateFilter && filters.dateFilter !== 'All') {
+        data = data.filter(a => (a.date_status || 'TODAY').toUpperCase() === filters.dateFilter.toUpperCase());
+      }
       setArticles(data);
       if (onArticlesUpdated) onArticlesUpdated();
     } catch (e) {

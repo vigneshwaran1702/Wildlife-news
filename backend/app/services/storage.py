@@ -1,7 +1,7 @@
 import json
 import os
 from typing import List, Optional, Dict
-from datetime import datetime
+from datetime import datetime, timedelta
 import uuid
 from app.ai.classifier import ArticleClassifier
 from app.models.schemas import Article, PDFReport, CollectorLog
@@ -70,16 +70,39 @@ class StorageService:
         conflict_level: Optional[str] = None,
         species: Optional[str] = None,
         search: Optional[str] = None,
-        bookmarked_only: bool = False
+        bookmarked_only: bool = False,
+        todays_only: bool = False,
+        date_status: Optional[str] = None
     ) -> List[Article]:
+        today_date = datetime.now().date()
         results = list(self.articles.values())
-        
+
+        # Update date_status on every article dynamically according to exact formula
+        for a in results:
+            if a.published_at:
+                pub_date = a.published_at.date() if isinstance(a.published_at, datetime) else today_date
+                if pub_date == today_date:
+                    a.date_status = "TODAY"
+                elif pub_date == today_date - timedelta(days=1):
+                    a.date_status = "YESTERDAY"
+                else:
+                    a.date_status = "OLD"
+
         # Only expose Tamil Nadu wildlife / forest department news
         results = [
             a for a in results
             if ArticleClassifier.is_tamil_nadu_relevant(a.title_en, a.content_en)
             and ArticleClassifier.is_forest_or_wildlife_relevant(a.title_en, a.content_en)
         ]
+
+        if date_status and date_status != "All":
+            results = [a for a in results if a.date_status.upper() == date_status.upper()]
+
+        if todays_only:
+            today_str = datetime.now().strftime('%Y-%m-%d')
+            todays_results = [a for a in results if a.published_at and a.published_at.strftime('%Y-%m-%d') == today_str]
+            if todays_results:
+                results = todays_results
 
         if category and category != "All":
             results = [a for a in results if a.category.lower() == category.lower()]

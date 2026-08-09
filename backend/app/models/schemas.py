@@ -26,6 +26,7 @@ class ArticleBase(BaseModel):
     image_url: Optional[str] = None
     key_entities: Optional[KeyEntities] = Field(default_factory=KeyEntities)
     sentiment: str = "Neutral"  # Positive, Neutral, Negative, Critical Alert
+    date_status: str = "TODAY"  # TODAY, YESTERDAY, OLD
 
 class ArticleCreate(ArticleBase):
     pass

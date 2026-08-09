@@ -14,7 +14,7 @@ class EnglishNewsCollector:
         """
         Fetches 100% live news directly from open source web RSS feeds for Tamil Nadu wildlife.
         """
-        feed_url = "https://news.google.com/rss/search?q=Tamil+Nadu+wildlife+OR+elephant+OR+tiger+OR+leopard+OR+forest+department&hl=en-IN&gl=IN&ceid=IN:en"
+        feed_url = "https://news.google.com/rss/search?q=Tamil+Nadu+wildlife+OR+forest+department+OR+forest+fire+OR+wildlife+crime+OR+protected+area+OR+rescue+OR+seizure+OR+encroachment+OR+forest+policy&hl=en-IN&gl=IN&ceid=IN:en"
         added = 0
         try:
             feed = feedparser.parse(feed_url)
