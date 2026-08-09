@@ -41,7 +41,8 @@ class PDFReportGenerator:
             rightMargin=28,
             leftMargin=28,
             topMargin=28,
-            bottomMargin=28
+            bottomMargin=38
+
         )
 
         styles = getSampleStyleSheet()
@@ -313,17 +314,27 @@ class PDFReportGenerator:
 
                 elements.append(KeepTogether([card_table, Spacer(1, 6)]))
 
-        # 5. Footer
-        elements.append(Spacer(1, 6))
-        footer_p = Paragraph(
-            f"<b>Compiled by Vigneshwaran</b> &nbsp;|&nbsp; <b>Downloaded On:</b> {now_str} | {time_str}",
-            ParagraphStyle(
-                'FooterStyle', parent=styles['Normal'], fontSize=8.5, leading=11, textColor=colors.HexColor("#0F172A"), alignment=TA_CENTER
-            )
-        )
-        elements.append(footer_p)
+        def draw_canvas_footer(canvas, doc_obj):
+            canvas.saveState()
+            dt = datetime.now()
+            d_str = dt.strftime("%b %d, %Y")
+            t_str = dt.strftime("%I:%M %p IST")
+            footer_text = f"Compiled by Vigneshwaran   |   Downloaded On: {d_str} | {t_str}"
 
-        doc.build(elements)
+            page_w, _ = letter
+            # Draw line above footer
+            canvas.setStrokeColor(colors.HexColor("#CBD5E1"))
+            canvas.setLineWidth(0.75)
+            canvas.line(28, 28, page_w - 28, 28)
+
+            # Draw footer text
+            canvas.setFont("Helvetica-Bold", 8.5)
+            canvas.setFillColor(colors.HexColor("#0F172A"))
+            canvas.drawCentredString(page_w / 2.0, 14, footer_text)
+            canvas.restoreState()
+
+        doc.build(elements, onFirstPage=draw_canvas_footer, onLaterPages=draw_canvas_footer)
+
 
 
         report = PDFReport(
