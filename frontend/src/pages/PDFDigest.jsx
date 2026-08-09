@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { fetchReports, clearReportsHistory, getShiftTriggerUrl } from '../services/api';
-import { FileText, Download, Clock, Moon, Sun, Sunset, CheckCircle, ShieldCheck, Trash2 } from 'lucide-react';
+import { fetchReports, clearReportsHistory, getShiftTriggerUrl, downloadPdfFile, getViewPdfUrl, getDownloadPdfUrl } from '../services/api';
+import { FileText, Download, Clock, Moon, Sun, Sunset, CheckCircle, ShieldCheck, Trash2, Eye } from 'lucide-react';
 
 export default function PDFDigest() {
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedShift, setSelectedShift] = useState(1);
+  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+  const [generatingShift, setGeneratingShift] = useState(null);
+  const [downloadingId, setDownloadingId] = useState(null);
 
   const loadReports = async () => {
     setLoading(true);
@@ -68,14 +72,31 @@ export default function PDFDigest() {
     }
   ];
 
-  const [selectedShift, setSelectedShift] = useState(1);
-  const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
-  const [generating, setGenerating] = useState(false);
+  const handleGenerateShiftForDate = async (shiftId) => {
+    setGeneratingShift(shiftId);
+    try {
+      const url = `${getShiftTriggerUrl(shiftId)}?target_date=${selectedDate}`;
+      const filename = `TN_Forest_Shift${shiftId}_Bulletin_${selectedDate}.pdf`;
+      await downloadPdfFile(url, filename);
+      await loadReports();
+    } catch (err) {
+      alert("Failed to download PDF: " + err.message);
+    } finally {
+      setGeneratingShift(null);
+    }
+  };
 
-  const handleGenerateShiftForDate = (shiftId) => {
-    const url = `${getShiftTriggerUrl(shiftId)}?target_date=${selectedDate}`;
-    window.open(url, '_blank');
-    setTimeout(loadReports, 1500);
+  const handleDownloadArchivedPdf = async (rep) => {
+    setDownloadingId(rep.id);
+    try {
+      const url = rep.download_url || getDownloadPdfUrl(rep.id);
+      const filename = `${rep.title.replace(/[^a-zA-Z0-9_-]/g, '_')}.pdf`;
+      await downloadPdfFile(url, filename);
+    } catch (err) {
+      alert("Failed to download PDF: " + err.message);
+    } finally {
+      setDownloadingId(null);
+    }
   };
 
   return (
@@ -147,6 +168,7 @@ export default function PDFDigest() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
           {shiftSchedules.map((s) => {
             const Icon = s.icon;
+            const isGenerating = generatingShift === s.shiftId;
             return (
               <div key={s.shiftId} style={{
                 background: 'rgba(0, 0, 0, 0.4)',
@@ -174,6 +196,7 @@ export default function PDFDigest() {
 
                 <button
                   onClick={() => handleGenerateShiftForDate(s.shiftId)}
+                  disabled={isGenerating}
                   className="btn"
                   style={{
                     background: `${s.color}20`,
@@ -188,10 +211,12 @@ export default function PDFDigest() {
                     borderRadius: '6px',
                     fontWeight: '600',
                     marginTop: '0.25rem',
-                    cursor: 'pointer'
+                    cursor: isGenerating ? 'wait' : 'pointer',
+                    opacity: isGenerating ? 0.7 : 1
                   }}
                 >
-                  <Download size={13} /> Generate & Download Shift {s.shiftId} PDF
+                  <Download size={13} />
+                  {isGenerating ? 'Generating & Downloading...' : `Generate & Download Shift ${s.shiftId} PDF`}
                 </button>
               </div>
             );
@@ -239,42 +264,78 @@ export default function PDFDigest() {
           </div>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxHeight: '500px', overflowY: 'auto' }}>
-            {reports.map(rep => (
-              <div key={rep.id} style={{
-                background: 'rgba(0, 0, 0, 0.3)',
-                border: '1px solid var(--border-color)',
-                borderRadius: '8px',
-                padding: '0.85rem 1rem',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}>
-                <div>
-                  <div style={{ fontSize: '0.92rem', fontWeight: '700', color: '#fff' }}>{rep.title}</div>
-                  <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.25rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                    <span>🏷️ {rep.report_type}</span>
-                    <span>📰 {rep.article_count} Articles</span>
-                    <span>📅 {new Date(rep.created_at).toLocaleString()}</span>
+            {reports.map(rep => {
+              const isDownloading = downloadingId === rep.id;
+              return (
+                <div key={rep.id} style={{
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  border: '1px solid var(--border-color)',
+                  borderRadius: '8px',
+                  padding: '0.85rem 1rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '1rem',
+                  flexWrap: 'wrap'
+                }}>
+                  <div>
+                    <div style={{ fontSize: '0.92rem', fontWeight: '700', color: '#fff' }}>{rep.title}</div>
+                    <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.25rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                      <span>🏷️ {rep.report_type}</span>
+                      <span>📰 {rep.article_count} Articles</span>
+                      <span>📅 {new Date(rep.created_at).toLocaleString()}</span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <a
+                      href={getViewPdfUrl(rep.id)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn"
+                      style={{
+                        padding: '0.4rem 0.75rem',
+                        fontSize: '0.78rem',
+                        textDecoration: 'none',
+                        background: 'rgba(59, 130, 246, 0.15)',
+                        color: '#60a5fa',
+                        border: '1px solid rgba(59, 130, 246, 0.4)',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.35rem'
+                      }}
+                    >
+                      <Eye size={13} /> Preview
+                    </a>
+
+                    <button
+                      onClick={() => handleDownloadArchivedPdf(rep)}
+                      disabled={isDownloading}
+                      className="btn btn-primary"
+                      style={{
+                        padding: '0.4rem 0.75rem',
+                        fontSize: '0.78rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.35rem',
+                        borderRadius: '6px',
+                        cursor: isDownloading ? 'wait' : 'pointer',
+                        opacity: isDownloading ? 0.7 : 1
+                      }}
+                    >
+                      <Download size={13} /> {isDownloading ? 'Downloading...' : 'Download PDF'}
+                    </button>
                   </div>
                 </div>
-
-                <a
-                  href={rep.download_url}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                  style={{ padding: '0.4rem 0.85rem', fontSize: '0.8rem', textDecoration: 'none' }}
-                >
-                  <Download size={14} /> Open PDF
-                </a>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
     </div>
   );
 }
+
 
 

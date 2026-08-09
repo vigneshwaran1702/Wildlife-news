@@ -198,12 +198,59 @@ def generate_pdf_report(payload: PDFGenerateRequest):
         filter_criteria=filter_dict
     )
 
+from app.pdf.generator import PDF_DIR
+
+def resolve_pdf_file_path(report_id: str, report: Optional[PDFReport] = None) -> str:
+    # 1. Try provided report object file_path if valid
+    if report and report.file_path and os.path.exists(report.file_path):
+        return report.file_path
+
+    # 2. Clean report_id
+    clean_id = report_id.replace(".pdf", "")
+    if clean_id.startswith("TN_Forest_Media_Scan_"):
+        clean_id = clean_id.replace("TN_Forest_Media_Scan_", "")
+
+    # Look up report by clean_id if not provided
+    if not report:
+        report = db_storage.reports.get(clean_id)
+        if report and report.file_path and os.path.exists(report.file_path):
+            return report.file_path
+
+    # 3. Check standard expected filename in PDF_DIR
+    target_filename = f"TN_Forest_Media_Scan_{clean_id}.pdf"
+    target_path = os.path.join(PDF_DIR, target_filename)
+    if os.path.exists(target_path):
+        return target_path
+
+    # 4. Search PDF_DIR for any file containing clean_id
+    if os.path.exists(PDF_DIR):
+        for fname in os.listdir(PDF_DIR):
+            if clean_id in fname and fname.endswith(".pdf"):
+                return os.path.join(PDF_DIR, fname)
+
+    raise HTTPException(status_code=404, detail=f"PDF report file for ID '{report_id}' not found on server")
+
 @router.get("/download/{report_id}")
 def download_pdf(report_id: str):
     report = db_storage.reports.get(report_id)
-    if not report:
-        raise HTTPException(status_code=404, detail="Report not found")
-    if not report.file_path or not os.path.exists(report.file_path):
-        raise HTTPException(status_code=404, detail="PDF file not found")
-    return FileResponse(report.file_path, media_type="application/pdf", filename=os.path.basename(report.file_path))
+    file_path = resolve_pdf_file_path(report_id, report)
+    filename = os.path.basename(file_path)
+    return FileResponse(
+        file_path,
+        media_type="application/pdf",
+        filename=filename,
+        headers={"Content-Disposition": f"attachment; filename=\"{filename}\""}
+    )
+
+@router.get("/view/{report_id}")
+def view_pdf(report_id: str):
+    report = db_storage.reports.get(report_id)
+    file_path = resolve_pdf_file_path(report_id, report)
+    filename = os.path.basename(file_path)
+    return FileResponse(
+        file_path,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"inline; filename=\"{filename}\""}
+    )
+
 
