@@ -1,5 +1,4 @@
-import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, time
 
 from fastapi import APIRouter, HTTPException, Query
 from fastapi.responses import FileResponse
@@ -12,8 +11,10 @@ from app.services.storage import db_storage
 router = APIRouter(prefix="/api/pdf", tags=["PDF Reports"])
 
 class PDFGenerateRequest(BaseModel):
-    title: str
+    title: Optional[str] = None
     report_type: str = "Custom Briefing"
+    shift_id: Optional[int] = None
+    target_date: Optional[str] = None
     category: Optional[str] = None
     district: Optional[str] = None
     conflict_level: Optional[str] = None
@@ -27,65 +28,68 @@ def make_naive(dt: Optional[datetime]) -> datetime:
         return dt.astimezone().replace(tzinfo=None)
     return dt
 
-def generate_shift_pdf_by_id(shift_id: int) -> PDFReport:
+def generate_shift_pdf_by_id(shift_id: int, target_date: Optional[str] = None) -> PDFReport:
     now = datetime.now()
+    if target_date:
+        try:
+            ref_date = datetime.strptime(target_date, "%Y-%m-%d").date()
+        except ValueError:
+            ref_date = now.date()
+    else:
+        ref_date = now.date()
+
     all_articles = db_storage.get_articles()
 
     if shift_id == 1:
-        # Shift 1: Day Bulletin (08:00 AM - 05:00 PM)
-        start_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
-        end_time = now.replace(hour=17, minute=0, second=0, microsecond=0)
+        # Shift 1: Day Bulletin (08:00 AM - 05:00 PM) on ref_date
+        start_time = datetime.combine(ref_date, time(8, 0, 0))
+        end_time = datetime.combine(ref_date, time(17, 0, 0))
         articles = [
             a for a in all_articles
             if a.published_at and start_time <= make_naive(a.published_at) <= end_time
         ]
 
-        title = f"Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - {now.strftime('%d %b %Y')}"
+        title = f"Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - {ref_date.strftime('%d %b %Y')}"
         report_type = "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)"
         filter_criteria = {
-            "Time Window": f"Today ({now.strftime('%b %d')}) 08:00 AM to 05:00 PM",
+            "Time Window": f"{ref_date.strftime('%b %d, %Y')} 08:00 AM to 05:00 PM",
             "Deduplication": "Excludes Evening (5pm-9pm) & Night (9pm-8am) News",
             "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
-            "Endpoint": "/api/pdf/trigger-shift/1"
+            "Endpoint": f"/api/pdf/trigger-shift/1?target_date={ref_date.strftime('%Y-%m-%d')}"
         }
     elif shift_id == 2:
-        # Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)
-        start_time = now.replace(hour=17, minute=0, second=0, microsecond=0)
-        end_time = now.replace(hour=21, minute=0, second=0, microsecond=0)
+        # Shift 2: Evening Bulletin (05:00 PM - 09:00 PM) on ref_date
+        start_time = datetime.combine(ref_date, time(17, 0, 0))
+        end_time = datetime.combine(ref_date, time(21, 0, 0))
         articles = [
             a for a in all_articles
             if a.published_at and start_time <= make_naive(a.published_at) <= end_time
         ]
 
-        title = f"Shift 2 Evening Bulletin (5:00 PM - 9:00 PM) - {now.strftime('%d %b %Y')}"
+        title = f"Shift 2 Evening Bulletin (5:00 PM - 9:00 PM) - {ref_date.strftime('%d %b %Y')}"
         report_type = "Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)"
         filter_criteria = {
-            "Time Window": f"Today ({now.strftime('%b %d')}) 05:00 PM to 09:00 PM",
+            "Time Window": f"{ref_date.strftime('%b %d, %Y')} 05:00 PM to 09:00 PM",
             "Deduplication": "Excludes Shift 1 (8am-5pm) & Night (9pm-8am) News",
             "Auto Schedule": "21:00 (9:00 PM) Daily Trigger",
-            "Endpoint": "/api/pdf/trigger-shift/2"
+            "Endpoint": f"/api/pdf/trigger-shift/2?target_date={ref_date.strftime('%Y-%m-%d')}"
         }
     elif shift_id == 3:
-        # Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)
-        if now.hour >= 21:
-            start_time = now.replace(hour=21, minute=0, second=0, microsecond=0)
-            end_time = (now + timedelta(days=1)).replace(hour=8, minute=0, second=0, microsecond=0)
-        else:
-            end_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
-            start_time = (now - timedelta(days=1)).replace(hour=21, minute=0, second=0, microsecond=0)
-
+        # Shift 3: Night & Early Morning Bulletin (09:00 PM yesterday to 08:00 AM on ref_date)
+        start_time = datetime.combine(ref_date - timedelta(days=1), time(21, 0, 0))
+        end_time = datetime.combine(ref_date, time(8, 0, 0))
         articles = [
             a for a in all_articles
             if a.published_at and start_time <= make_naive(a.published_at) <= end_time
         ]
 
-        title = f"Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - {end_time.strftime('%d %b %Y')}"
+        title = f"Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - {ref_date.strftime('%d %b %Y')}"
         report_type = "Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)"
         filter_criteria = {
-            "Time Window": f"{start_time.strftime('%b %d 09:00 PM')} to {end_time.strftime('%b %d 08:00 AM')}",
+            "Time Window": f"{(ref_date - timedelta(days=1)).strftime('%b %d 09:00 PM')} to {ref_date.strftime('%b %d 08:00 AM')}",
             "Deduplication": "Excludes Daytime (8am-5pm) & Evening (5pm-9pm) News",
             "Auto Schedule": "08:00 (8:00 AM) Daily Trigger",
-            "Endpoint": "/api/pdf/trigger-shift/3"
+            "Endpoint": f"/api/pdf/trigger-shift/3?target_date={ref_date.strftime('%Y-%m-%d')}"
         }
     else:
         raise HTTPException(status_code=400, detail="Invalid shift ID. Choose 1 (Day: 8am-5pm), 2 (Evening: 5pm-9pm), or 3 (Night: yesterday 9pm-8am).")
@@ -121,8 +125,8 @@ def get_pdf_schedule():
 
 @router.get("/trigger-shift/{shift_id}")
 @router.post("/trigger-shift/{shift_id}")
-def trigger_shift_pdf(shift_id: int, as_json: bool = False):
-    report = generate_shift_pdf_by_id(shift_id)
+def trigger_shift_pdf(shift_id: int, target_date: Optional[str] = Query(None), as_json: bool = False):
+    report = generate_shift_pdf_by_id(shift_id, target_date=target_date)
 
     if as_json:
         return report
@@ -150,13 +154,16 @@ def clear_pdf_history():
 
 @router.post("/generate", response_model=PDFReport)
 def generate_pdf_report(payload: PDFGenerateRequest):
-    # Time Window filtering for 3 distinct shifts
-    if "Shift 1" in payload.report_type or "8am-5pm" in payload.report_type or "Day" in payload.report_type:
-        return generate_shift_pdf_by_id(1)
-    elif "Shift 2" in payload.report_type or "5pm-9pm" in payload.report_type or "Evening" in payload.report_type:
-        return generate_shift_pdf_by_id(2)
-    elif "Shift 3" in payload.report_type or "9pm-8am" in payload.report_type or "Night" in payload.report_type:
-        return generate_shift_pdf_by_id(3)
+    rt = (payload.report_type or "").lower()
+
+    if payload.shift_id in [1, 2, 3]:
+        return generate_shift_pdf_by_id(payload.shift_id, target_date=payload.target_date)
+    elif "shift 1" in rt or "shift1" in rt or "8am-5pm" in rt:
+        return generate_shift_pdf_by_id(1, target_date=payload.target_date)
+    elif "shift 2" in rt or "shift2" in rt or "5pm-9pm" in rt:
+        return generate_shift_pdf_by_id(2, target_date=payload.target_date)
+    elif "shift 3" in rt or "shift3" in rt or "9pm-8am" in rt:
+        return generate_shift_pdf_by_id(3, target_date=payload.target_date)
 
     articles = db_storage.get_articles(
         category=payload.category,
@@ -170,14 +177,14 @@ def generate_pdf_report(payload: PDFGenerateRequest):
         "Risk Level": payload.conflict_level or "All"
     }
 
-    report = PDFReportGenerator.generate_report(
-        title=payload.title,
+    title = payload.title or f"{payload.report_type} - {datetime.now().strftime('%d %b %Y')}"
+
+    return PDFReportGenerator.generate_report(
+        title=title,
         report_type=payload.report_type,
         articles=articles,
         filter_criteria=filter_dict
     )
-
-    return report
 
 @router.get("/download/{report_id}")
 def download_pdf(report_id: str):
