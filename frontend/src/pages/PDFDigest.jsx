@@ -2,7 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { fetchReports, clearReportsHistory, getShiftTriggerUrl, downloadPdfFile, getViewPdfUrl, getDownloadPdfUrl } from '../services/api';
 import { FileText, Download, Clock, Moon, Sun, Sunset, CheckCircle, ShieldCheck, Trash2, Eye } from 'lucide-react';
 
+const formatDateWithTime = (dateInput) => {
+  if (!dateInput) return '';
+  const d = new Date(dateInput);
+  if (isNaN(d.getTime())) return String(dateInput);
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const month = months[d.getMonth()];
+  const day = String(d.getDate()).padStart(2, '0');
+  const year = d.getFullYear();
+  let hours = d.getHours();
+  const minutes = String(d.getMinutes()).padStart(2, '0');
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12;
+  const formattedHours = String(hours).padStart(2, '0');
+  return `Date: ${month} ${day}, ${year} | ${formattedHours}:${minutes} ${ampm} IST`;
+};
+
 export default function PDFDigest() {
+
   const [reports, setReports] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedShift, setSelectedShift] = useState(1);
@@ -283,7 +301,8 @@ export default function PDFDigest() {
                     <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.25rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                       <span>🏷️ {rep.report_type}</span>
                       <span>📰 {rep.article_count} Articles</span>
-                      <span>📅 {new Date(rep.created_at).toLocaleString()}</span>
+                      <span style={{ color: '#34d399', fontWeight: '600' }}>📅 {formatDateWithTime(rep.created_at)}</span>
+
                     </div>
                   </div>
 

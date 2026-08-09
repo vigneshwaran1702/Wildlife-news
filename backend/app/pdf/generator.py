@@ -123,8 +123,13 @@ class PDFReportGenerator:
 
         elements = []
 
-        now_str = datetime.now().strftime("%b %d, %Y")
-        time_str = datetime.now().strftime("%I:%M %p IST")
+        now_dt = datetime.now()
+        now_str = now_dt.strftime("%b %d, %Y")
+        time_str = now_dt.strftime("%I:%M %p IST")
+        download_datetime_formatted = f"Date: {now_str} | {time_str}"
+
+        if filter_criteria is not None:
+            filter_criteria["Downloaded At"] = download_datetime_formatted
 
         # Determine Scan Window text
         scan_window_text = "08:00 AM – 05:00 PM"
@@ -147,12 +152,12 @@ class PDFReportGenerator:
         ]
 
         banner_right = [
-            Paragraph(f"<b>Date:</b> {now_str} | {time_str}", hdr_meta_style),
+            Paragraph(f"<b>{download_datetime_formatted}</b>", hdr_meta_style),
             Paragraph(f"<b>Scan Window:</b> {scan_window_text}", hdr_meta_style),
             Paragraph("<b>Issued By:</b> Vigneshwaran", hdr_meta_style)
         ]
 
-        banner_table = Table([[banner_left, banner_right]], colWidths=[350, 206])
+        banner_table = Table([[banner_left, banner_right]], colWidths=[330, 226])
         banner_table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, -1), HEADER_DARK),
             ('PADDING', (0, 0), (-1, -1), 8),
@@ -161,6 +166,7 @@ class PDFReportGenerator:
         ]))
         elements.append(banner_table)
         elements.append(Spacer(1, 6))
+
 
         # 2. Executive KPI Cards Row (6 Metric Boxes)
         forest_cnt = sum(1 for a in articles if a.category in ["Forest Dept & Policy", "Forest Fire & Safety", "Forest Encroachment"])
@@ -309,12 +315,16 @@ class PDFReportGenerator:
 
         # 5. Footer
         elements.append(Spacer(1, 6))
-        footer_p = Paragraph("<b>Compiled by Vigneshwaran</b>", ParagraphStyle(
-            'FooterStyle', parent=styles['Normal'], fontSize=8, leading=10, textColor=TEXT_MUTED, alignment=TA_CENTER
-        ))
+        footer_p = Paragraph(
+            f"<b>Compiled by Vigneshwaran</b> &nbsp;|&nbsp; <b>Downloaded On:</b> {now_str} | {time_str}",
+            ParagraphStyle(
+                'FooterStyle', parent=styles['Normal'], fontSize=8.5, leading=11, textColor=colors.HexColor("#0F172A"), alignment=TA_CENTER
+            )
+        )
         elements.append(footer_p)
 
         doc.build(elements)
+
 
         report = PDFReport(
             id=report_id,
