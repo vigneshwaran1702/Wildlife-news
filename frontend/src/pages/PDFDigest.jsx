@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { fetchReports, generatePDFReport } from '../services/api';
-import { FileText, Download, Plus, CheckCircle, Sparkles, Filter, ShieldAlert } from 'lucide-react';
+import { fetchReports, generatePDFReport, getShiftTriggerUrl } from '../services/api';
+import { FileText, Download, Plus, CheckCircle, Sparkles, Filter, ShieldAlert, Clock, Moon, Sun, Sunset } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function PDFDigest() {
@@ -58,6 +58,36 @@ export default function PDFDigest() {
     }
   };
 
+  const shiftSchedules = [
+    {
+      shiftId: 3,
+      time: '08:00 IST',
+      label: 'Night Digest',
+      range: 'Yesterday 9:00 PM – 8:00 AM',
+      icon: Moon,
+      color: '#a78bfa',
+      url: getShiftTriggerUrl(3)
+    },
+    {
+      shiftId: 1,
+      time: '17:00 IST',
+      label: 'Day Digest',
+      range: 'Today 8:00 AM – 5:00 PM',
+      icon: Sun,
+      color: '#f59e0b',
+      url: getShiftTriggerUrl(1)
+    },
+    {
+      shiftId: 2,
+      time: '21:00 IST',
+      label: 'Evening Digest',
+      range: 'Today 5:00 PM – 9:00 PM',
+      icon: Sunset,
+      color: '#10b981',
+      url: getShiftTriggerUrl(2)
+    }
+  ];
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       {/* Header Banner */}
@@ -78,6 +108,66 @@ export default function PDFDigest() {
           </p>
         </div>
       </div>
+
+      {/* Automated Shift Schedules & Direct Trigger Download Links */}
+      <div className="glass-card" style={{ background: 'rgba(5, 18, 12, 0.7)', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
+        <h3 style={{ fontSize: '1rem', color: '#ffffff', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <Clock color="var(--primary-emerald)" size={18} />
+          Automated Shift Trigger Schedules & Direct Download Links
+        </h3>
+        <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginBottom: '1rem' }}>
+          PDF digests are compiled automatically at scheduled IST times and can also be triggered manually anytime via API endpoints:
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
+          {shiftSchedules.map((s) => {
+            const Icon = s.icon;
+            return (
+              <div key={s.shiftId} style={{
+                background: 'rgba(0, 0, 0, 0.4)',
+                border: `1px solid ${s.color}40`,
+                borderRadius: '8px',
+                padding: '0.85rem',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                gap: '0.75rem'
+              }}>
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.4rem' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '700', padding: '0.2rem 0.5rem', borderRadius: '4px', background: `${s.color}25`, color: s.color, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                      <Icon size={12} /> {s.time}
+                    </span>
+                    <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', fontFamily: 'monospace' }}>Shift {s.shiftId}</span>
+                  </div>
+                  <div style={{ fontSize: '0.9rem', fontWeight: '700', color: '#fff' }}>{s.label}</div>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{s.range}</div>
+                </div>
+
+                <a
+                  href={s.url}
+                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn"
+                  style={{
+                    background: `${s.color}20`,
+                    color: s.color,
+                    border: `1px solid ${s.color}50`,
+                    padding: '0.4rem 0.75rem',
+                    fontSize: '0.78rem',
+                    justifyContent: 'center',
+                    textDecoration: 'none'
+                  }}
+                >
+                  <Download size={13} /> Trigger & Download Shift {s.shiftId} PDF
+                </a>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
         {/* Generator Form */}

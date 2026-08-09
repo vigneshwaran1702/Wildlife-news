@@ -60,3 +60,14 @@ export async function triggerCollectors() {
   if (!res.ok) throw new Error('Failed to trigger collectors');
   return res.json();
 }
+
+export function getShiftTriggerUrl(shiftId) {
+  return `${API_BASE}/pdf/trigger-shift/${shiftId}`;
+}
+
+export async function fetchPdfSchedule() {
+  const res = await fetch(`${API_BASE}/pdf/schedule`);
+  if (!res.ok) throw new Error('Failed to fetch PDF schedule');
+  return res.json();
+}
+
