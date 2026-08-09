@@ -208,18 +208,28 @@ class PDFReportGenerator:
         ]
 
         idx_rows = [idx_headers]
-        for i, art in enumerate(articles, 1):
-            time_val = art.published_at.strftime("%I:%M %p IST") if art.published_at else "09:00 AM IST"
-            clean_title = safe_pdf_text(art.title_en if art.title_en else art.title_ta)
-            row = [
-                Paragraph(str(i), tbl_cell_style),
-                Paragraph(time_val, tbl_cell_style),
-                Paragraph(safe_pdf_text(art.district), tbl_cell_style),
-                Paragraph(clean_title, tbl_cell_style),
-                Paragraph(safe_pdf_text(art.source_name), tbl_cell_style),
-                Paragraph(safe_pdf_text(art.category), tbl_cell_style)
-            ]
-            idx_rows.append(row)
+        if not articles:
+            idx_rows.append([
+                Paragraph("-", tbl_cell_style),
+                Paragraph("-", tbl_cell_style),
+                Paragraph("N/A", tbl_cell_style),
+                Paragraph("<b>No news articles recorded within this shift timeline window.</b>", tbl_cell_style),
+                Paragraph("-", tbl_cell_style),
+                Paragraph("-", tbl_cell_style)
+            ])
+        else:
+            for i, art in enumerate(articles, 1):
+                time_val = art.published_at.strftime("%I:%M %p IST") if art.published_at else "09:00 AM IST"
+                clean_title = safe_pdf_text(art.title_en if art.title_en else art.title_ta)
+                row = [
+                    Paragraph(str(i), tbl_cell_style),
+                    Paragraph(time_val, tbl_cell_style),
+                    Paragraph(safe_pdf_text(art.district), tbl_cell_style),
+                    Paragraph(clean_title, tbl_cell_style),
+                    Paragraph(safe_pdf_text(art.source_name), tbl_cell_style),
+                    Paragraph(safe_pdf_text(art.category), tbl_cell_style)
+                ]
+                idx_rows.append(row)
 
         idx_table = Table(idx_rows, colWidths=[20, 95, 110, 191, 70, 70])
         idx_table.setStyle(TableStyle([
@@ -242,45 +252,60 @@ class PDFReportGenerator:
         elements.append(sec2_hdr)
         elements.append(Spacer(1, 6))
 
-        for idx, art in enumerate(articles, 1):
-            time_val = art.published_at.strftime("%I:%M %p IST (Aug 08)") if art.published_at else "09:00 AM IST (Aug 08)"
-            title_text = safe_pdf_text(art.title_en if art.title_en else art.title_ta)
-            cat_badge = safe_pdf_text(art.category.upper())
-
-            # Top Header Row of Card
-            hdr_left = Paragraph(f"<b>{idx}. {title_text}</b>", card_title_style)
-            hdr_right = Paragraph(f"<b>[{cat_badge}]</b>", badge_style)
-            card_top_tbl = Table([[hdr_left, hdr_right]], colWidths=[436, 110])
-            card_top_tbl.setStyle(TableStyle([
-                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                ('ALIGN', (1, 0), (1, 0), 'RIGHT')
-            ]))
-
-            # Sub Metadata & Where Line
-            safe_source = safe_pdf_text(art.source_name)
-            safe_dist = safe_pdf_text(art.district)
-            where_p = Paragraph(f"<b>📍 WHERE (Location):</b> {safe_dist} &nbsp;|&nbsp; <b>Time:</b> {time_val} &nbsp;|&nbsp; <b>Source:</b> {safe_source}", meta_line_style)
-
-            # What Happened Text
-            body_text = safe_pdf_text(art.content_en if art.content_en else art.content_ta)
-            what_p = Paragraph(f"<b>⚡ WHAT HAPPENED:</b> {body_text}", body_style)
-
-            card_content = [
-                card_top_tbl,
+        if not articles:
+            no_news_content = [
+                Paragraph("<b>NO ARTICLES FOUND IN THIS TIMELINE WINDOW</b>", card_title_style),
                 Spacer(1, 3),
-                where_p,
-                Spacer(1, 4),
-                what_p
+                Paragraph("No media news or press releases were recorded in this specific shift interval. The backend system strictly monitors news within scheduled boundaries and excludes news from other shifts.", body_style)
             ]
-
-            card_table = Table([[card_content]], colWidths=[556])
-            card_table.setStyle(TableStyle([
+            no_news_tbl = Table([[no_news_content]], colWidths=[556])
+            no_news_tbl.setStyle(TableStyle([
                 ('BACKGROUND', (0, 0), (-1, -1), LIGHT_BOX_BG),
                 ('BOX', (0, 0), (-1, -1), 0.5, CARD_BORDER),
-                ('PADDING', (0, 0), (-1, -1), 6)
+                ('PADDING', (0, 0), (-1, -1), 8)
             ]))
+            elements.append(no_news_tbl)
+        else:
+            for idx, art in enumerate(articles, 1):
+                date_str = art.published_at.strftime("%b %d") if art.published_at else ""
+                time_val = art.published_at.strftime(f"%I:%M %p IST ({date_str})") if art.published_at else "09:00 AM IST"
+                title_text = safe_pdf_text(art.title_en if art.title_en else art.title_ta)
+                cat_badge = safe_pdf_text(art.category.upper())
 
-            elements.append(KeepTogether([card_table, Spacer(1, 6)]))
+                # Top Header Row of Card
+                hdr_left = Paragraph(f"<b>{idx}. {title_text}</b>", card_title_style)
+                hdr_right = Paragraph(f"<b>[{cat_badge}]</b>", badge_style)
+                card_top_tbl = Table([[hdr_left, hdr_right]], colWidths=[436, 110])
+                card_top_tbl.setStyle(TableStyle([
+                    ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                    ('ALIGN', (1, 0), (1, 0), 'RIGHT')
+                ]))
+
+                # Sub Metadata & Where Line
+                safe_source = safe_pdf_text(art.source_name)
+                safe_dist = safe_pdf_text(art.district)
+                where_p = Paragraph(f"<b>📍 WHERE (Location):</b> {safe_dist} &nbsp;|&nbsp; <b>Time:</b> {time_val} &nbsp;|&nbsp; <b>Source:</b> {safe_source}", meta_line_style)
+
+                # What Happened Text
+                body_text = safe_pdf_text(art.content_en if art.content_en else art.content_ta)
+                what_p = Paragraph(f"<b>⚡ WHAT HAPPENED:</b> {body_text}", body_style)
+
+                card_content = [
+                    card_top_tbl,
+                    Spacer(1, 3),
+                    where_p,
+                    Spacer(1, 4),
+                    what_p
+                ]
+
+                card_table = Table([[card_content]], colWidths=[556])
+                card_table.setStyle(TableStyle([
+                    ('BACKGROUND', (0, 0), (-1, -1), LIGHT_BOX_BG),
+                    ('BOX', (0, 0), (-1, -1), 0.5, CARD_BORDER),
+                    ('PADDING', (0, 0), (-1, -1), 6)
+                ]))
+
+                elements.append(KeepTogether([card_table, Spacer(1, 6)]))
 
         # 5. Footer
         elements.append(Spacer(1, 6))

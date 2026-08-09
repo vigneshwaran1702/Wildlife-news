@@ -20,51 +20,70 @@ class PDFGenerateRequest(BaseModel):
 
 from app.scheduler.jobs import scheduler
 
+def make_naive(dt: Optional[datetime]) -> datetime:
+    if dt is None:
+        return datetime.now()
+    if dt.tzinfo is not None:
+        return dt.astimezone().replace(tzinfo=None)
+    return dt
+
 def generate_shift_pdf_by_id(shift_id: int) -> PDFReport:
     now = datetime.now()
     all_articles = db_storage.get_articles()
 
     if shift_id == 1:
+        # Shift 1: Day Bulletin (08:00 AM - 05:00 PM)
         start_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
         end_time = now.replace(hour=17, minute=0, second=0, microsecond=0)
-        articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
-        if not articles:
-            articles = [a for a in all_articles if a.published_at >= start_time] or all_articles[:15]
+        articles = [
+            a for a in all_articles
+            if a.published_at and start_time <= make_naive(a.published_at) <= end_time
+        ]
 
         title = f"Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - {now.strftime('%d %b %Y')}"
         report_type = "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)"
         filter_criteria = {
-            "Time Window": "Today 08:00 AM to 05:00 PM",
+            "Time Window": f"Today ({now.strftime('%b %d')}) 08:00 AM to 05:00 PM",
+            "Deduplication": "Excludes Evening (5pm-9pm) & Night (9pm-8am) News",
             "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
             "Endpoint": "/api/pdf/trigger-shift/1"
         }
     elif shift_id == 2:
+        # Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)
         start_time = now.replace(hour=17, minute=0, second=0, microsecond=0)
         end_time = now.replace(hour=21, minute=0, second=0, microsecond=0)
-        articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
-        if not articles:
-            articles = [a for a in all_articles if a.published_at >= start_time] or all_articles[:15]
+        articles = [
+            a for a in all_articles
+            if a.published_at and start_time <= make_naive(a.published_at) <= end_time
+        ]
 
         title = f"Shift 2 Evening Bulletin (5:00 PM - 9:00 PM) - {now.strftime('%d %b %Y')}"
         report_type = "Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)"
         filter_criteria = {
-            "Time Window": "Today 05:00 PM to 09:00 PM",
-            "Deduplication": "Excludes Shift 1 (8am-5pm) News",
+            "Time Window": f"Today ({now.strftime('%b %d')}) 05:00 PM to 09:00 PM",
+            "Deduplication": "Excludes Shift 1 (8am-5pm) & Night (9pm-8am) News",
             "Auto Schedule": "21:00 (9:00 PM) Daily Trigger",
             "Endpoint": "/api/pdf/trigger-shift/2"
         }
     elif shift_id == 3:
-        end_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
-        start_time = (end_time - timedelta(days=1)).replace(hour=21, minute=0, second=0, microsecond=0)
-        articles = [a for a in all_articles if start_time <= a.published_at <= end_time]
-        if not articles:
-            articles = [a for a in all_articles if a.published_at <= end_time] or all_articles[:15]
+        # Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)
+        if now.hour >= 21:
+            start_time = now.replace(hour=21, minute=0, second=0, microsecond=0)
+            end_time = (now + timedelta(days=1)).replace(hour=8, minute=0, second=0, microsecond=0)
+        else:
+            end_time = now.replace(hour=8, minute=0, second=0, microsecond=0)
+            start_time = (now - timedelta(days=1)).replace(hour=21, minute=0, second=0, microsecond=0)
 
-        title = f"Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - {now.strftime('%d %b %Y')}"
+        articles = [
+            a for a in all_articles
+            if a.published_at and start_time <= make_naive(a.published_at) <= end_time
+        ]
+
+        title = f"Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - {end_time.strftime('%d %b %Y')}"
         report_type = "Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)"
         filter_criteria = {
-            "Time Window": "Yesterday 09:00 PM to Today 08:00 AM",
-            "Deduplication": "Excludes Daytime & Evening News",
+            "Time Window": f"{start_time.strftime('%b %d 09:00 PM')} to {end_time.strftime('%b %d 08:00 AM')}",
+            "Deduplication": "Excludes Daytime (8am-5pm) & Evening (5pm-9pm) News",
             "Auto Schedule": "08:00 (8:00 AM) Daily Trigger",
             "Endpoint": "/api/pdf/trigger-shift/3"
         }
@@ -131,19 +150,6 @@ def clear_pdf_history():
 
 @router.post("/generate", response_model=PDFReport)
 def generate_pdf_report(payload: PDFGenerateRequest):
-    articles = db_storage.get_articles(
-        category=payload.category,
-        district=payload.district,
-        conflict_level=payload.conflict_level
-    )
-
-    now = datetime.now()
-    filter_dict = {
-        "Category": payload.category or "All",
-        "District": payload.district or "All",
-        "Risk Level": payload.conflict_level or "All"
-    }
-
     # Time Window filtering for 3 distinct shifts
     if "Shift 1" in payload.report_type or "8am-5pm" in payload.report_type or "Day" in payload.report_type:
         return generate_shift_pdf_by_id(1)
@@ -152,8 +158,17 @@ def generate_pdf_report(payload: PDFGenerateRequest):
     elif "Shift 3" in payload.report_type or "9pm-8am" in payload.report_type or "Night" in payload.report_type:
         return generate_shift_pdf_by_id(3)
 
-    if not articles:
-        articles = db_storage.get_articles()[:10]  # Fallback to top 10
+    articles = db_storage.get_articles(
+        category=payload.category,
+        district=payload.district,
+        conflict_level=payload.conflict_level
+    )
+
+    filter_dict = {
+        "Category": payload.category or "All",
+        "District": payload.district or "All",
+        "Risk Level": payload.conflict_level or "All"
+    }
 
     report = PDFReportGenerator.generate_report(
         title=payload.title,
