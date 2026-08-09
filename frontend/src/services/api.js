@@ -71,3 +71,9 @@ export async function fetchPdfSchedule() {
   return res.json();
 }
 
+export async function clearReportsHistory() {
+  const res = await fetch(`${API_BASE}/pdf/clear-history`, { method: 'DELETE' });
+  if (!res.ok) throw new Error('Failed to clear PDF history');
+  return res.json();
+}
+
