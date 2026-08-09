@@ -93,31 +93,64 @@ def generate_shift3_night_digest_job():
     )
     print(f"Generated automated Shift 3 (09:00 PM - 08:00 AM) PDF report: {report.download_url}")
 
+def check_and_generate_due_pdfs():
+    """
+    Guarantees PDF reports generate even if the server was started after the exact cron time.
+    """
+    now = datetime.now()
+    today_str = now.strftime('%Y-%m-%d')
+    existing_reports = db_storage.get_reports()
+    existing_types = [
+        r.report_type for r in existing_reports
+        if r.created_at and r.created_at.strftime('%Y-%m-%d') == today_str
+    ]
+
+    # Shift 3 Night (8:00 AM): Due if current time is past 8:00 AM and report not yet created today
+    if now.hour >= 8 and "Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)" not in existing_types:
+        print("[Scheduler Startup Catch-Up] Generating Shift 3 Night PDF (due at 8:00 AM)...")
+        generate_shift3_night_digest_job()
+
+    # Shift 1 Day (5:00 PM / 17:00): Due if current time is past 5:00 PM and report not yet created today
+    if now.hour >= 17 and "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)" not in existing_types:
+        print("[Scheduler Startup Catch-Up] Generating Shift 1 Day PDF (due at 5:00 PM)...")
+        generate_shift1_day_digest_job()
+
+    # Shift 2 Evening (9:00 PM / 21:00): Due if current time is past 9:00 PM and report not yet created today
+    if now.hour >= 21 and "Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)" not in existing_types:
+        print("[Scheduler Startup Catch-Up] Generating Shift 2 Evening PDF (due at 9:00 PM)...")
+        generate_shift2_evening_digest_job()
+
 def start_scheduler():
     if not scheduler.running:
         # Continuous Scheduled Collector: Every 3 hours
-        scheduler.add_job(run_collection_job, 'interval', hours=3, id='news_fetch_job')
+        scheduler.add_job(run_collection_job, 'interval', hours=3, id='news_fetch_job', misfire_grace_time=3600)
 
         # ── SHIFT 1: 08:00 AM ➔ 05:00 PM ──
         # 8:00 AM: Start collecting Morning Shift news
-        scheduler.add_job(run_collection_job, 'cron', hour=8, minute=0, id='start_shift1_collect_job')
+        scheduler.add_job(run_collection_job, 'cron', hour=8, minute=0, id='start_shift1_collect_job', misfire_grace_time=3600)
         # 5:00 PM (17:00): Generate Morning Shift PDF (Covers 8:00 AM - 5:00 PM)
-        scheduler.add_job(generate_shift1_day_digest_job, 'cron', hour=17, minute=0, id='shift1_digest_job')
+        scheduler.add_job(generate_shift1_day_digest_job, 'cron', hour=17, minute=0, id='shift1_digest_job', misfire_grace_time=3600)
 
         # ── SHIFT 2: 05:00 PM ➔ 09:00 PM ──
         # 5:00 PM (17:00): Start collecting Evening Shift new news
-        scheduler.add_job(run_collection_job, 'cron', hour=17, minute=0, id='start_shift2_collect_job')
+        scheduler.add_job(run_collection_job, 'cron', hour=17, minute=0, id='start_shift2_collect_job', misfire_grace_time=3600)
         # 9:00 PM (21:00): Generate Evening Shift PDF (Covers 5:00 PM - 9:00 PM)
-        scheduler.add_job(generate_shift2_evening_digest_job, 'cron', hour=21, minute=0, id='shift2_digest_job')
+        scheduler.add_job(generate_shift2_evening_digest_job, 'cron', hour=21, minute=0, id='shift2_digest_job', misfire_grace_time=3600)
 
         # ── SHIFT 3: 09:00 PM ➔ 08:00 AM (Next Day) ──
         # 9:00 PM (21:00): Start collecting Night Shift new news
-        scheduler.add_job(run_collection_job, 'cron', hour=21, minute=0, id='start_shift3_collect_job')
+        scheduler.add_job(run_collection_job, 'cron', hour=21, minute=0, id='start_shift3_collect_job', misfire_grace_time=3600)
         # 8:00 AM (08:00 Next Day): Generate Night Shift PDF (Covers 9:00 PM - 8:00 AM)
-        scheduler.add_job(generate_shift3_night_digest_job, 'cron', hour=8, minute=0, id='shift3_digest_job')
+        scheduler.add_job(generate_shift3_night_digest_job, 'cron', hour=8, minute=0, id='shift3_digest_job', misfire_grace_time=3600)
         
         scheduler.start()
         print("APScheduler active: 3 Shifts (8:00 AM-5:00 PM, 5:00 PM-9:00 PM, 9:00 PM-8:00 AM) collection & PDF generation scheduled.")
+
+        # Run instant catch-up check on server launch
+        try:
+            check_and_generate_due_pdfs()
+        except Exception as e:
+            print(f"Catch-up check warning: {e}")
 
 def stop_scheduler():
     if scheduler.running:
