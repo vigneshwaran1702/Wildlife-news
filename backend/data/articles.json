@@ -84,6 +84,174 @@
     "is_bookmarked": false
   },
   {
+    "title_en": "Anamalai Tiger Reserve issues night travel advisory along Valparai ghat road due to elephant herd movement",
+    "title_ta": "ஆனைமலை புலிகள் காப்பகம் வால்பாறை மலைப்பாதையில் இரவு நேர பயண ஆலோசனையை வெளியிட்டுள்ளது",
+    "content_en": "Forest officials at Anamalai Tiger Reserve advised evening motorists to exercise extreme caution as a herd of 8 wild elephants crossed the Valparai ghat highway.",
+    "content_ta": "வால்பாறை மலைப்பாதையில் 8 காட்டு யானைகள் கடப்பதால் மாலை நேர வாகன ஓட்டிகள் மிகுந்த எச்சரிக்கையுடன் இருக்குமாறு வனத்துறை அதிகாரிகள் அறிவுறுத்தியுள்ளனர்.",
+    "summary_en": "• Forest officials at Anamalai Tiger Reserve advised evening motorists to exercise extreme caution as a herd of 8 wild elephants crossed the Valparai ghat highway.",
+    "summary_ta": "• வால்பாறை மலைப்பாதையில் 8 காட்டு யானைகள் கடப்பதால் மாலை நேர வாகன ஓட்டிகள் மிகுந்த எச்சரிக்கையுடன் இருக்குமாறு வனத்துறை அதிகாரிகள் அறிவுறுத்தியுள்ளனர்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Anamalai",
+    "species": [
+      "Elephant"
+    ],
+    "source_name": "The Hindu",
+    "source_url": "https://www.thehindu.com/news/national/tamil-nadu/anamalai-elephant-travel-advisory",
+    "published_at": "2026-08-09 18:20:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Anamalai",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Anamalai"
+      ],
+      "species": [
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department",
+        "TNFWCCB"
+      ],
+      "impact": "Date Status Pipeline Categorization"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "status_today_shift2_001",
+    "created_at": "2026-08-09 18:20:00",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "TN Forest Department team tranquilizes and relocates stray gaur near Kodaikanal foothills",
+    "title_ta": "கொடைக்கானல் அடிவாரத்தில் சுற்றிய காட்டெருமையை தமிழ்நாடு வனத்துறை மயக்க ஊசி செலுத்தி பிடித்தது",
+    "content_en": "A specialized veterinary team of the Tamil Nadu Forest Department successfully tranquilized an adult male gaur that wandered into residential orchards near Kodaikanal.",
+    "content_ta": "கொடைக்கானல் அருகே குடியிருப்பு பகுதிக்குள் புகுந்த காட்டெருமையை தமிழ்நாடு வனத்துறை மருத்துவ குழு மயக்க ஊசி செலுத்தி வெற்றிகரமாக பிடித்தது.",
+    "summary_en": "• A specialized veterinary team of the Tamil Nadu Forest Department successfully tranquilized an adult male gaur that wandered into residential orchards near Kodaikanal.",
+    "summary_ta": "• கொடைக்கானல் அருகே குடியிருப்பு பகுதிக்குள் புகுந்த காட்டெருமையை தமிழ்நாடு வனத்துறை மருத்துவ குழு மயக்க ஊசி செலுத்தி வெற்றிகரமாக பிடித்தது.",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "High",
+    "district": "Dindigul & Kodaikanal",
+    "species": [
+      "Gaur"
+    ],
+    "source_name": "Dina Thanthi (தினத்தந்தி)",
+    "source_url": "https://www.dailythanthi.com/News/State/kodaikanal-gaur-rescue-relocation",
+    "published_at": "2026-08-09 20:10:00",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Dindigul & Kodaikanal",
+      "Gaur"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Dindigul & Kodaikanal"
+      ],
+      "species": [
+        "Gaur"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department",
+        "TNFWCCB"
+      ],
+      "impact": "Date Status Pipeline Categorization"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "status_today_shift2_002",
+    "created_at": "2026-08-09 20:10:00",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Early morning forest squad safely herds wild tusker back into Mudumalai reserve core",
+    "title_ta": "அதிகாலை வன ரோந்துப் படை காட்டு யானையை பாதுகாப்பாக முதுமலை வனப்பகுதிக்குள் விரட்டியது",
+    "content_en": "At 3:30 AM today, Mudumalai night patrol teams spotted a single wild tusker near Masinagudi border and safely guided the animal back into deep forest.",
+    "content_ta": "இன்று அதிகாலை 3:30 மணிக்கு மசினகுடி எல்லை அருகே வந்த காட்டு யானையை முதுமலை இரவு ரோந்துப் படையினர் பாதுகாப்பாக காட்டுக்குள் திருப்பினார்கள்.",
+    "summary_en": "• At 3:30 AM today, Mudumalai night patrol teams spotted a single wild tusker near Masinagudi border and safely guided the animal back into deep forest.",
+    "summary_ta": "• இன்று அதிகாலை 3:30 மணிக்கு மசினகுடி எல்லை அருகே வந்த காட்டு யானையை முதுமலை இரவு ரோந்துப் படையினர் பாதுகாப்பாக காட்டுக்குள் திருப்பினார்கள்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Nilgiris",
+    "species": [
+      "Elephant"
+    ],
+    "source_name": "The New Indian Express",
+    "source_url": "https://www.newindianexpress.com/states/tamil-nadu/mudumalai-early-morning-elephant-patrol",
+    "published_at": "2026-08-09 03:30:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Nilgiris",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department",
+        "TNFWCCB"
+      ],
+      "impact": "Date Status Pipeline Categorization"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "status_today_shift3_001",
+    "created_at": "2026-08-09 03:30:00",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Night monitoring team intercepts illegal timber truck along Thenpennai river forest belt",
+    "title_ta": "தென்பெண்ணை ஆற்று வனப்பகுதியில் இரவு கண்காணிப்பு குழு சட்டவிரோத மர லாரியை பிடித்தது",
+    "content_en": "During overnight patrolling at 10:45 PM yesterday, Tamil Nadu forest squads impounded a timber-laden truck attempting illegal transit.",
+    "content_ta": "நேற்று இரவு 10:45 மணிக்கு மேற்கொண்ட ரோந்தின் போது சட்டவிரோதமாக மரம் ஏற்றிச் சென்ற லாரியை வனத்துறை அதிகாரிகள் பறிமுதல் செய்தனர்.",
+    "summary_en": "• During overnight patrolling at 10:45 PM yesterday, Tamil Nadu forest squads impounded a timber-laden truck attempting illegal transit.",
+    "summary_ta": "• நேற்று இரவு 10:45 மணிக்கு மேற்கொண்ட ரோந்தின் போது சட்டவிரோதமாக மரம் ஏற்றிச் சென்ற லாரியை வனத்துறை அதிகாரிகள் பறிமுதல் செய்தனர்.",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "High",
+    "district": "Dharmapuri & Krishnagiri",
+    "species": [
+      "Teak Wood"
+    ],
+    "source_name": "Dinamalar (தினமலர்)",
+    "source_url": "https://www.dinamalar.com/news/state/thenpennai-night-timber-seizure",
+    "published_at": "2026-08-08 22:45:00",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Dharmapuri & Krishnagiri",
+      "Teak Wood"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Dharmapuri & Krishnagiri"
+      ],
+      "species": [
+        "Teak Wood"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department",
+        "TNFWCCB"
+      ],
+      "impact": "Date Status Pipeline Categorization"
+    },
+    "sentiment": "Neutral",
+    "date_status": "YESTERDAY",
+    "id": "status_today_shift3_002",
+    "created_at": "2026-08-08 22:45:00",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
     "title_en": "Mudumalai Tiger Reserve deploys thermal drones to monitor wild elephant herd near Masinagudi",
     "title_ta": "மசினகுடி அருகே காட்டு யானைக் கூட்டத்தை கண்காணிக்க முதுமலை புலிகள் காப்பகம் வெப்ப ட்ரோன்களை இயக்கியது",
     "content_en": "Forest officials in Mudumalai Tiger Reserve activated high-resolution thermal drones to track 14 wild elephants near Masinagudi.",
