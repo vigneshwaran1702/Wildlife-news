@@ -1,7 +1,10 @@
 import feedparser
 import httpx
-from datetime import datetime
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 import uuid
+
+IST = ZoneInfo("Asia/Kolkata")
 
 from app.models.schemas import Article, CollectorLog
 from app.ai.classifier import ArticleClassifier
@@ -130,11 +133,12 @@ class RSSCollector:
                     sum_en = ArticleSummarizer.summarize_en(title_en, content_en)
                     sum_ta = ArticleSummarizer.summarize_ta(title_ta, content_ta)
 
-                    # Parse actual publication date from RSS feed entry if available
+                    # Parse actual publication date from RSS feed entry if available (convert UTC to IST)
                     pub_dt = None
                     if hasattr(entry, 'published_parsed') and entry.published_parsed:
                         try:
-                            pub_dt = datetime(*entry.published_parsed[:6])
+                            utc_dt = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
+                            pub_dt = utc_dt.astimezone(IST).replace(tzinfo=None)
                         except Exception:
                             pub_dt = None
                     if not pub_dt:

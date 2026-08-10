@@ -1,6 +1,7 @@
 import feedparser
 import httpx
-from datetime import datetime
+from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 import uuid
 from app.models.schemas import Article, CollectorLog
 from app.ai.classifier import ArticleClassifier
@@ -8,6 +9,7 @@ from app.ai.summarizer import ArticleSummarizer
 from app.ai.translator import ArticleTranslator
 from app.services.storage import db_storage
 
+IST = ZoneInfo("Asia/Kolkata")
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 HEADERS = {"User-Agent": USER_AGENT}
 
@@ -78,7 +80,8 @@ class TamilNewsCollector:
                 pub_dt = None
                 if hasattr(entry, 'published_parsed') and entry.published_parsed:
                     try:
-                        pub_dt = datetime(*entry.published_parsed[:6])
+                        utc_dt = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
+                        pub_dt = utc_dt.astimezone(IST).replace(tzinfo=None)
                     except Exception:
                         pub_dt = None
                 if not pub_dt:
