@@ -59,18 +59,26 @@ class ArticleClassifier:
     def is_tamil_nadu_relevant(title: str, content: str) -> bool:
         text = f"{title} {content}".lower()
         tn_keywords = [
-            "tamil nadu", "tamilnadu", "tn forest", "தமிழ்நாடு", "வனத்துறை",
-            "coimbatore", "valparai", "pollachi", "mettupalayam", " thondamuthur", " கோவை", "வால்பாறை",
-            "nilgiris", "ooty", "coonoor", "gudalur", "mudumalai", "mukurthi", "நீலகிரி", "ஊட்டி", "கூடலூர்",
+            "tamil nadu", "tamilnadu", "tn forest", "madras", "chennai", "தமிழ்நாடு", "வனத்துறை",
+            "coimbatore", "valparai", "pollachi", "boluvampatti", "mettupalayam", "thondamuthur", "marudhamalai", "கோவை", "வால்பாறை",
+            "nilgiris", "ooty", "udhagamandalam", "coonoor", "gudalur", "kotagiri", "mudumalai", "pykara", "நீலகிரி", "ஊட்டி", "கூடலூர்",
             "sathyamangalam", "str", "bhavanisagar", "erode", "hasanur", "thalavadi", "ஈரோடு", "சத்தியமங்கலம்",
-            "anamalai", "atr", "udumalpet", "tiruppur", "ஆனைமலை", "திருப்பூர்",
-            "megamalai", "theni", "cumbum", "தேனி", "மேகமலை",
+            "anamalai", "atr", "udumalpet", "tiruppur", "amaravathi", "ஆனைமலை", "திருப்பூர்",
+            "megamalai", "theni", "cumbum", "andipatti", "periyar", "தேனி", "மேகமலை",
             "kodaikanal", "dindigul", "palani", "sirumalai", "திண்டுக்கல்", "கொடைக்கானல்",
-            "kalakad", "mundanthurai", "kmtr", "tirunelveli", "papanasam", "திருநெல்வேலி", "களக்காடு",
-            "kanyakumari", "pechiparai", "கன்னியாகுமரி",
-            "dharmapuri", "krishnagiri", "hogenakkal", "denkanikottai", "தர்மபுரி", "கிருஷ்ணகிரி",
-            "salem", "yercaud", "mettur", "சேலம்", "ஏற்காடு",
-            "ramanathapuram", "gulf of mannar", "rameshwaram", "இராமநாதபுரம்"
+            "kalakad", "mundanthurai", "kmtr", "tirunelveli", "papanasam", "manjolai", "திருநெல்வேலி", "களக்காடு",
+            "kanyakumari", "pechiparai", "marunthuvazh malai", "asambu", "கன்னியாகுமரி",
+            "dharmapuri", "krishnagiri", "hogenakkal", "denkanikottai", "hosur", "cauvery north", "தர்மபுரி", "கிருஷ்ணகிரி",
+            "salem", "shevaroys", "yercaud", "mettur", "சேலம்", "ஏற்காடு",
+            "ramanathapuram", "gulf of mannar", "dugong", "rameshwaram", "இராமநாதபுரம்",
+            "vandalur", "guindy", "nanmangalam", "சென்னை", "வண்டலூர்",
+            "chengalpattu", "vedanthangal", "karikili", "காஞ்சிபுரம்", "செங்கல்பட்டு",
+            "nagapattinam", "point calimere", "kodiyakarai", "கொடாய்க்கரை", "நாகப்பட்டினம்",
+            "tiruchirappalli", "trichy", "namakkal", "kolli hills", "கொல்லிமலை", "திருச்சி",
+            "tiruvannamalai", "vellore", "jawadhu hills", "javadi", "ஜவாது மலை", "திருவண்ணாமலை",
+            "thanjavur", "tiruvarur", "muthupet", "மன்னார்குடி", "தஞ்சாவூர்",
+            "tenkasi", "courtallam", "virudhunagar", "தென்காசி", "விருதுநகர்",
+            "villupuram", "cuddalore", "pitchavaram", "பிச்சாவரம்", "கடலூர்"
         ]
         return any(kw in text for kw in tn_keywords)
 

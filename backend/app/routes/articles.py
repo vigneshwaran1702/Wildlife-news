@@ -10,6 +10,8 @@ from datetime import datetime
 
 router = APIRouter(prefix="/api/articles", tags=["Articles"])
 
+from app.collectors.bing_collector import BingNewsCollector
+
 @router.get("", response_model=List[Article])
 def get_articles(
     category: Optional[str] = Query(None, description="Category filter"),
@@ -19,8 +21,15 @@ def get_articles(
     search: Optional[str] = Query(None, description="Keyword search query"),
     bookmarked_only: bool = Query(False, description="Show bookmarked only"),
     todays_only: bool = Query(False, description="Show today's news only"),
-    date_status: Optional[str] = Query(None, description="Date status filter: TODAY, YESTERDAY, OLD")
+    date_status: Optional[str] = Query(None, description="Date status filter: TODAY, YESTERDAY, OLD"),
+    refresh_live: bool = Query(False, description="Fetch fresh live online news directly")
 ):
+    if refresh_live:
+        try:
+            BingNewsCollector.scrape_latest()
+        except Exception as e:
+            pass
+
     return db_storage.get_articles(
         category=category,
         district=district,
