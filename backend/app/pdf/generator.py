@@ -126,8 +126,7 @@ class PDFReportGenerator:
 
         now_dt = datetime.now()
         now_str = now_dt.strftime("%b %d, %Y")
-        time_str = now_dt.strftime("%I:%M %p IST")
-        download_datetime_formatted = f"Date: {now_str} | {time_str}"
+        download_datetime_formatted = f"Date: {now_str}"
 
         if filter_criteria is not None:
             filter_criteria["Downloaded At"] = download_datetime_formatted
@@ -207,7 +206,7 @@ class PDFReportGenerator:
         # Table Header
         idx_headers = [
             Paragraph("#", tbl_hdr_style),
-            Paragraph("TIME OF NEWS", tbl_hdr_style),
+            Paragraph("DATE & TIME", tbl_hdr_style),
             Paragraph("DISTRICT / DIVISION", tbl_hdr_style),
             Paragraph("ARTICLE HEADLINE", tbl_hdr_style),
             Paragraph("SOURCE", tbl_hdr_style),
@@ -226,7 +225,7 @@ class PDFReportGenerator:
             ])
         else:
             for i, art in enumerate(articles, 1):
-                time_val = art.published_at.strftime("%I:%M %p IST") if art.published_at else "09:00 AM IST"
+                time_val = art.published_at.strftime("%b %d, %Y %I:%M %p IST") if art.published_at else "09:00 AM IST"
                 clean_title = safe_pdf_text(art.title_en if art.title_en else art.title_ta)
                 row = [
                     Paragraph(str(i), tbl_cell_style),
@@ -274,8 +273,7 @@ class PDFReportGenerator:
             elements.append(no_news_tbl)
         else:
             for idx, art in enumerate(articles, 1):
-                date_str = art.published_at.strftime("%b %d") if art.published_at else ""
-                time_val = art.published_at.strftime(f"%I:%M %p IST ({date_str})") if art.published_at else "09:00 AM IST"
+                full_datetime_str = art.published_at.strftime("%b %d, %Y %I:%M %p IST") if art.published_at else "09:00 AM IST"
                 title_text = safe_pdf_text(art.title_en if art.title_en else art.title_ta)
                 cat_badge = safe_pdf_text(art.category.upper())
 
@@ -291,7 +289,7 @@ class PDFReportGenerator:
                 # Sub Metadata & Where Line
                 safe_source = safe_pdf_text(art.source_name)
                 safe_dist = safe_pdf_text(art.district)
-                where_p = Paragraph(f"<b>📍 WHERE (Location):</b> {safe_dist} &nbsp;|&nbsp; <b>Time:</b> {time_val} &nbsp;|&nbsp; <b>Source:</b> {safe_source}", meta_line_style)
+                where_p = Paragraph(f"<b>📍 WHERE (Location):</b> {safe_dist} &nbsp;|&nbsp; <b>Date & Time:</b> {full_datetime_str} &nbsp;|&nbsp; <b>Source:</b> {safe_source}", meta_line_style)
 
                 # What Happened Text
                 body_text = safe_pdf_text(art.content_en if art.content_en else art.content_ta)
@@ -318,8 +316,7 @@ class PDFReportGenerator:
             canvas.saveState()
             dt = datetime.now()
             d_str = dt.strftime("%b %d, %Y")
-            t_str = dt.strftime("%I:%M %p IST")
-            footer_text = f"Compiled by Vigneshwaran   |   Downloaded On: {d_str} | {t_str}"
+            footer_text = f"Compiled by Vigneshwaran   |   Downloaded On: {d_str}"
 
             page_w, _ = letter
             # Draw line above footer

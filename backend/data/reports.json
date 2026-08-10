@@ -172,5 +172,15 @@
       "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-09",
       "Downloaded At": "Date: Aug 09, 2026 | 09:36 PM IST"
     }
+  },
+  {
+    "id": "pdf_9e28abb8",
+    "title": "Test PDF Report",
+    "report_type": "Exhaustive Scan",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_9e28abb8.pdf",
+    "download_url": "/api/pdf/download/pdf_9e28abb8",
+    "created_at": "2026-08-10 10:18:49.321747",
+    "article_count": 5,
+    "filter_criteria": {}
   }
 ]
