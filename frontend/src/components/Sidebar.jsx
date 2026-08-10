@@ -10,7 +10,7 @@ export default function Sidebar({ activeTab, setActiveTab, analytics }) {
   ];
 
   return (
-    <aside style={{ width: '260px', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+    <aside style={{ width: '260px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
       {/* Navigation */}
       <div className="glass-card" style={{ padding: '0.75rem' }}>
         <div style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em', padding: '0.5rem 0.75rem' }}>

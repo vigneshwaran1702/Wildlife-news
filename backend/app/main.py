@@ -3,6 +3,15 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 import os
+from dotenv import load_dotenv
+
+# Load .env configuration from root and backend
+root_env = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env")
+backend_env = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
+if os.path.exists(root_env):
+    load_dotenv(root_env)
+if os.path.exists(backend_env):
+    load_dotenv(backend_env)
 
 from app.routes.articles import router as articles_router
 from app.routes.pdf_routes import router as pdf_router
