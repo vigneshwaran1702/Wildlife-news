@@ -21,12 +21,23 @@ class ArticleBase(BaseModel):
     species: List[str] = Field(default_factory=list)  # Elephant, Tiger, Leopard, Gaur, Wild Boar, etc.
     source_name: str
     source_url: str
-    published_at: datetime = Field(default_factory=datetime.now)
+    published_at: Optional[datetime] = None  # Original publication date/time from source
+    collected_at: datetime = Field(default_factory=datetime.now)  # Timestamp when collected by app
+    verification_status: str = "UNVERIFIED"  # VERIFIED, REJECTED_OLD, REJECTED_FUTURE, REJECTED_NOT_TAMIL_NADU, REJECTED_NOT_WILDLIFE, DUPLICATE, TIME_UNAVAILABLE, SOURCE_UNREACHABLE, UNVERIFIED
+    verification_reason: str = ""
     tags: List[str] = Field(default_factory=list)
     image_url: Optional[str] = None
     key_entities: Optional[KeyEntities] = Field(default_factory=KeyEntities)
     sentiment: str = "Neutral"  # Positive, Neutral, Negative, Critical Alert
     date_status: str = "TODAY"  # TODAY, YESTERDAY, OLD
+
+    @property
+    def location(self) -> str:
+        return self.district
+
+    @property
+    def title(self) -> str:
+        return self.title_en
 
 class ArticleCreate(ArticleBase):
     pass
@@ -36,6 +47,7 @@ class Article(ArticleBase):
     created_at: datetime = Field(default_factory=datetime.now)
     views_count: int = 0
     is_bookmarked: bool = False
+
 
 class PDFReport(BaseModel):
     id: str

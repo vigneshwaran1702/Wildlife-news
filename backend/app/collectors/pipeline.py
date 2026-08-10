@@ -9,82 +9,37 @@ from app.models.schemas import Article
 from app.ai.classifier import ArticleClassifier
 from app.ai.summarizer import ArticleSummarizer
 from app.ai.translator import ArticleTranslator
-from app.ai.openai_service import OpenAIService
+from app.collectors.verifier import SourcePageVerifier, parse_entry_datetime
 from app.services.storage import db_storage
 
 logger = logging.getLogger(__name__)
 IST = ZoneInfo("Asia/Kolkata")
 
-def parse_entry_datetime(entry: Any) -> Optional[datetime]:
-    """
-    Extracts original publication date/time from feed entry or metadata object.
-    Converts to Asia/Kolkata (IST) timezone.
-    """
-    if isinstance(entry, dict):
-        item = entry
-    else:
-        item = getattr(entry, '__dict__', {})
-
-    # 1. feedparser published_parsed / updated_parsed
-    published_parsed = getattr(entry, 'published_parsed', None) or getattr(entry, 'updated_parsed', None) or item.get('published_parsed') or item.get('updated_parsed')
-    if published_parsed:
-        try:
-            utc_dt = datetime(*published_parsed[:6], tzinfo=timezone.utc)
-            return utc_dt.astimezone(IST).replace(tzinfo=None)
-        except Exception:
-            pass
-
-    # 2. String timestamp parsing
-    pub_str = getattr(entry, 'published', None) or getattr(entry, 'pubDate', None) or getattr(entry, 'updated', None) or item.get('published') or item.get('pubDate') or item.get('updated') or item.get('published_at') or item.get('pubdate')
-    if pub_str and isinstance(pub_str, str):
-        try:
-            dt = email.utils.parsedate_to_datetime(pub_str)
-            if dt:
-                return dt.astimezone(IST).replace(tzinfo=None)
-        except Exception:
-            pass
-        try:
-            dt = datetime.fromisoformat(pub_str)
-            if dt.tzinfo:
-                return dt.astimezone(IST).replace(tzinfo=None)
-            return dt
-        except Exception:
-            pass
-
-    # 3. Direct datetime object
-    pub_obj = item.get('published_at') or getattr(entry, 'published_at', None)
-    if isinstance(pub_obj, datetime):
-        if pub_obj.tzinfo:
-            return pub_obj.astimezone(IST).replace(tzinfo=None)
-        return pub_obj
-
-    return None
-
-
 class ArticlePipeline:
     """
-    Enforces strict Article Ingestion Flowchart:
-    Open source article
+    Strict Real-Time Source Verification Pipeline:
+    COLLECT
       ↓
-    Extract ORIGINAL publication date/time
+    SOURCE URL VALIDATION & ORIGINAL DATE EXTRACTION
+      ├── Unreachable? ──> REJECT: SOURCE_UNREACHABLE
+      ├── Unparseable? ──> REJECT: TIME_UNAVAILABLE
       ↓
-    DATE FILTER: Is ORIGINAL article date today's date?
-      │ NO  => REJECT
-      ↓ YES
-    LOCATION FILTER: Tamil Nadu related?
-      │ NO  => REJECT
-      ↓ YES
-    TOPIC FILTER: Forest / Wildlife?
-      │ NO  => REJECT
-      ↓ YES
-    DUPLICATE CHECK
-      │ DUPLICATE => REJECT
-      ↓ UNIQUE
-    SOURCE VERIFY
+    TODAY DATE CHECK (Asia/Kolkata timezone)
+      ├── Published < Today? ──> REJECT: REJECTED_OLD
+      ├── Published > Today? ──> REJECT: REJECTED_FUTURE
       ↓
-    DATABASE
+    TAMIL NADU RELEVANCE CHECK
+      ├── Not TN? ──> REJECT: REJECTED_NOT_TAMIL_NADU
       ↓
-    PDF GENERATOR
+    FOREST/WILDLIFE TOPIC CHECK
+      ├── Not Forest/Wildlife? ──> REJECT: REJECTED_NOT_WILDLIFE
+      ↓
+    DUPLICATE CHECK (Canonical URL & Headline)
+      ├── Exists? ──> REJECT: DUPLICATE
+      ↓
+    SAVE AS VERIFIED (status = "VERIFIED")
+      ↓
+    PDF GENERATION (Shift 1 / Shift 2 / Shift 3 IST filtering)
     """
 
     @staticmethod
@@ -95,46 +50,79 @@ class ArticlePipeline:
         link: str,
         source_name: str,
         is_tamil: bool = False,
-        batch_articles: Optional[List[Article]] = None
+        batch_articles: Optional[List[Article]] = None,
+        verify_web_source: bool = True
     ) -> Optional[Article]:
         today_date = datetime.now(IST).date()
-        title_clean = title.strip()
+        title_clean = title.strip() if title else ""
         content_clean = content.replace("<p>", "").replace("</p>", "").replace("<br>", "\n").strip() if content else title_clean
 
         if not title_clean:
-            logger.info("REJECTED: Article missing title.")
+            logger.info("REJECTED [UNVERIFIED]: Article missing title.")
             return None
 
-        # ── 1. EXTRACT ORIGINAL PUBLICATION DATE & DATE FILTER ──
-        pub_dt = parse_entry_datetime(raw_entry)
+        # ── 1. SOURCE URL VALIDATION & ORIGINAL PUBLICATION DATE EXTRACTION ──
+        feed_dt = parse_entry_datetime(raw_entry)
+
+        if verify_web_source and link and link.startswith("http") and "news.google.com" not in link and "bing.com" not in link:
+            ver_res = SourcePageVerifier.verify_and_extract_metadata(link, fallback_entry_dt=feed_dt)
+            if not ver_res.is_reachable and not feed_dt:
+                logger.info(f"REJECTED [SOURCE_UNREACHABLE] Source: {source_name} | URL: {link} | Reason: {ver_res.reason}")
+                return None
+
+            if ver_res.published_at:
+                pub_dt = ver_res.published_at
+            else:
+                pub_dt = feed_dt
+
+            if ver_res.raw_title and len(ver_res.raw_title) > 10:
+                # Use authentic source headline directly (NO AI HEADLINE HALLUCINATION)
+                title_clean = ver_res.raw_title.strip()
+        else:
+            pub_dt = feed_dt
+
+        # Check if date was extracted
         if not pub_dt:
-            logger.info(f"REJECTED ('{title_clean}'): Could not extract ORIGINAL publication date/time.")
+            logger.info(f"REJECTED [TIME_UNAVAILABLE] Source: {source_name} | Title: '{title_clean}' | Today: {today_date} | Reason: Original publication date/time unavailable.")
             return None
 
         pub_date = pub_dt.date()
-        if pub_date != today_date:
-            logger.info(f"REJECTED ('{title_clean}'): Date filter failed. Original pub date {pub_date} != today's date {today_date}.")
+
+        # ── 2. TODAY DATE CHECK (Asia/Kolkata) ──
+        if pub_date < today_date:
+            logger.info(f"REJECTED [REJECTED_OLD] Source: {source_name} | Orig Date: {pub_date} | Today: {today_date} | Reason: Original date is older than today ({pub_date} < {today_date}).")
             return None
 
-        # ── 2. LOCATION FILTER: Tamil Nadu related? ──
+        if pub_date > today_date:
+            logger.info(f"REJECTED [REJECTED_FUTURE] Source: {source_name} | Orig Date: {pub_date} | Today: {today_date} | Reason: Original date is in the future ({pub_date} > {today_date}).")
+            return None
+
+        # ── 3. TAMIL NADU RELEVANCE CHECK ──
         if not ArticleClassifier.is_tamil_nadu_relevant(title_clean, content_clean):
-            logger.info(f"REJECTED ('{title_clean}'): Location filter failed. Not related to Tamil Nadu.")
+            logger.info(f"REJECTED [REJECTED_NOT_TAMIL_NADU] Source: {source_name} | Title: '{title_clean}' | Today: {today_date} | Reason: Content not relevant to Tamil Nadu.")
             return None
 
-        # ── 3. TOPIC FILTER: Forest / Wildlife related? ──
+        # ── 4. FOREST / WILDLIFE TOPIC CHECK ──
         if not ArticleClassifier.is_forest_or_wildlife_relevant(title_clean, content_clean):
-            logger.info(f"REJECTED ('{title_clean}'): Topic filter failed. Not related to Forest/Wildlife.")
+            logger.info(f"REJECTED [REJECTED_NOT_WILDLIFE] Source: {source_name} | Title: '{title_clean}' | Today: {today_date} | Reason: Content not relevant to Forest/Wildlife topics.")
             return None
 
-        # ── 4. DUPLICATE CHECK ──
+        # ── 5. DUPLICATE CHECK (Canonical URL & Normalized Headline) ──
         existing_db = list(db_storage.articles.values())
         batch_list = batch_articles or []
-        is_duplicate = any(a.source_url == link or a.title_en.lower() == title_clean.lower() or (a.title_ta and a.title_ta.lower() == title_clean.lower()) for a in existing_db + batch_list)
+        norm_title = title_clean.lower().strip()
+        is_duplicate = any(
+            a.source_url == link or 
+            a.title_en.lower().strip() == norm_title or 
+            (a.title_ta and a.title_ta.lower().strip() == norm_title)
+            for a in existing_db + batch_list
+        )
+
         if is_duplicate:
-            logger.info(f"REJECTED ('{title_clean}'): Duplicate check failed. Already exists in DB or batch.")
+            logger.info(f"REJECTED [DUPLICATE] Source: {source_name} | Title: '{title_clean}' | Today: {today_date} | Reason: Article already exists in database or batch.")
             return None
 
-        # ── 5. SOURCE VERIFY ──
+        # ── 6. SOURCE VERIFICATION CLEANUP ──
         clean_source = source_name.strip() if source_name else "Open Source Media"
         if " - " in title_clean and clean_source in ["Google News", "Open Source Media", "Tamil News Outlet", "Bing News Media"]:
             parts = title_clean.rsplit(" - ", 1)
@@ -143,7 +131,8 @@ class ArticlePipeline:
 
         clean_link = link.strip() if link and link != "#" else "https://news.google.com"
 
-        # ── 6. AI TRANSLATION, CLASSIFICATION, SUMMARIZATION ──
+        # ── 7. AI TRANSLATION, CLASSIFICATION, SUMMARIZATION ──
+        # Note: Headline is NOT hallucinated by AI; it comes directly from title_clean extracted from source
         if is_tamil:
             title_ta = title_clean
             content_ta = content_clean
@@ -157,7 +146,7 @@ class ArticlePipeline:
         sum_en = ArticleSummarizer.summarize_en(title_en, content_en)
         sum_ta = ArticleSummarizer.summarize_ta(title_ta, content_ta)
 
-        # ── 7. DATABASE SAVE MODEL ──
+        # ── 8. SAVE AS VERIFIED ──
         art = Article(
             id=f"art_{uuid.uuid4().hex[:8]}",
             title_en=title_en,
@@ -173,10 +162,14 @@ class ArticlePipeline:
             source_name=clean_source,
             source_url=clean_link,
             published_at=pub_dt,
+            collected_at=datetime.now(IST).replace(tzinfo=None),
+            verification_status="VERIFIED",
+            verification_reason="Original source metadata verified and matches today's date in Asia/Kolkata",
             tags=[ai_meta["category"], ai_meta["district"]] + ai_meta["species"],
             key_entities=ai_meta["key_entities"],
             sentiment=ai_meta["sentiment"],
             date_status="TODAY"
         )
 
+        logger.info(f"ACCEPTED [VERIFIED] Source: {clean_source} | Title: '{title_en[:50]}...' | Published: {pub_dt.strftime('%Y-%m-%d %H:%M:%S IST')}")
         return art

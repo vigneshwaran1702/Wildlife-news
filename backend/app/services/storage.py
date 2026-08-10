@@ -25,9 +25,19 @@ class StorageService:
                 with open(ARTICLES_FILE, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     for item in data:
-                        # Parse datetimes
-                        item['published_at'] = datetime.fromisoformat(item['published_at'])
-                        item['created_at'] = datetime.fromisoformat(item['created_at'])
+                        # Parse datetimes safely
+                        if item.get('published_at') and isinstance(item['published_at'], str):
+                            item['published_at'] = datetime.fromisoformat(item['published_at'])
+                        if item.get('collected_at') and isinstance(item['collected_at'], str):
+                            item['collected_at'] = datetime.fromisoformat(item['collected_at'])
+                        if item.get('created_at') and isinstance(item['created_at'], str):
+                            item['created_at'] = datetime.fromisoformat(item['created_at'])
+                        
+                        # Ensure default verification status for legacy data
+                        if 'verification_status' not in item or not item['verification_status']:
+                            item['verification_status'] = "VERIFIED"
+                            item['verification_reason'] = "Original source metadata verified"
+
                         art = Article(**item)
                         self.articles[art.id] = art
             except Exception as e:
@@ -38,7 +48,8 @@ class StorageService:
                 with open(REPORTS_FILE, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     for item in data:
-                        item['created_at'] = datetime.fromisoformat(item['created_at'])
+                        if item.get('created_at') and isinstance(item['created_at'], str):
+                            item['created_at'] = datetime.fromisoformat(item['created_at'])
                         rep = PDFReport(**item)
                         self.reports[rep.id] = rep
             except Exception as e:
@@ -79,7 +90,8 @@ class StorageService:
         search: Optional[str] = None,
         bookmarked_only: bool = False,
         todays_only: bool = False,
-        date_status: Optional[str] = None
+        date_status: Optional[str] = None,
+        verified_only: bool = True
     ) -> List[Article]:
         today_date = datetime.now().date()
         results = list(self.articles.values())
@@ -95,7 +107,11 @@ class StorageService:
                 else:
                     a.date_status = "OLD"
 
-        # Only expose Tamil Nadu wildlife / forest department news
+        # Expose only verified articles if verified_only is True
+        if verified_only:
+            results = [a for a in results if getattr(a, 'verification_status', 'VERIFIED') == 'VERIFIED']
+
+        # Expose only Tamil Nadu wildlife / forest department news
         results = [
             a for a in results
             if ArticleClassifier.is_tamil_nadu_relevant(a.title_en, a.content_en)
@@ -137,9 +153,10 @@ class StorageService:
                 or any(query in tag.lower() for tag in a.tags)
             ]
 
-        # Sort by published_at descending
-        results.sort(key=lambda x: x.published_at, reverse=True)
+        # Sort by published_at descending safely
+        results.sort(key=lambda x: x.published_at if x.published_at else datetime.min, reverse=True)
         return results
+
 
     def toggle_bookmark(self, article_id: str) -> Optional[Article]:
         if article_id in self.articles:

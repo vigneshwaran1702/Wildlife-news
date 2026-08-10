@@ -44,7 +44,9 @@ def generate_shift_pdf_by_id(shift_id: int, target_date: Optional[str] = None) -
     else:
         ref_date = now.date()
 
-    all_articles = db_storage.get_articles()
+    all_articles = db_storage.get_articles(verified_only=True)
+    # Ensure only VERIFIED articles with valid original publication datetime enter shift filtering
+    all_articles = [a for a in all_articles if getattr(a, 'verification_status', 'VERIFIED') == 'VERIFIED']
 
     if shift_id == 1:
         # Shift 1: Day Bulletin (08:00 AM - 05:00 PM) on ref_date
