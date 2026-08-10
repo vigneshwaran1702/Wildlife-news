@@ -31,6 +31,8 @@ def get_articles(
         except Exception as e:
             pass
 
+    target_date_status = date_status if date_status is not None else "TODAY"
+
     return db_storage.get_articles(
         category=category,
         district=district,
@@ -39,8 +41,10 @@ def get_articles(
         search=search,
         bookmarked_only=bookmarked_only,
         todays_only=todays_only,
-        date_status=date_status
+        date_status=target_date_status,
+        verified_only=True
     )
+
 
 @router.get("/{article_id}", response_model=Article)
 def get_article(article_id: str):
