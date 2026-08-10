@@ -1,12 +1,10 @@
 import feedparser
 import httpx
-from datetime import datetime, timezone
+from datetime import datetime
 from zoneinfo import ZoneInfo
 import uuid
-from app.models.schemas import Article, CollectorLog
-from app.ai.classifier import ArticleClassifier
-from app.ai.summarizer import ArticleSummarizer
-from app.ai.translator import ArticleTranslator
+from app.models.schemas import CollectorLog
+from app.collectors.pipeline import ArticlePipeline
 from app.services.storage import db_storage
 
 IST = ZoneInfo("Asia/Kolkata")
@@ -17,7 +15,8 @@ class TamilNewsCollector:
     @staticmethod
     def scrape_latest() -> int:
         """
-        Fetches 100% live Tamil language news directly from open source media feeds.
+        Fetches live Tamil language news directly from open source media feeds.
+        Routes entries through ArticlePipeline enforcing Date == TODAY filter.
         """
         feed_url = "https://news.google.com/rss/search?q=%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%E0%AE%A5%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%88+%E0%AE%B5%E0%AE%A9%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81%E0%AE%B0%E0%AF%8D%E0%AE%AE%E0%AF%88+OR+%E0%AE%AF%E0%AE%BE%E0%AE%A9%E0%AF%88+OR+%E0%AE%AA%E0%AF%81%E0%AE%B2%E0%AE%BF&hl=ta&gl=IN&ceid=IN:ta"
         new_articles = []
@@ -52,61 +51,23 @@ class TamilNewsCollector:
                 link = entry.get("link", "#")
                 content_ta = entry.get("summary", "") or entry.get("description", "") or title_ta
 
-                if not title_ta:
-                    continue
-
-                content_ta = content_ta.replace("<p>", "").replace("</p>", "").replace("<br>", "\n").strip()
-
                 source_name = "Tamil News Outlet"
                 if " - " in title_ta:
                     parts = title_ta.rsplit(" - ", 1)
-                    title_ta = parts[0]
-                    source_name = parts[1]
+                    source_name = parts[1].strip()
 
-                title_en, content_en = ArticleTranslator.translate_to_english(title_ta, content_ta)
-
-                # Filter strictly for Tamil Nadu + forest/wildlife relevance
-                if not ArticleClassifier.is_tamil_nadu_relevant(title_en, content_en) or not ArticleClassifier.is_forest_or_wildlife_relevant(title_en, content_en):
-                    continue
-
-                existing = [a for a in db_storage.articles.values() if a.source_url == link or a.title_ta == title_ta] or [a for a in new_articles if a.source_url == link or a.title_ta == title_ta]
-                if existing:
-                    continue
-
-                ai_meta = ArticleClassifier.classify(title_en, content_en)
-                sum_en = ArticleSummarizer.summarize_en(title_en, content_en)
-                sum_ta = ArticleSummarizer.summarize_ta(title_ta, content_ta)
-
-                pub_dt = None
-                if hasattr(entry, 'published_parsed') and entry.published_parsed:
-                    try:
-                        utc_dt = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
-                        pub_dt = utc_dt.astimezone(IST).replace(tzinfo=None)
-                    except Exception:
-                        pub_dt = None
-                if not pub_dt:
-                    pub_dt = datetime.now()
-
-                art = Article(
-                    id=f"art_{uuid.uuid4().hex[:8]}",
-                    title_en=title_en,
-                    title_ta=title_ta,
-                    content_en=content_en,
-                    content_ta=content_ta,
-                    summary_en=sum_en,
-                    summary_ta=sum_ta,
-                    category=ai_meta["category"],
-                    conflict_level=ai_meta["conflict_level"],
-                    district=ai_meta["district"],
-                    species=ai_meta["species"],
+                article = ArticlePipeline.process_article(
+                    raw_entry=entry,
+                    title=title_ta,
+                    content=content_ta,
+                    link=link,
                     source_name=source_name,
-                    source_url=link,
-                    published_at=pub_dt,
-                    tags=[ai_meta["category"], ai_meta["district"]] + ai_meta["species"],
-                    key_entities=ai_meta["key_entities"],
-                    sentiment=ai_meta["sentiment"]
+                    is_tamil=True,
+                    batch_articles=new_articles
                 )
-                new_articles.append(art)
+
+                if article:
+                    new_articles.append(article)
 
             if new_articles:
                 db_storage.add_articles_batch(new_articles)
@@ -118,7 +79,7 @@ class TamilNewsCollector:
                 status="Success" if added > 0 else "Warning",
                 articles_found=added,
                 timestamp=datetime.now(),
-                log_message=f"Scraped {added} live Tamil articles."
+                log_message=f"Scraped {added} live Tamil articles matching today's date."
             ))
         except Exception as e:
             db_storage.add_log(CollectorLog(
@@ -131,3 +92,4 @@ class TamilNewsCollector:
             ))
 
         return added
+

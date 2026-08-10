@@ -1,14 +1,11 @@
 import feedparser
 import httpx
-from datetime import datetime, timezone
+from datetime import datetime
 from zoneinfo import ZoneInfo
 import uuid
 
-from app.models.schemas import Article, CollectorLog
-from app.ai.classifier import ArticleClassifier
-from app.ai.summarizer import ArticleSummarizer
-from app.ai.translator import ArticleTranslator
-from app.ai.openai_service import OpenAIService
+from app.models.schemas import CollectorLog
+from app.collectors.pipeline import ArticlePipeline
 from app.services.storage import db_storage
 
 IST = ZoneInfo("Asia/Kolkata")
@@ -32,6 +29,7 @@ class BingNewsCollector:
     def scrape_latest() -> int:
         """
         Actively collects live daily news articles from Bing News RSS feeds matching TN wildlife filters.
+        Routes entries through ArticlePipeline enforcing Date == TODAY filter.
         """
         total_added = 0
         log_msgs = []
@@ -58,74 +56,26 @@ class BingNewsCollector:
                     link = entry.get("link", "#")
                     content_en = entry.get("summary", "") or entry.get("description", "") or title_en
 
-                    if not title_en:
-                        continue
-
-                    # Clean HTML tags
-                    clean_content = content_en.replace("<p>", "").replace("</p>", "").replace("<br>", "\n").strip()
-
-                    # Source extraction
                     source_name = "Bing News Media"
                     if " - " in title_en:
                         parts = title_en.rsplit(" - ", 1)
-                        title_en = parts[0]
-                        source_name = parts[1]
+                        source_name = parts[1].strip()
 
-                    # Relevance filter
-                    if not ArticleClassifier.is_tamil_nadu_relevant(title_en, clean_content) or not ArticleClassifier.is_forest_or_wildlife_relevant(title_en, clean_content):
-                        continue
-
-                    # Duplicate check against db_storage and new_articles
-                    if any(a.source_url == link for a in db_storage.articles.values()) or any(a.source_url == link for a in new_articles):
-                        continue
-
-                    # Process live article with OpenAI / Live AI Engine
-                    ai_res = OpenAIService.process_live_article(title_en, clean_content, source_name)
-
-                    title_ta = ai_res.get("title_ta", "") or title_en
-                    content_ta = ai_res.get("content_ta", "") or clean_content
-                    sum_en = ai_res.get("summary_en", "")
-                    sum_ta = ai_res.get("summary_ta", "")
-                    category = ai_res.get("category", "General Wildlife")
-                    conflict_level = ai_res.get("conflict_level", "Low")
-                    district = ai_res.get("district", "Tamil Nadu")
-                    species = ai_res.get("species", ["Wildlife"])
-                    sentiment = ai_res.get("sentiment", "Neutral")
-
-                    # Publication datetime in IST
-                    pub_dt = None
-                    if hasattr(entry, 'published_parsed') and entry.published_parsed:
-                        try:
-                            utc_dt = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc)
-                            pub_dt = utc_dt.astimezone(IST).replace(tzinfo=None)
-                        except Exception:
-                            pub_dt = None
-                    if not pub_dt or pub_dt > datetime.now():
-                        pub_dt = datetime.now()
-
-                    art = Article(
-                        id=f"art_{uuid.uuid4().hex[:8]}",
-                        title_en=title_en,
-                        title_ta=title_ta,
-                        content_en=clean_content,
-                        content_ta=content_ta,
-                        summary_en=sum_en,
-                        summary_ta=sum_ta,
-                        category=category,
-                        conflict_level=conflict_level,
-                        district=district,
-                        species=species if isinstance(species, list) else [species],
+                    article = ArticlePipeline.process_article(
+                        raw_entry=entry,
+                        title=title_en,
+                        content=content_en,
+                        link=link,
                         source_name=source_name,
-                        source_url=link,
-                        published_at=pub_dt,
-                        tags=[category, district] + (species if isinstance(species, list) else [species]),
-                        key_entities=ai_res.get("key_entities", None),
-                        sentiment=sentiment
+                        is_tamil=False,
+                        batch_articles=new_articles
                     )
-                    new_articles.append(art)
-                    count += 1
 
-                log_msgs.append(f"{name}: {count} new articles")
+                    if article:
+                        new_articles.append(article)
+                        count += 1
+
+                log_msgs.append(f"{name}: {count} new today articles")
 
             except Exception as e:
                 log_msgs.append(f"{name} Error: {str(e)}")
@@ -144,3 +94,4 @@ class BingNewsCollector:
         ))
 
         return total_added
+

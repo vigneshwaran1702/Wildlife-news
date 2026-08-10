@@ -11,6 +11,7 @@ from datetime import datetime
 router = APIRouter(prefix="/api/articles", tags=["Articles"])
 
 from app.collectors.bing_collector import BingNewsCollector
+from app.collectors.pipeline import ArticlePipeline
 
 @router.get("", response_model=List[Article])
 def get_articles(
@@ -61,35 +62,34 @@ def toggle_bookmark(article_id: str):
 def create_article(payload: ArticleCreate):
     title_en = payload.title_en
     content_en = payload.content_en
-    
-    title_ta = payload.title_ta
-    content_ta = payload.content_ta
+    source_url = payload.source_url or "https://news.google.com"
 
-    if not title_ta or not content_ta:
-        title_ta, content_ta = ArticleTranslator.translate_to_tamil(title_en, content_en)
-
-    ai_meta = ArticleClassifier.classify(title_en, content_en)
-    sum_en = ArticleSummarizer.summarize_en(title_en, content_en)
-    sum_ta = ArticleSummarizer.summarize_ta(title_ta, content_ta)
-
-    art = Article(
-        id=f"art_{uuid.uuid4().hex[:8]}",
-        title_en=title_en,
-        title_ta=title_ta,
-        content_en=content_en,
-        content_ta=content_ta,
-        summary_en=sum_en,
-        summary_ta=sum_ta,
-        category=payload.category if payload.category != "General Wildlife" else ai_meta["category"],
-        conflict_level=payload.conflict_level if payload.conflict_level != "Low" else ai_meta["conflict_level"],
-        district=payload.district if payload.district != "Tamil Nadu" else ai_meta["district"],
-        species=payload.species if payload.species else ai_meta["species"],
-        source_name=payload.source_name,
-        source_url=payload.source_url,
-        published_at=payload.published_at or datetime.now(),
-        tags=[ai_meta["category"], ai_meta["district"]] + ai_meta["species"],
-        key_entities=ai_meta["key_entities"],
-        sentiment=ai_meta["sentiment"]
+    # Enforce ArticlePipeline (Extract date -> Date == TODAY -> TN Location -> Forest/Wildlife -> Duplicate -> Source -> DB)
+    raw_entry = {"published_at": payload.published_at or datetime.now()}
+    art = ArticlePipeline.process_article(
+        raw_entry=raw_entry,
+        title=title_en,
+        content=content_en,
+        link=source_url,
+        source_name=payload.source_name or "Manual Submission",
+        is_tamil=False
     )
 
+    if not art:
+        raise HTTPException(
+            status_code=400,
+            detail="Article REJECTED by Pipeline: Must have original date == TODAY, be relevant to Tamil Nadu, and focus on Forest/Wildlife."
+        )
+
+    # Apply optional user overrides
+    if payload.category and payload.category != "General Wildlife":
+        art.category = payload.category
+    if payload.district and payload.district != "Tamil Nadu":
+        art.district = payload.district
+    if payload.conflict_level and payload.conflict_level != "Low":
+        art.conflict_level = payload.conflict_level
+    if payload.species:
+        art.species = payload.species
+
     return db_storage.add_article(art)
+
