@@ -1,5 +1,5 @@
 import email.utils
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from zoneinfo import ZoneInfo
 from typing import Optional, Dict, Any, List
 import uuid
@@ -88,23 +88,37 @@ class ArticlePipeline:
 
         pub_date = pub_dt.date()
 
-        # ── 2. TODAY DATE CHECK (Asia/Kolkata) ──
-        if pub_date < today_date:
-            logger.info(f"REJECTED [REJECTED_OLD] Source: {source_name} | Orig Date: {pub_date} | Today: {today_date} | Reason: Original date is older than today ({pub_date} < {today_date}).")
+        # ── 2. TODAY DATE CHECK (Asia/Kolkata timezone boundary in UTC) ──
+        now_ist = datetime.now(timezone.utc).astimezone(IST)
+        start_of_today_ist = now_ist.replace(hour=0, minute=0, second=0, microsecond=0)
+        start_of_today_utc = start_of_today_ist.astimezone(timezone.utc)
+        end_of_today_utc = (start_of_today_ist + timedelta(days=1)).astimezone(timezone.utc)
+
+        # Convert pub_dt to UTC for database comparison
+        if pub_dt.tzinfo is None:
+            pub_dt_utc = pub_dt.replace(tzinfo=IST).astimezone(timezone.utc)
+        else:
+            pub_dt_utc = pub_dt.astimezone(timezone.utc)
+
+        pub_date_ist = pub_dt_utc.astimezone(IST).date()
+        today_date_ist = now_ist.date()
+
+        if pub_dt_utc < start_of_today_utc:
+            logger.info(f"REJECTED [REJECTED_OLD] Source: {source_name} | Orig Date IST: {pub_date_ist} | Today IST: {today_date_ist} | Reason: Original date is older than today ({pub_date_ist} < {today_date_ist}).")
             return None
 
-        if pub_date > today_date:
-            logger.info(f"REJECTED [REJECTED_FUTURE] Source: {source_name} | Orig Date: {pub_date} | Today: {today_date} | Reason: Original date is in the future ({pub_date} > {today_date}).")
+        if pub_dt_utc >= end_of_today_utc:
+            logger.info(f"REJECTED [REJECTED_FUTURE] Source: {source_name} | Orig Date IST: {pub_date_ist} | Today IST: {today_date_ist} | Reason: Original date is in the future ({pub_date_ist} > {today_date_ist}).")
             return None
 
         # ── 3. TAMIL NADU RELEVANCE CHECK ──
         if not ArticleClassifier.is_tamil_nadu_relevant(title_clean, content_clean):
-            logger.info(f"REJECTED [REJECTED_NOT_TAMIL_NADU] Source: {source_name} | Title: '{title_clean}' | Today: {today_date} | Reason: Content not relevant to Tamil Nadu.")
+            logger.info(f"REJECTED [REJECTED_NOT_TAMIL_NADU] Source: {source_name} | Title: '{title_clean}' | Today IST: {today_date_ist} | Reason: Content not relevant to Tamil Nadu.")
             return None
 
         # ── 4. FOREST / WILDLIFE TOPIC CHECK ──
         if not ArticleClassifier.is_forest_or_wildlife_relevant(title_clean, content_clean):
-            logger.info(f"REJECTED [REJECTED_NOT_WILDLIFE] Source: {source_name} | Title: '{title_clean}' | Today: {today_date} | Reason: Content not relevant to Forest/Wildlife topics.")
+            logger.info(f"REJECTED [REJECTED_NOT_WILDLIFE] Source: {source_name} | Title: '{title_clean}' | Today IST: {today_date_ist} | Reason: Content not relevant to Forest/Wildlife topics.")
             return None
 
         # ── 5. DUPLICATE CHECK (Canonical URL & Normalized Headline) ──
@@ -119,7 +133,7 @@ class ArticlePipeline:
         )
 
         if is_duplicate:
-            logger.info(f"REJECTED [DUPLICATE] Source: {source_name} | Title: '{title_clean}' | Today: {today_date} | Reason: Article already exists in database or batch.")
+            logger.info(f"REJECTED [DUPLICATE] Source: {source_name} | Title: '{title_clean}' | Today IST: {today_date_ist} | Reason: Article already exists in database or batch.")
             return None
 
         # ── 6. SOURCE VERIFICATION CLEANUP ──
@@ -146,7 +160,7 @@ class ArticlePipeline:
         sum_en = ArticleSummarizer.summarize_en(title_en, content_en)
         sum_ta = ArticleSummarizer.summarize_ta(title_ta, content_ta)
 
-        # ── 8. SAVE AS VERIFIED ──
+        # ── 8. SAVE AS VERIFIED (store collected_at in UTC) ──
         art = Article(
             id=f"art_{uuid.uuid4().hex[:8]}",
             title_en=title_en,
@@ -161,8 +175,8 @@ class ArticlePipeline:
             species=ai_meta["species"],
             source_name=clean_source,
             source_url=clean_link,
-            published_at=pub_dt,
-            collected_at=datetime.now(IST).replace(tzinfo=None),
+            published_at=pub_dt.replace(tzinfo=None),
+            collected_at=datetime.now(timezone.utc).replace(tzinfo=None),
             verification_status="VERIFIED",
             verification_reason="Original source metadata verified and matches today's date in Asia/Kolkata",
             tags=[ai_meta["category"], ai_meta["district"]] + ai_meta["species"],
@@ -173,3 +187,4 @@ class ArticlePipeline:
 
         logger.info(f"ACCEPTED [VERIFIED] Source: {clean_source} | Title: '{title_en[:50]}...' | Published: {pub_dt.strftime('%Y-%m-%d %H:%M:%S IST')}")
         return art
+

@@ -16,8 +16,9 @@ export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated, refr
     category: 'All',
     conflictLevel: 'All',
     species: 'All',
-    dateFilter: 'All'
+    dateFilter: 'TODAY'
   });
+
 
   const loadData = async () => {
     setLoading(true);
