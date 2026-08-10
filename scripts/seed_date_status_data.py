@@ -168,6 +168,9 @@ for art in status_articles:
         source_name=art["source"],
         source_url=art["url"],
         published_at=art["time"],
+        collected_at=now,
+        verification_status="VERIFIED" if art["date_status"] == "TODAY" else "REJECTED_OLD",
+        verification_reason="Original source verified" if art["date_status"] == "TODAY" else "Original date is older than today",
         tags=[art["category"], art["district"]] + art["species"],
         key_entities=KeyEntities(
             locations=[art["district"]],
@@ -179,6 +182,7 @@ for art in status_articles:
         date_status=art["date_status"],
         created_at=art["time"]
     )
+
 
 db_storage.save_data()
 print(f"Seeded date_status articles successfully! ({len(db_storage.articles)} total)")

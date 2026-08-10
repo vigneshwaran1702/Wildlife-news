@@ -24,5 +24,69 @@
       "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-10",
       "Downloaded At": "Date: Aug 10, 2026"
     }
+  },
+  {
+    "id": "pdf_1fcc2365",
+    "title": "Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - 10 Aug 2026",
+    "report_type": "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_1fcc2365.pdf",
+    "download_url": "/api/pdf/download/pdf_1fcc2365",
+    "created_at": "2026-08-10 18:53:46.583122",
+    "article_count": 1,
+    "filter_criteria": {
+      "Time Window": "Aug 10, 2026 08:00 AM to 05:00 PM",
+      "Deduplication": "Excludes Evening (5pm-9pm) & Night (9pm-8am) News",
+      "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-10",
+      "Downloaded At": "Date: Aug 10, 2026"
+    }
+  },
+  {
+    "id": "pdf_098f2209",
+    "title": "Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - 10 Aug 2026",
+    "report_type": "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_098f2209.pdf",
+    "download_url": "/api/pdf/download/pdf_098f2209",
+    "created_at": "2026-08-10 18:53:50.883776",
+    "article_count": 0,
+    "filter_criteria": {
+      "Time Window": "Aug 10, 2026 08:00 AM to 05:00 PM",
+      "Deduplication": "Excludes Evening (5pm-9pm) & Night (9pm-8am) News",
+      "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-10",
+      "Downloaded At": "Date: Aug 10, 2026"
+    }
+  },
+  {
+    "id": "pdf_b942776a",
+    "title": "Shift 2 Evening Bulletin (5:00 PM - 9:00 PM) - 10 Aug 2026",
+    "report_type": "Shift 2: Evening Bulletin (05:00 PM - 09:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_b942776a.pdf",
+    "download_url": "/api/pdf/download/pdf_b942776a",
+    "created_at": "2026-08-10 18:53:50.897166",
+    "article_count": 0,
+    "filter_criteria": {
+      "Time Window": "Aug 10, 2026 05:00 PM to 09:00 PM",
+      "Deduplication": "Excludes Shift 1 (8am-5pm) & Night (9pm-8am) News",
+      "Auto Schedule": "21:00 (9:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/2?target_date=2026-08-10",
+      "Downloaded At": "Date: Aug 10, 2026"
+    }
+  },
+  {
+    "id": "pdf_be683ea1",
+    "title": "Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - 10 Aug 2026",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_be683ea1.pdf",
+    "download_url": "/api/pdf/download/pdf_be683ea1",
+    "created_at": "2026-08-10 18:53:50.915757",
+    "article_count": 0,
+    "filter_criteria": {
+      "Time Window": "Aug 09 09:00 PM to Aug 10 08:00 AM",
+      "Deduplication": "Excludes Daytime (8am-5pm) & Evening (5pm-9pm) News",
+      "Auto Schedule": "08:00 (8:00 AM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/3?target_date=2026-08-10",
+      "Downloaded At": "Date: Aug 10, 2026"
+    }
   }
 ]

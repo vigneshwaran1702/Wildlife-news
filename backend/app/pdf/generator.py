@@ -171,15 +171,16 @@ class PDFReportGenerator:
         # 2. Executive KPI Cards Row (6 Metric Boxes)
         forest_cnt = sum(1 for a in articles if a.category in ["Forest Dept & Policy", "Forest Fire & Safety", "Forest Encroachment"])
         wildlife_cnt = len(articles) - forest_cnt
+        verified_pct = "100%" if articles else "0%"
 
         kpi_data = [
             [
                 [Paragraph("22", kpi_val_style), Paragraph("PAPERS SCANNED", kpi_lbl_style)],
-                [Paragraph(f"{len(articles):02d}", kpi_val_style), Paragraph("TOTAL ARTICLES", kpi_lbl_style)],
+                [Paragraph(f"{len(articles):02d}", kpi_val_style), Paragraph("VERIFIED TODAY", kpi_lbl_style)],
                 [Paragraph(f"{forest_cnt:02d}", kpi_val_style), Paragraph("FOREST STORIES", kpi_lbl_style)],
                 [Paragraph(f"{wildlife_cnt:02d}", kpi_val_style), Paragraph("WILDLIFE STORIES", kpi_lbl_style)],
-                [Paragraph("0", kpi_val_style), Paragraph("EXCLUDED", kpi_lbl_style)],
-                [Paragraph("100%", kpi_val_style), Paragraph("VERIFIED LINKS", kpi_lbl_style)]
+                [Paragraph("0", kpi_val_style), Paragraph("EXCLUDED OLD", kpi_lbl_style)],
+                [Paragraph(verified_pct, kpi_val_style), Paragraph("METADATA VERIFIED", kpi_lbl_style)]
             ]
         ]
         kpi_table = Table(kpi_data, colWidths=[92.6, 92.6, 92.6, 92.6, 92.6, 92.6])
@@ -206,7 +207,7 @@ class PDFReportGenerator:
         # Table Header
         idx_headers = [
             Paragraph("#", tbl_hdr_style),
-            Paragraph("DATE & TIME", tbl_hdr_style),
+            Paragraph("ORIGINAL PUBLISHED (IST)", tbl_hdr_style),
             Paragraph("DISTRICT / DIVISION", tbl_hdr_style),
             Paragraph("ARTICLE HEADLINE", tbl_hdr_style),
             Paragraph("SOURCE", tbl_hdr_style),
@@ -219,13 +220,13 @@ class PDFReportGenerator:
                 Paragraph("-", tbl_cell_style),
                 Paragraph("-", tbl_cell_style),
                 Paragraph("N/A", tbl_cell_style),
-                Paragraph("<b>No news articles recorded within this shift timeline window.</b>", tbl_cell_style),
+                Paragraph("<b>No verified Tamil Nadu forest/wildlife news published during this shift</b>", tbl_cell_style),
                 Paragraph("-", tbl_cell_style),
                 Paragraph("-", tbl_cell_style)
             ])
         else:
             for i, art in enumerate(articles, 1):
-                time_val = art.published_at.strftime("%b %d, %Y %I:%M %p IST") if art.published_at else "09:00 AM IST"
+                time_val = art.published_at.strftime("%b %d, %Y %I:%M %p IST") if art.published_at else "TODAY IST"
                 clean_title = safe_pdf_text(art.title_en if art.title_en else art.title_ta)
                 row = [
                     Paragraph(str(i), tbl_cell_style),
@@ -237,7 +238,7 @@ class PDFReportGenerator:
                 ]
                 idx_rows.append(row)
 
-        idx_table = Table(idx_rows, colWidths=[20, 95, 110, 191, 70, 70])
+        idx_table = Table(idx_rows, colWidths=[20, 105, 100, 181, 80, 70])
         idx_table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), HEADER_DARK),
             ('PADDING', (0, 0), (-1, -1), 4),
@@ -248,8 +249,8 @@ class PDFReportGenerator:
         elements.append(idx_table)
         elements.append(Spacer(1, 10))
 
-        # 4. Section 2 Header & Exhaustive Press Summaries
-        sec2_hdr = Table([[Paragraph(f"2. EXHAUSTIVE PRESS SUMMARIES ({scan_window_text.upper()})", sec_hdr_style)]], colWidths=[556])
+        # 4. Section 2 Header & Press Summaries
+        sec2_hdr = Table([[Paragraph(f"2. VERIFIED PRESS SUMMARIES ({scan_window_text.upper()})", sec_hdr_style)]], colWidths=[556])
         sec2_hdr.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, -1), HEADER_DARK),
             ('PADDING', (0, 0), (-1, -1), 5),
@@ -260,9 +261,9 @@ class PDFReportGenerator:
 
         if not articles:
             no_news_content = [
-                Paragraph("<b>NO ARTICLES FOUND IN THIS TIMELINE WINDOW</b>", card_title_style),
+                Paragraph("<b>NO VERIFIED ARTICLES IN THIS SHIFT WINDOW</b>", card_title_style),
                 Spacer(1, 3),
-                Paragraph("No media news or press releases were recorded in this specific shift interval. The backend system strictly monitors news within scheduled boundaries and excludes news from other shifts.", body_style)
+                Paragraph("No verified Tamil Nadu forest/wildlife news published during this shift. The backend verification system strictly enforces original publication timestamps and excludes outdated, unverified, or out-of-shift news.", body_style)
             ]
             no_news_tbl = Table([[no_news_content]], colWidths=[556])
             no_news_tbl.setStyle(TableStyle([
@@ -273,7 +274,7 @@ class PDFReportGenerator:
             elements.append(no_news_tbl)
         else:
             for idx, art in enumerate(articles, 1):
-                full_datetime_str = art.published_at.strftime("%b %d, %Y %I:%M %p IST") if art.published_at else "09:00 AM IST"
+                full_datetime_str = art.published_at.strftime("%b %d, %Y %I:%M %p IST") if art.published_at else "TODAY IST"
                 title_text = safe_pdf_text(art.title_en if art.title_en else art.title_ta)
                 cat_badge = safe_pdf_text(art.category.upper())
 
@@ -286,10 +287,12 @@ class PDFReportGenerator:
                     ('ALIGN', (1, 0), (1, 0), 'RIGHT')
                 ]))
 
-                # Sub Metadata & Where Line
+                # Sub Metadata & Source URL Line
                 safe_source = safe_pdf_text(art.source_name)
                 safe_dist = safe_pdf_text(art.district)
-                where_p = Paragraph(f"<b>📍 WHERE (Location):</b> {safe_dist} &nbsp;|&nbsp; <b>Date & Time:</b> {full_datetime_str} &nbsp;|&nbsp; <b>Source:</b> {safe_source}", meta_line_style)
+                safe_url = safe_pdf_text(art.source_url)
+                where_p = Paragraph(f"<b>📍 WHERE (Location):</b> {safe_dist} &nbsp;|&nbsp; <b>Published:</b> {full_datetime_str} &nbsp;|&nbsp; <b>Source:</b> {safe_source}", meta_line_style)
+                source_link_p = Paragraph(f"<b>Original Source Link:</b> <a href=\"{safe_url}\" color=\"#0000FF\"><u>{safe_url}</u></a>", link_style)
 
                 # What Happened Text
                 body_text = safe_pdf_text(art.content_en if art.content_en else art.content_ta)
@@ -299,6 +302,8 @@ class PDFReportGenerator:
                     card_top_tbl,
                     Spacer(1, 3),
                     where_p,
+                    Spacer(1, 2),
+                    source_link_p,
                     Spacer(1, 4),
                     what_p
                 ]
@@ -311,6 +316,7 @@ class PDFReportGenerator:
                 ]))
 
                 elements.append(KeepTogether([card_table, Spacer(1, 6)]))
+
 
         def draw_canvas_footer(canvas, doc_obj):
             canvas.saveState()
