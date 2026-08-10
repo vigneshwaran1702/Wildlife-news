@@ -13,6 +13,7 @@ export default function App() {
   const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
   const [analytics, setAnalytics] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const loadAnalyticsData = async () => {
     try {
@@ -32,6 +33,7 @@ export default function App() {
     try {
       await triggerCollectors();
       await loadAnalyticsData();
+      setRefreshTrigger(prev => prev + 1);
     } catch (e) {
       console.error(e);
     } finally {
@@ -65,6 +67,7 @@ export default function App() {
               lang={lang}
               bookmarkedOnly={bookmarkedOnly}
               onArticlesUpdated={loadAnalyticsData}
+              refreshTrigger={refreshTrigger}
             />
           )}
 

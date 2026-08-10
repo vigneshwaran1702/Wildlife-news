@@ -8,6 +8,7 @@ from app.models.schemas import Article, CollectorLog
 from app.ai.classifier import ArticleClassifier
 from app.ai.summarizer import ArticleSummarizer
 from app.ai.translator import ArticleTranslator
+from app.ai.openai_service import OpenAIService
 from app.services.storage import db_storage
 
 IST = ZoneInfo("Asia/Kolkata")
@@ -78,13 +79,18 @@ class BingNewsCollector:
                     if any(a.source_url == link for a in db_storage.articles.values()) or any(a.source_url == link for a in new_articles):
                         continue
 
-                    # Translate to Tamil
-                    title_ta, content_ta = ArticleTranslator.translate_to_tamil(title_en, clean_content)
+                    # Process live article with OpenAI / Live AI Engine
+                    ai_res = OpenAIService.process_live_article(title_en, clean_content, source_name)
 
-                    # AI Metadata & Summaries
-                    ai_meta = ArticleClassifier.classify(title_en, clean_content)
-                    sum_en = ArticleSummarizer.summarize_en(title_en, clean_content)
-                    sum_ta = ArticleSummarizer.summarize_ta(title_ta, content_ta)
+                    title_ta = ai_res.get("title_ta", "") or title_en
+                    content_ta = ai_res.get("content_ta", "") or clean_content
+                    sum_en = ai_res.get("summary_en", "")
+                    sum_ta = ai_res.get("summary_ta", "")
+                    category = ai_res.get("category", "General Wildlife")
+                    conflict_level = ai_res.get("conflict_level", "Low")
+                    district = ai_res.get("district", "Tamil Nadu")
+                    species = ai_res.get("species", ["Wildlife"])
+                    sentiment = ai_res.get("sentiment", "Neutral")
 
                     # Publication datetime in IST
                     pub_dt = None
@@ -105,16 +111,16 @@ class BingNewsCollector:
                         content_ta=content_ta,
                         summary_en=sum_en,
                         summary_ta=sum_ta,
-                        category=ai_meta["category"],
-                        conflict_level=ai_meta["conflict_level"],
-                        district=ai_meta["district"],
-                        species=ai_meta["species"],
+                        category=category,
+                        conflict_level=conflict_level,
+                        district=district,
+                        species=species if isinstance(species, list) else [species],
                         source_name=source_name,
                         source_url=link,
                         published_at=pub_dt,
-                        tags=[ai_meta["category"], ai_meta["district"]] + ai_meta["species"],
-                        key_entities=ai_meta["key_entities"],
-                        sentiment=ai_meta["sentiment"]
+                        tags=[category, district] + (species if isinstance(species, list) else [species]),
+                        key_entities=ai_res.get("key_entities", None),
+                        sentiment=sentiment
                     )
                     new_articles.append(art)
                     count += 1

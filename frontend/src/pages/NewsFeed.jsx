@@ -5,7 +5,7 @@ import ArticleModal from '../components/ArticleModal';
 import { fetchArticles, toggleBookmark } from '../services/api';
 import { ShieldAlert, Newspaper, Sparkles } from 'lucide-react';
 
-export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated }) {
+export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated, refreshTrigger }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedArticle, setSelectedArticle] = useState(null);
@@ -37,7 +37,7 @@ export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated }) {
 
   useEffect(() => {
     loadData();
-  }, [filters, bookmarkedOnly]);
+  }, [filters, bookmarkedOnly, refreshTrigger]);
 
   const handleToggleBookmark = async (id) => {
     try {
