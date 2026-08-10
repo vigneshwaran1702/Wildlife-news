@@ -173,9 +173,6 @@ export default function ArticleCard({ article, lang, onSelect, onToggleBookmark 
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-dim)' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.2rem' }}>
-            <Clock size={12} /> {publishedDate}
-          </span>
           <button 
             onClick={() => onSelect(article)}
             className="btn btn-secondary"
