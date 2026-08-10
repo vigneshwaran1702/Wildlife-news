@@ -24,4 +24,17 @@ frontend/dist/
 npm-debug.log*
 pnpm-debug.log*
 yarn-debug.log*
-yarn-error.log*
+yarn-error.log*     
+# Generated PDFs
+backend/pdfs/*.pdf
+
+# Local VS Code settings
+.vscode/
+
+# n8n local/download data
+n8n_downloads/
+
+# Python cache
+__pycache__/
+*.pyc
+n8n_workflows/

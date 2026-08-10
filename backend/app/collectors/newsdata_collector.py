@@ -5,9 +5,8 @@ import uuid
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from app.models.schemas import Article, CollectorLog
-from app.ai.classifier import ArticleClassifier
-from app.ai.openai_service import OpenAIService
+from app.models.schemas import CollectorLog
+from app.collectors.pipeline import ArticlePipeline
 from app.services.storage import db_storage
 
 logger = logging.getLogger(__name__)
@@ -20,6 +19,7 @@ class NewsDataCollector:
     def scrape_latest() -> int:
         """
         Collects live news articles from NewsData.io API matching TN wildlife filters.
+        Routes items through ArticlePipeline enforcing Date == TODAY filter.
         """
         api_key = os.getenv("NEWSDATA_API_KEY", NEWSDATA_API_KEY)
         total_added = 0
@@ -57,43 +57,27 @@ class NewsDataCollector:
                     content = item.get("description", "") or item.get("content", "") or title
                     source_name = item.get("source_id", "NewsData.io").capitalize()
 
-                    if not title or not link:
-                        continue
+                    # Attach pubDate if available so pipeline can extract original publication date
+                    pub_date_str = item.get("pubDate") or item.get("published_at") or datetime.now().isoformat()
+                    raw_entry = {"published": pub_date_str, "pubDate": pub_date_str}
 
-                    # Filter TN and Wildlife relevance
-                    if not ArticleClassifier.is_tamil_nadu_relevant(title, content) or not ArticleClassifier.is_forest_or_wildlife_relevant(title, content):
-                        continue
+                    is_tamil = item.get("language") == "tamil" or item.get("language") == "ta"
 
-                    # Deduplication
-                    if any(a.source_url == link for a in db_storage.articles.values()) or any(a.source_url == link for a in new_articles):
-                        continue
-
-                    # AI processing
-                    ai_res = OpenAIService.process_live_article(title, content, source_name)
-
-                    art = Article(
-                        id=f"art_{uuid.uuid4().hex[:8]}",
-                        title_en=title,
-                        title_ta=ai_res.get("title_ta", "") or title,
-                        content_en=content,
-                        content_ta=ai_res.get("content_ta", "") or content,
-                        summary_en=ai_res.get("summary_en", ""),
-                        summary_ta=ai_res.get("summary_ta", ""),
-                        category=ai_res.get("category", "General Wildlife"),
-                        conflict_level=ai_res.get("conflict_level", "Low"),
-                        district=ai_res.get("district", "Tamil Nadu"),
-                        species=ai_res.get("species", ["Wildlife"]),
+                    article = ArticlePipeline.process_article(
+                        raw_entry=raw_entry,
+                        title=title,
+                        content=content,
+                        link=link,
                         source_name=source_name,
-                        source_url=link,
-                        published_at=datetime.now(),
-                        tags=[ai_res.get("category", "General Wildlife"), ai_res.get("district", "Tamil Nadu")],
-                        key_entities=ai_res.get("key_entities", None),
-                        sentiment=ai_res.get("sentiment", "Neutral")
+                        is_tamil=is_tamil,
+                        batch_articles=new_articles
                     )
-                    new_articles.append(art)
-                    count += 1
 
-                log_msgs.append(f"NewsData.io '{q}': {count} new articles")
+                    if article:
+                        new_articles.append(article)
+                        count += 1
+
+                log_msgs.append(f"NewsData.io '{q}': {count} new today articles")
 
             except Exception as e:
                 log_msgs.append(f"NewsData.io query '{q}' error: {str(e)}")
@@ -112,3 +96,4 @@ class NewsDataCollector:
         ))
 
         return total_added
+
