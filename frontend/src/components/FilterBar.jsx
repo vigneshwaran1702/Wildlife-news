@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Filter, MapPin, Shield, Layers } from 'lucide-react';
+import { Search, Filter, MapPin, Shield, Layers, Calendar } from 'lucide-react';
 
 const DISTRICTS = [
   'All',
@@ -129,10 +129,10 @@ export default function FilterBar({ filters, setFilters }) {
           </select>
         </div>
 
-        {/* Everyday Date Filter */}
+        {/* Pick Day Filter */}
         <div>
           <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.3rem' }}>
-            📅 Date Filter
+            <Calendar size={12} color="var(--primary-emerald)" /> Pick Day
           </label>
           <select
             value={filters.dateFilter || 'All'}
@@ -147,10 +147,9 @@ export default function FilterBar({ filters, setFilters }) {
               fontSize: '0.85rem'
             }}
           >
-            <option value="All" style={{ background: '#0a1610' }}>All Dates</option>
-            <option value="TODAY" style={{ background: '#0a1610' }}>🗓️ TODAY</option>
-            <option value="YESTERDAY" style={{ background: '#0a1610' }}>📆 YESTERDAY</option>
-            <option value="OLD" style={{ background: '#0a1610' }}>📁 OLDER</option>
+            <option value="All" style={{ background: '#0a1610' }}>All Days</option>
+            <option value="TODAY" style={{ background: '#0a1610' }}>Today</option>
+            <option value="YESTERDAY" style={{ background: '#0a1610' }}>Yesterday</option>
           </select>
         </div>
       </div>

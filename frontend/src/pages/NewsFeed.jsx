@@ -15,7 +15,8 @@ export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated }) {
     district: 'All',
     category: 'All',
     conflictLevel: 'All',
-    species: 'All'
+    species: 'All',
+    dateFilter: 'All'
   });
 
   const loadData = async () => {
