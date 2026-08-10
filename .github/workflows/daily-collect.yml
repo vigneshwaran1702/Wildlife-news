@@ -1,0 +1,17 @@
+name: Daily News Collection
+
+on:
+  schedule:
+    # 2:30 UTC corresponds to 8:00 AM IST (UTC +5:30)
+    - cron: '30 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger-collectors:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Collectors API Endpoint
+        env:
+          BACKEND_URL: ${{ secrets.BACKEND_URL }}
+        run: |
+          curl -sS --fail-with-body -X POST "${BACKEND_URL%/}/api/collectors/trigger"

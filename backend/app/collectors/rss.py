@@ -9,6 +9,9 @@ from app.ai.summarizer import ArticleSummarizer
 from app.ai.translator import ArticleTranslator
 from app.services.storage import db_storage
 
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+HEADERS = {"User-Agent": USER_AGENT}
+
 DEFAULT_RSS_FEEDS = [
     # --- TAMIL CHANNELS & NEWSPAPERS ---
     # 1. தினத் தந்தி (Daily Thanthi)
@@ -16,7 +19,7 @@ DEFAULT_RSS_FEEDS = [
     # 2. தினமலர் (Dinamalar)
     {"name": "Dinamalar (தினமலர்)", "url": "https://www.dinamalar.com/rss.asp", "lang": "ta"},
     # 3. தினமணி (Dinamani)
-    {"name": "Dinamani (தினமணி)", "url": "https://news.google.com/rss/search?q=site:dinamani.com+%E0%AE%B5%E0%AE%A9%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81%E0%AE%B0%E0%AF%8D%E0%AE%AE%E0%AF%88+OR+%E0%AE%95%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%81+%E0%AE%A4%E0%AF%80&hl=ta&gl=IN&ceid=IN:ta", "lang": "ta"},
+    {"name": "Dinamani (தினமணி)", "url": "https://news.google.com/rss/search?q=site:dinamani.com+%E0%AE%B5%E0%AE%A9%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81%E0%AE%B0%E0%AF%8D%E0%AE%AE%E0%AF%88+OR+%E0%AE%95%E0%AE%BE%E0%AE%9F%E0%AF%8D%E0%AE%9F%E0%AF%8B+%E0%AE%A4%E0%AF%80&hl=ta&gl=IN&ceid=IN:ta", "lang": "ta"},
     # 4. தமிழ் இந்து (Tamil Hindu / Hindu Tamil Thisai)
     {"name": "Hindu Tamil Thisai (தமிழ் இந்து)", "url": "https://news.google.com/rss/search?q=site:hindutamil.in+%E0%AE%B5%E0%AE%A9%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81%E0%AE%B0%E0%AF%8D%E0%AE%AE%E0%AF%88+OR+%E0%AE%B5%E0%AE%B9%E0%AE%B5%E0%AE%BF%E0%AE%B2%E0%AE%99%E0%AF%8D%E0%AE%95%E0%AF%81&hl=ta&gl=IN&ceid=IN:ta", "lang": "ta"},
     # 5. நியூஸ்18 தமிழ் (News18 Tamil)
@@ -31,22 +34,27 @@ DEFAULT_RSS_FEEDS = [
     {"name": "News7 Tamil (நியூஸ்7 தமிழ்)", "url": "https://news.google.com/rss/search?q=site:news7tamil.live+%E0%AE%B5%E0%AE%A9%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AF%81%E0%AE%B0%E0%AF%8D%E0%AE%AE%E0%AF%88+OR+%E0%AE%AF%E0%AE%BE%E0%AE%A9%E0%AF%88&hl=ta&gl=IN&ceid=IN:ta", "lang": "ta"},
 
     # --- ENGLISH CHANNELS & NEWSPAPERS ---
-    # 10. The Hindu
-    {"name": "The Hindu", "url": "https://news.google.com/rss/search?q=site:thehindu.com+Tamil+Nadu+wildlife+OR+forest+department+OR+elephant+OR+tiger&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
-    # 11. The New Indian Express
+    # 10. The Hindu (Direct Feeds & Google Search)
+    {"name": "The Hindu (TN Direct)", "url": "https://www.thehindu.com/news/national/tamil-nadu/feeder/default.rss", "lang": "en"},
+    {"name": "The Hindu (Environment Direct)", "url": "https://www.thehindu.com/sci-tech/energy-and-environment/feeder/default.rss", "lang": "en"},
+    {"name": "The Hindu (Google Search)", "url": "https://news.google.com/rss/search?q=site:thehindu.com+Tamil+Nadu+wildlife+OR+forest+department+OR+elephant+OR+tiger&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
+    # 11. The New Indian Express (Google Search + Direct Feed TODO)
+    # TODO: Add direct RSS feed URL for The New Indian Express when available (e.g. https://www.newindianexpress.com/rss/tamil-nadu)
     {"name": "The New Indian Express", "url": "https://news.google.com/rss/search?q=site:newindianexpress.com+Tamil+Nadu+wildlife+OR+forest+department+OR+poaching+OR+rescue&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
-    # 12. Times of India
-    {"name": "Times of India", "url": "https://news.google.com/rss/search?q=site:timesofindia.indiatimes.com+Tamil+Nadu+wildlife+OR+forest+department+OR+sanctuary&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
-    # 13. DT Next
-    {"name": "DT Next", "url": "https://news.google.com/rss/search?q=site:dtnext.in+wildlife+OR+forest+department+OR+elephant+OR+tiger&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
+    # 12. Times of India (Direct & Google Search)
+    {"name": "Times of India (Chennai Direct)", "url": "https://timesofindia.indiatimes.com/rssfeeds/2950623.cms", "lang": "en"},
+    {"name": "Times of India (Google Search)", "url": "https://news.google.com/rss/search?q=site:timesofindia.indiatimes.com+Tamil+Nadu+wildlife+OR+forest+department+OR+sanctuary&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
+    # 13. DT Next (Direct & Google Search)
+    {"name": "DT Next (Direct)", "url": "https://www.dtnext.in/feed", "lang": "en"},
+    {"name": "DT Next (Google Search)", "url": "https://news.google.com/rss/search?q=site:dtnext.in+wildlife+OR+forest+department+OR+elephant+OR+tiger&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
     # 14. Deccan Chronicle
     {"name": "Deccan Chronicle", "url": "https://news.google.com/rss/search?q=site:deccanchronicle.com+Tamil+Nadu+wildlife+OR+forest+department&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
     # 15. The News Minute
     {"name": "The News Minute", "url": "https://news.google.com/rss/search?q=site:thenewsminute.com+Tamil+Nadu+wildlife+OR+forest+department+OR+elephant&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
     # 16. India Today
     {"name": "India Today", "url": "https://news.google.com/rss/search?q=site:indiatoday.in+Tamil+Nadu+wildlife+OR+forest+department&hl=en-IN&gl=IN&ceid=IN:en", "lang": "en"},
-    # 17. The Indian Express
-    {"name": "The Indian Express", "url": "https://indianexpress.com/section/cities/chennai/feed/", "lang": "en"},
+    # 17. The Indian Express (Direct Feed)
+    {"name": "The Indian Express (Chennai Direct)", "url": "https://indianexpress.com/section/cities/chennai/feed/", "lang": "en"},
 
     # --- OFFICIAL GOVERNMENT & FOREST SOURCES ---
     # 18. Tamil Nadu Forest Department
@@ -66,10 +74,24 @@ class RSSCollector:
     def fetch_all() -> int:
         total_added = 0
         log_msgs = []
+        new_articles = []
 
         for feed_info in DEFAULT_RSS_FEEDS:
+            name = feed_info["name"]
+            url = feed_info["url"]
             try:
-                feed = feedparser.parse(feed_info["url"])
+                try:
+                    response = httpx.get(url, headers=HEADERS, timeout=15.0, follow_redirects=True)
+                    if response.status_code != 200:
+                        log_msg = f"Google blocked request: status {response.status_code}" if "google.com" in url else f"Request blocked: status {response.status_code}"
+                        log_msgs.append(f"{name}: {log_msg}")
+                        continue
+                    feed_content = response.text
+                except Exception as http_err:
+                    log_msgs.append(f"{name} HTTP Fetch Error: {str(http_err)}")
+                    continue
+
+                feed = feedparser.parse(feed_content)
                 count = 0
                 for entry in feed.entries[:5]:  # Fetch latest 5 from each
                     title = entry.get("title", "")
@@ -86,9 +108,8 @@ class RSSCollector:
                     if not ArticleClassifier.is_tamil_nadu_relevant(title, clean_content) or not ArticleClassifier.is_forest_or_wildlife_relevant(title, clean_content):
                         continue
 
-                    # Check if already exists
-                    existing = [a for a in db_storage.articles.values() if a.source_url == link]
-                    if existing:
+                    # Check if already exists in storage or batch
+                    if any(a.source_url == link for a in db_storage.articles.values()) or any(a.source_url == link for a in new_articles):
                         continue
 
                     is_tamil = feed_info["lang"] == "ta"
@@ -139,14 +160,17 @@ class RSSCollector:
                         sentiment=ai_meta["sentiment"]
                     )
 
-                    db_storage.add_article(art)
+                    new_articles.append(art)
                     count += 1
-                    total_added += 1
 
-                log_msgs.append(f"{feed_info['name']}: {count} new articles")
+                log_msgs.append(f"{name}: {count} new articles")
 
             except Exception as e:
-                log_msgs.append(f"{feed_info['name']} Error: {str(e)}")
+                log_msgs.append(f"{name} Error: {str(e)}")
+
+        if new_articles:
+            db_storage.add_articles_batch(new_articles)
+            total_added = len(new_articles)
 
         db_storage.add_log(CollectorLog(
             id=f"log_{uuid.uuid4().hex[:8]}",

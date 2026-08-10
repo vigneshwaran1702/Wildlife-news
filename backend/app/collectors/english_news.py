@@ -8,6 +8,9 @@ from app.ai.summarizer import ArticleSummarizer
 from app.ai.translator import ArticleTranslator
 from app.services.storage import db_storage
 
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+HEADERS = {"User-Agent": USER_AGENT}
+
 class EnglishNewsCollector:
     @staticmethod
     def scrape_latest() -> int:
@@ -15,9 +18,33 @@ class EnglishNewsCollector:
         Fetches 100% live news directly from open source web RSS feeds for Tamil Nadu wildlife.
         """
         feed_url = "https://news.google.com/rss/search?q=Tamil+Nadu+wildlife+OR+forest+department+OR+forest+fire+OR+wildlife+crime+OR+protected+area+OR+rescue+OR+seizure+OR+encroachment+OR+forest+policy&hl=en-IN&gl=IN&ceid=IN:en"
-        added = 0
+        new_articles = []
         try:
-            feed = feedparser.parse(feed_url)
+            try:
+                response = httpx.get(feed_url, headers=HEADERS, timeout=15.0, follow_redirects=True)
+                if response.status_code != 200:
+                    db_storage.add_log(CollectorLog(
+                        id=f"log_{uuid.uuid4().hex[:8]}",
+                        collector_name="Live English News Scraper",
+                        status="Warning",
+                        articles_found=0,
+                        timestamp=datetime.now(),
+                        log_message=f"Google blocked request: status {response.status_code}"
+                    ))
+                    return 0
+                feed_content = response.text
+            except Exception as http_err:
+                db_storage.add_log(CollectorLog(
+                    id=f"log_{uuid.uuid4().hex[:8]}",
+                    collector_name="Live English News Scraper",
+                    status="Error",
+                    articles_found=0,
+                    timestamp=datetime.now(),
+                    log_message=f"Fetch error: {str(http_err)}"
+                ))
+                return 0
+
+            feed = feedparser.parse(feed_content)
             for entry in feed.entries[:10]:
                 title_en = entry.get("title", "")
                 link = entry.get("link", "#")
@@ -33,7 +60,7 @@ class EnglishNewsCollector:
                 if not ArticleClassifier.is_tamil_nadu_relevant(title_en, content_en) or not ArticleClassifier.is_forest_or_wildlife_relevant(title_en, content_en):
                     continue
 
-                existing = [a for a in db_storage.articles.values() if a.source_url == link or a.title_en == title_en]
+                existing = [a for a in db_storage.articles.values() if a.source_url == link or a.title_en == title_en] or [a for a in new_articles if a.source_url == link or a.title_en == title_en]
                 if existing:
                     continue
 
@@ -78,13 +105,16 @@ class EnglishNewsCollector:
                     key_entities=ai_meta["key_entities"],
                     sentiment=ai_meta["sentiment"]
                 )
-                db_storage.add_article(art)
-                added += 1
+                new_articles.append(art)
 
+            if new_articles:
+                db_storage.add_articles_batch(new_articles)
+
+            added = len(new_articles)
             db_storage.add_log(CollectorLog(
                 id=f"log_{uuid.uuid4().hex[:8]}",
                 collector_name="Live English News Scraper",
-                status="Success",
+                status="Success" if added > 0 else "Warning",
                 articles_found=added,
                 timestamp=datetime.now(),
                 log_message=f"Fetched {added} live articles from TN open source media."
