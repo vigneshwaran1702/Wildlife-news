@@ -60,6 +60,13 @@ class StorageService:
         self.save_data()
         return article
 
+    def add_articles_batch(self, articles: List[Article]) -> List[Article]:
+        for article in articles:
+            self.articles[article.id] = article
+        if articles:
+            self.save_data()
+        return articles
+
     def get_article(self, article_id: str) -> Optional[Article]:
         return self.articles.get(article_id)
 
