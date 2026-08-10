@@ -100,7 +100,7 @@ class BingNewsCollector:
                             pub_dt = utc_dt.astimezone(IST).replace(tzinfo=None)
                         except Exception:
                             pub_dt = None
-                    if not pub_dt:
+                    if not pub_dt or pub_dt > datetime.now():
                         pub_dt = datetime.now()
 
                     art = Article(

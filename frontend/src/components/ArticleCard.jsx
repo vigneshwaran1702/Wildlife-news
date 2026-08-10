@@ -11,12 +11,24 @@ export default function ArticleCard({ article, lang, onSelect, onToggleBookmark 
   const summary = (lang === 'ta' && article.summary_ta) ? article.summary_ta : article.summary_en;
   const content = (lang === 'ta' && article.content_ta) ? article.content_ta : article.content_en;
 
-  const publishedDate = new Date(article.published_at).toLocaleDateString(lang === 'ta' ? 'ta-IN' : 'en-US', {
-    day: 'numeric',
-    month: 'short',
-    hour: '2-digit',
-    minute: '2-digit'
-  });
+  const formatArticleDate = (dateStr) => {
+    if (!dateStr) return '';
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      return d.toLocaleString(lang === 'ta' ? 'ta-IN' : 'en-US', {
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
+    } catch (e) {
+      return dateStr;
+    }
+  };
+
+  const publishedDate = formatArticleDate(article.published_at);
 
   const handleOpenSource = (e, url) => {
     e.stopPropagation();
