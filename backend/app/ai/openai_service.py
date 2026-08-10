@@ -3,6 +3,15 @@ import json
 import logging
 import httpx
 from typing import Dict, Optional, Tuple
+from dotenv import load_dotenv
+
+# Load .env file
+root_env = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), ".env")
+backend_env = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), ".env")
+if os.path.exists(root_env):
+    load_dotenv(root_env)
+if os.path.exists(backend_env):
+    load_dotenv(backend_env)
 
 from app.ai.classifier import ArticleClassifier
 from app.ai.summarizer import ArticleSummarizer

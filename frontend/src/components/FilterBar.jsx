@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Filter, MapPin, Shield, Layers, Calendar } from 'lucide-react';
+import { Search, MapPin, Shield, Layers, Calendar } from 'lucide-react';
 
 const DISTRICTS = [
   'All',
@@ -38,8 +38,10 @@ const CATEGORIES = [
 const CONFLICT_LEVELS = ['All', 'High', 'Medium', 'Low', 'None'];
 
 export default function FilterBar({ filters, setFilters }) {
+  const currentDay = filters.dateFilter || 'All';
+
   return (
-    <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', width: '100%' }}>
       {/* Search Input */}
       <div style={{ position: 'relative', width: '100%' }}>
         <Search size={18} color="var(--text-muted)" style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
@@ -50,8 +52,8 @@ export default function FilterBar({ filters, setFilters }) {
           onChange={(e) => setFilters({ ...filters, search: e.target.value })}
           style={{
             width: '100%',
-            padding: '0.65rem 1rem 0.65rem 2.4rem',
-            background: 'rgba(0, 0, 0, 0.35)',
+            padding: '0.6rem 1rem 0.6rem 2.4rem',
+            background: 'rgba(0, 0, 0, 0.4)',
             border: '1px solid var(--border-color)',
             borderRadius: '8px',
             color: 'var(--text-main)',
@@ -61,19 +63,89 @@ export default function FilterBar({ filters, setFilters }) {
         />
       </div>
 
-      {/* Select Dropdowns */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '0.75rem' }}>
+      {/* Select Controls & Pick Day Toggle Row */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: '0.75rem', width: '100%', alignItems: 'end' }}>
+        {/* Pick Day Pill Filter */}
+        <div>
+          <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--primary-emerald)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.35rem' }}>
+            <Calendar size={13} color="var(--primary-emerald)" /> Pick Day
+          </label>
+          <div style={{
+            display: 'flex',
+            background: 'rgba(0, 0, 0, 0.4)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '6px',
+            padding: '2px',
+            gap: '2px'
+          }}>
+            <button
+              type="button"
+              onClick={() => setFilters({ ...filters, dateFilter: 'All' })}
+              style={{
+                flex: 1,
+                padding: '0.4rem 0.2rem',
+                borderRadius: '4px',
+                border: 'none',
+                background: currentDay === 'All' ? 'var(--primary-emerald)' : 'transparent',
+                color: currentDay === 'All' ? '#ffffff' : 'var(--text-muted)',
+                fontSize: '0.8rem',
+                fontWeight: currentDay === 'All' ? '700' : '500',
+                cursor: 'pointer',
+                transition: 'all 0.15s'
+              }}
+            >
+              All Days
+            </button>
+            <button
+              type="button"
+              onClick={() => setFilters({ ...filters, dateFilter: 'TODAY' })}
+              style={{
+                flex: 1,
+                padding: '0.4rem 0.2rem',
+                borderRadius: '4px',
+                border: 'none',
+                background: currentDay === 'TODAY' ? 'var(--primary-emerald)' : 'transparent',
+                color: currentDay === 'TODAY' ? '#ffffff' : 'var(--text-muted)',
+                fontSize: '0.8rem',
+                fontWeight: currentDay === 'TODAY' ? '700' : '500',
+                cursor: 'pointer',
+                transition: 'all 0.15s'
+              }}
+            >
+              Today
+            </button>
+            <button
+              type="button"
+              onClick={() => setFilters({ ...filters, dateFilter: 'YESTERDAY' })}
+              style={{
+                flex: 1,
+                padding: '0.4rem 0.2rem',
+                borderRadius: '4px',
+                border: 'none',
+                background: currentDay === 'YESTERDAY' ? 'var(--accent-amber)' : 'transparent',
+                color: currentDay === 'YESTERDAY' ? '#000000' : 'var(--text-muted)',
+                fontSize: '0.8rem',
+                fontWeight: currentDay === 'YESTERDAY' ? '700' : '500',
+                cursor: 'pointer',
+                transition: 'all 0.15s'
+              }}
+            >
+              Yesterday
+            </button>
+          </div>
+        </div>
+
         {/* District */}
         <div>
-          <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.3rem' }}>
-            <MapPin size={12} color="var(--primary-emerald)" /> District / Range
+          <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.35rem' }}>
+            <MapPin size={13} color="var(--primary-emerald)" /> District / Range
           </label>
           <select
             value={filters.district}
             onChange={(e) => setFilters({ ...filters, district: e.target.value })}
             style={{
               width: '100%',
-              padding: '0.5rem',
+              padding: '0.45rem 0.6rem',
               background: 'rgba(0, 0, 0, 0.4)',
               border: '1px solid var(--border-color)',
               borderRadius: '6px',
@@ -87,15 +159,15 @@ export default function FilterBar({ filters, setFilters }) {
 
         {/* Category */}
         <div>
-          <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.3rem' }}>
-            <Layers size={12} color="var(--accent-amber)" /> Category
+          <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.35rem' }}>
+            <Layers size={13} color="var(--accent-amber)" /> Category
           </label>
           <select
             value={filters.category}
             onChange={(e) => setFilters({ ...filters, category: e.target.value })}
             style={{
               width: '100%',
-              padding: '0.5rem',
+              padding: '0.45rem 0.6rem',
               background: 'rgba(0, 0, 0, 0.4)',
               border: '1px solid var(--border-color)',
               borderRadius: '6px',
@@ -109,15 +181,15 @@ export default function FilterBar({ filters, setFilters }) {
 
         {/* Conflict Level */}
         <div>
-          <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.3rem' }}>
-            <Shield size={12} color="var(--accent-red)" /> Conflict Risk
+          <label style={{ fontSize: '0.75rem', fontWeight: '600', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.35rem' }}>
+            <Shield size={13} color="var(--accent-red)" /> Conflict Risk
           </label>
           <select
             value={filters.conflictLevel}
             onChange={(e) => setFilters({ ...filters, conflictLevel: e.target.value })}
             style={{
               width: '100%',
-              padding: '0.5rem',
+              padding: '0.45rem 0.6rem',
               background: 'rgba(0, 0, 0, 0.4)',
               border: '1px solid var(--border-color)',
               borderRadius: '6px',
@@ -126,30 +198,6 @@ export default function FilterBar({ filters, setFilters }) {
             }}
           >
             {CONFLICT_LEVELS.map(cl => <option key={cl} value={cl} style={{ background: '#0a1610' }}>{cl}</option>)}
-          </select>
-        </div>
-
-        {/* Pick Day Filter */}
-        <div>
-          <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.3rem' }}>
-            <Calendar size={12} color="var(--primary-emerald)" /> Pick Day
-          </label>
-          <select
-            value={filters.dateFilter || 'All'}
-            onChange={(e) => setFilters({ ...filters, dateFilter: e.target.value })}
-            style={{
-              width: '100%',
-              padding: '0.5rem',
-              background: 'rgba(0, 0, 0, 0.4)',
-              border: '1px solid var(--border-color)',
-              borderRadius: '6px',
-              color: 'var(--text-main)',
-              fontSize: '0.85rem'
-            }}
-          >
-            <option value="All" style={{ background: '#0a1610' }}>All Days</option>
-            <option value="TODAY" style={{ background: '#0a1610' }}>Today</option>
-            <option value="YESTERDAY" style={{ background: '#0a1610' }}>Yesterday</option>
           </select>
         </div>
       </div>
