@@ -1878,5 +1878,802 @@
     "created_at": "2026-08-10 10:06:16.857659",
     "views_count": 0,
     "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu Budget 2026: Farmers welcome announcements to minimise man–wildlife conflict",
+    "title_ta": "Tamil Nadu Budget 2026: Farmers welcome announcements to minimise man–wildlife மனித-விலங்கு மோதல்",
+    "content_en": "The Tamil Nadu Government’s move to scientifically minimise the man – wildlife conflict, which even leads to loss of precious life in Tirunelveli and Tenkasi districts, will be a great relief to the ...",
+    "content_ta": "The Tamil Nadu Government’s move to scientifically minimise the man – wildlife மனித-விலங்கு மோதல், which even leads to loss of precious life in Tirunelveli and Tenkasi districts, will be a great relief to the ...",
+    "summary_en": "• The Tamil Nadu Government’s move to scientifically minimise the man – wildlife conflict, which even leads to loss of precious life in Tirunelveli and Tenkasi districts, will be a great relief to the ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• The Tamil Nadu Government’s move to scientifically minimise the man – wildlife மனித-விலங்கு மோதல், which even leads to loss of precious life in Tirunelveli and Tenkasi districts, will be a great relief to the ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "Low",
+    "district": "Erode & Sathyamangalam",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c872c642ee8f5b493b81bab3ee&url=https%3a%2f%2fwww.thehindu.com%2fnews%2fnational%2ftamil-nadu%2ftamil-nadu-budget-2026-farmers-welcome-announcements-to-minimise-manwildlife-conflict%2farticle71309530.ece&c=4514968531934060662&mkt=en-in",
+    "published_at": "2026-08-06 11:47:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Erode & Sathyamangalam"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Erode & Sathyamangalam"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_f051bb54",
+    "created_at": "2026-08-10 10:12:47.312652",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Nilgiris Farmers Welcome Organic Farming, Millet Schemes in TN Agri Budget",
+    "title_ta": "நீலகிரி Farmers Welcome Organic Farming, Millet Schemes in TN Agri Budget",
+    "content_en": "Farmers and tribal leaders hail provisions for organic farming, minor millets, traditional cattle breeds and wildlife damage prevention in Tamil Nadu's Agriculture Budget 2026-27.",
+    "content_ta": "Farmers and tribal leaders hail provisions for organic farming, minor millets, traditional cattle breeds and wildlife damage prevention in Tamil Nadu's Agriculture Budget 2026-27.",
+    "summary_en": "• Farmers and tribal leaders hail provisions for organic farming, minor millets, traditional cattle breeds and wildlife damage prevention in Tamil Nadu's Agriculture Budget 2026-27.\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• Farmers and tribal leaders hail provisions for organic farming, minor millets, traditional cattle breeds and wildlife damage prevention in Tamil Nadu's Agriculture Budget 2026-27.\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "General Wildlife",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c872c642ee8f5b493b81bab3ee&url=https%3a%2f%2fwww.deccanchronicle.com%2fsouthern-states%2ftamil-nadu%2fnilgiris-farmers-welcome-organic-farming-millet-schemes-in-tn-agri-budget-1977351&c=1409306233862077035&mkt=en-in",
+    "published_at": "2026-08-07 01:12:00",
+    "tags": [
+      "General Wildlife",
+      "Nilgiris"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_2669aa78",
+    "created_at": "2026-08-10 10:12:47.314446",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "TN bars public from Neelakurinji blooming site to protect wildlife, fragile habitat",
+    "title_ta": "[தமிழ் அறிக்கை] TN bars public from Neelakurinji blooming site to protect wildlife, fragile habitat",
+    "content_en": "The Tamil Nadu Forest Department has restricted access to Neelakurinji blooming sites in Gudalur to protect the rare flower, wildlife, and visitors in ecologically sensitive forest areas.",
+    "content_ta": "The Tamil Nadu வனத்துறை has restricted access to Neelakurinji blooming sites in Gudalur to protect the rare flower, wildlife, and visitors in ecologically sensitive forest areas.",
+    "summary_en": "• The Tamil Nadu Forest Department has restricted access to Neelakurinji blooming sites in Gudalur to protect the rare flower, wildlife, and visitors in ecologically sensitive forest areas.\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• The Tamil Nadu வனத்துறை has restricted access to Neelakurinji blooming sites in Gudalur to protect the rare flower, wildlife, and visitors in ecologically sensitive forest areas.\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Forest Dept & Policy",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c872c642ee8f5b493b81bab3ee&url=https%3a%2f%2fwww.thehansindia.com%2fnews%2fnational%2ftn-bars-public-from-neelakurinji-blooming-site-to-protect-wildlife-fragile-habitat-1102231&c=487677070503927695&mkt=en-in",
+    "published_at": "2026-07-28 03:08:00",
+    "tags": [
+      "Forest Dept & Policy",
+      "Nilgiris"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_3ac19423",
+    "created_at": "2026-08-10 10:12:47.314446",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "TN's compensation for wildlife attack victims lower than Karnataka, Kerala",
+    "title_ta": "[தமிழ் அறிக்கை] TN's compensation for wildlife attack victims lower than Karnataka, Kerala",
+    "content_en": "COIMBATORE: Even as wild animals such as tigers, elephants and leopards are protected under the Wildlife (Protection) Act, 1972, the ex gratia compensation paid to families of victims killed in wild ...",
+    "content_ta": "கோவை: Even as wild animals such as tigers, elephants and leopards are protected under the Wildlife (Protection) Act, 1972, the ex gratia compensation paid to families of victims killed in wild ...",
+    "summary_en": "• COIMBATORE: Even as wild animals such as tigers, elephants and leopards are protected under the Wildlife (Protection) Act, 1972, the ex gratia compensation paid to families of victims killed in wild ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• கோவை: Even as wild animals such as tigers, elephants and leopards are protected under the Wildlife (Protection) Act, 1972, the ex gratia compensation paid to families of victims killed in wild ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Coimbatore",
+    "species": [
+      "Elephant",
+      "Tiger",
+      "Leopard"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c872c642ee8f5b493b81bab3ee&url=https%3a%2f%2fwww.newindianexpress.com%2fstates%2ftamil-nadu%2f2026%2fJul%2f20%2ftns-compensation-for-wildlife-attack-victims-lower-than-karnataka-kerala&c=11712485042002021514&mkt=en-in",
+    "published_at": "2026-07-20 01:42:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Coimbatore",
+      "Elephant",
+      "Tiger",
+      "Leopard"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Coimbatore"
+      ],
+      "species": [
+        "Elephant",
+        "Tiger",
+        "Leopard"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Severe conflict event"
+    },
+    "sentiment": "Critical Alert",
+    "date_status": "TODAY",
+    "id": "art_ec64e1ae",
+    "created_at": "2026-08-10 10:12:47.314446",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu forest department restricts public entry to Neelakurinji blooming areas in Nilgiris district",
+    "title_ta": "Tamil Nadu வனத்துறை restricts public entry to Neelakurinji blooming areas in நீலகிரி district",
+    "content_en": "Tamil Nadu Forest Department has restricted public access to areas in Nilgiris district where Neelakurinji flowers have bloomed because of its protected status ...",
+    "content_ta": "Tamil Nadu வனத்துறை has restricted public access to areas in நீலகிரி district where Neelakurinji flowers have bloomed because of its protected status ...",
+    "summary_en": "• Tamil Nadu Forest Department has restricted public access to areas in Nilgiris district where Neelakurinji flowers have bloomed because of its protected status ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• Tamil Nadu வனத்துறை has restricted public access to areas in நீலகிரி district where Neelakurinji flowers have bloomed because of its protected status ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Forest Dept & Policy",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c872c642ee8f5b493b81bab3ee&url=https%3a%2f%2fwww.mid-day.com%2flifestyle%2fnature-and-wildlife%2farticle%2ftamil-nadu-forest-department-restricts-public-entry-to-neelakurinji-blooming-areas-in-nilgiris-district-23641984&c=10814404451608751734&mkt=en-in",
+    "published_at": "2026-07-28 06:03:00",
+    "tags": [
+      "Forest Dept & Policy",
+      "Nilgiris"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_61bcd677",
+    "created_at": "2026-08-10 10:12:47.314446",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu’s first Mangrove Conservation Centre coming up in Muzhukuthurai",
+    "title_ta": "[தமிழ் அறிக்கை] Tamil Nadu’s first Mangrove Conservation Centre coming up in Muzhukuthurai",
+    "content_en": "Cuddalore's first Mangrove Conservation Centre launches, promoting biodiversity, research, and sustainable eco-tourism for community benefits.",
+    "content_ta": "Cuddalore's first Mangrove Conservation Centre launches, promoting biodiversity, research, and sustainable eco-tourism for community benefits.",
+    "summary_en": "• Cuddalore's first Mangrove Conservation Centre launches, promoting biodiversity, research, and sustainable eco-tourism for community benefits.\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• Cuddalore's first Mangrove Conservation Centre launches, promoting biodiversity, research, and sustainable eco-tourism for community benefits.\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Eco-Tourism & Sanctuaries",
+    "conflict_level": "Low",
+    "district": "Villupuram & Cuddalore",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c883ca4a9e8795423fab249c88&url=https%3a%2f%2fwww.thehindu.com%2fnews%2fnational%2ftamil-nadu%2ftamil-nadus-first-mangrove-conservation-centre-coming-up-in-muzhukuthurai%2farticle71308566.ece&c=1972746002318694756&mkt=en-in",
+    "published_at": "2026-08-05 13:35:00",
+    "tags": [
+      "Eco-Tourism & Sanctuaries",
+      "Villupuram & Cuddalore"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Villupuram & Cuddalore"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_f19667fa",
+    "created_at": "2026-08-10 10:12:49.511701",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu forest depart likely to conduct first-ever Lion-Tailed Macaque census next year",
+    "title_ta": "[தமிழ் அறிக்கை] Tamil Nadu forest depart likely to conduct first-ever Lion-Tailed Macaque census next year",
+    "content_en": "COIMBATORE: In a first for the state, the Tamil Nadu forest department is set to conduct a dedicated census of the endangered lion-tailed macaque (LTM), an endemic primate of the Western Ghats, as ...",
+    "content_ta": "கோவை: In a first for the state, the Tamil Nadu வனத்துறை is set to conduct a dedicated census of the endangered lion-tailed macaque (LTM), an endemic primate of the Western Ghats, as ...",
+    "summary_en": "• COIMBATORE: In a first for the state, the Tamil Nadu forest department is set to conduct a dedicated census of the endangered lion-tailed macaque (LTM), an endemic primate of the Western Ghats, as ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• கோவை: In a first for the state, the Tamil Nadu வனத்துறை is set to conduct a dedicated census of the endangered lion-tailed macaque (LTM), an endemic primate of the Western Ghats, as ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Species Conservation",
+    "conflict_level": "Low",
+    "district": "Coimbatore",
+    "species": [
+      "Lion-Tailed Macaque"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c883ca4a9e8795423fab249c88&url=https%3a%2f%2fwww.msn.com%2fen-in%2fnews%2fIndia%2ftamil-nadu-forest-depart-likely-to-conduct-first-ever-lion-tailed-macaque-census-next-year%2far-AA291tjP&c=2442271122378700808&mkt=en-in",
+    "published_at": "2026-07-30 01:53:57",
+    "tags": [
+      "Species Conservation",
+      "Coimbatore",
+      "Lion-Tailed Macaque"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Coimbatore"
+      ],
+      "species": [
+        "Lion-Tailed Macaque"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "art_f85c9e04",
+    "created_at": "2026-08-10 10:12:49.512750",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "TN forest department failed to consider requests during online transfer, rue staff",
+    "title_ta": "TN வனத்துறை failed to consider requests during online transfer, rue staff",
+    "content_en": "COIMBATORE: Forest staff, along with ministerial staff and representatives of the Tamil Nadu Forest Staff Association, charged that several of their requests have been sidelined during the online ...",
+    "content_ta": "கோவை: Forest staff, along with ministerial staff and representatives of the Tamil Nadu Forest Staff Association, charged that several of their requests have been sidelined during the online ...",
+    "summary_en": "• COIMBATORE: Forest staff, along with ministerial staff and representatives of the Tamil Nadu Forest Staff Association, charged that several of their requests have been sidelined during the online ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• கோவை: Forest staff, along with ministerial staff and representatives of the Tamil Nadu Forest Staff Association, charged that several of their requests have been sidelined during the online ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Forest Dept & Policy",
+    "conflict_level": "Low",
+    "district": "Coimbatore",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c883ca4a9e8795423fab249c88&url=https%3a%2f%2fwww.newindianexpress.com%2fstates%2ftamil-nadu%2f2026%2fJun%2f24%2ftn-forest-department-failed-to-consider-requests-during-online-transferruestaff&c=15293568998959550824&mkt=en-in",
+    "published_at": "2026-06-24 00:58:00",
+    "tags": [
+      "Forest Dept & Policy",
+      "Coimbatore"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Coimbatore"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_6d896f24",
+    "created_at": "2026-08-10 10:12:49.512750",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu forest department restricts public entry to Neelakurinji blooming areas in Nilgiris district",
+    "title_ta": "Tamil Nadu வனத்துறை restricts public entry to Neelakurinji blooming areas in நீலகிரி district",
+    "content_en": "Tamil Nadu Forest Department has restricted public access to areas in Nilgiris district where Neelakurinji flowers have bloomed because of its protected status ...",
+    "content_ta": "Tamil Nadu வனத்துறை has restricted public access to areas in நீலகிரி district where Neelakurinji flowers have bloomed because of its protected status ...",
+    "summary_en": "• Tamil Nadu Forest Department has restricted public access to areas in Nilgiris district where Neelakurinji flowers have bloomed because of its protected status ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• Tamil Nadu வனத்துறை has restricted public access to areas in நீலகிரி district where Neelakurinji flowers have bloomed because of its protected status ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Forest Dept & Policy",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c883ca4a9e8795423fab249c88&url=https%3a%2f%2fwww.mid-day.com%2flifestyle%2fnature-and-wildlife%2farticle%2ftamil-nadu-forest-department-restricts-public-entry-to-neelakurinji-blooming-areas-in-nilgiris-district-23641984&c=10814404451608751734&mkt=en-in",
+    "published_at": "2026-07-28 06:03:00",
+    "tags": [
+      "Forest Dept & Policy",
+      "Nilgiris"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_cef4465d",
+    "created_at": "2026-08-10 10:12:49.512750",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu: Tiger found dead mysteriously in Nilgiris stream",
+    "title_ta": "Tamil Nadu: புலி found dead mysteriously in நீலகிரி stream",
+    "content_en": "The Forest Department has initiated a detailed investigation following the mysterious death of a tiger near Naduvattam in the Nilgiris district ...",
+    "content_ta": "The வனத்துறை has initiated a detailed investigation following the mysterious death of a புலி near Naduvattam in the நீலகிரி district ...",
+    "summary_en": "• The Forest Department has initiated a detailed investigation following the mysterious death of a tiger near Naduvattam in the Nilgiris district ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• The வனத்துறை has initiated a detailed investigation following the mysterious death of a புலி near Naduvattam in the நீலகிரி district ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Forest Dept & Policy",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [
+      "Tiger"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c883ca4a9e8795423fab249c88&url=https%3a%2f%2fwww.mid-day.com%2flifestyle%2fnature-and-wildlife%2farticle%2ftamil-nadu-tiger-found-dead-in-nilgiris-stream-forest-department-investigating-the-cause-23642915&c=9420826035611158377&mkt=en-in",
+    "published_at": "2026-08-03 02:14:00",
+    "tags": [
+      "Forest Dept & Policy",
+      "Nilgiris",
+      "Tiger"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [
+        "Tiger"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_42437f69",
+    "created_at": "2026-08-10 10:12:49.512750",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "TN bars public from Neelakurinji blooming site to protect wildlife, fragile habitat",
+    "title_ta": "[தமிழ் அறிக்கை] TN bars public from Neelakurinji blooming site to protect wildlife, fragile habitat",
+    "content_en": "The Tamil Nadu Forest Department has restricted access to Neelakurinji blooming sites in Gudalur to protect the rare flower, wildlife, and visitors in ecologically sensitive forest areas.",
+    "content_ta": "The Tamil Nadu வனத்துறை has restricted access to Neelakurinji blooming sites in Gudalur to protect the rare flower, wildlife, and visitors in ecologically sensitive forest areas.",
+    "summary_en": "• The Tamil Nadu Forest Department has restricted access to Neelakurinji blooming sites in Gudalur to protect the rare flower, wildlife, and visitors in ecologically sensitive forest areas.\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• The Tamil Nadu வனத்துறை has restricted access to Neelakurinji blooming sites in Gudalur to protect the rare flower, wildlife, and visitors in ecologically sensitive forest areas.\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Forest Dept & Policy",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c883ca4a9e8795423fab249c88&url=https%3a%2f%2fwww.thehansindia.com%2fnews%2fnational%2ftn-bars-public-from-neelakurinji-blooming-site-to-protect-wildlife-fragile-habitat-1102231&c=487677070503927695&mkt=en-in",
+    "published_at": "2026-07-28 03:08:00",
+    "tags": [
+      "Forest Dept & Policy",
+      "Nilgiris"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_2639c764",
+    "created_at": "2026-08-10 10:12:49.515468",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Madras HC stops Tamil Nadu forest dept from engaging NGOs to treat elephants in custody",
+    "title_ta": "[தமிழ் அறிக்கை] Madras HC stops Tamil Nadu forest dept from engaging NGOs to treat elephants in custody",
+    "content_en": "Chennai: Madras high court has directed the state forest department to not engage NGOs to treat elephants in its custody until further orders. A special bench of justices N Sathish Kumar and D ...",
+    "content_ta": "Chennai: Madras high court has directed the state வனத்துறை to not engage NGOs to treat elephants in its custody until further orders. A special bench of justices N Sathish Kumar and D ...",
+    "summary_en": "• Chennai: Madras high court has directed the state forest department to not engage NGOs to treat elephants in its custody until further orders.\n• A special bench of justices N Sathish Kumar and D ...\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• Chennai: Madras high court has directed the state வனத்துறை to not engage NGOs to treat elephants in its custody until further orders.\n• A special bench of justices N Sathish Kumar and D ...\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Forest Dept & Policy",
+    "conflict_level": "Low",
+    "district": "Chennai & Vandalur",
+    "species": [
+      "Elephant"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956c883ca4a9e8795423fab249c88&url=https%3a%2f%2ftimesofindia.indiatimes.com%2fcity%2fchennai%2fmadras-hc-stops-tamil-nadu-forest-dept-from-engaging-ngos-to-treat-elephants-in-custody%2farticleshow%2f132482187.cms&c=12451156819728365549&mkt=en-in",
+    "published_at": "2026-07-18 16:30:00",
+    "tags": [
+      "Forest Dept & Policy",
+      "Chennai & Vandalur",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Chennai & Vandalur"
+      ],
+      "species": [
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department",
+        "Madras High Court"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_85b0985d",
+    "created_at": "2026-08-10 10:12:49.515468",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Concerns arise over expansion of Theppakadu Elephant Camp in the Nilgiris",
+    "title_ta": "Concerns arise over expansion of Theppakadu யானை Camp in the நீலகிரி",
+    "content_en": "Conservationists and elephant experts have voiced their concern over the continued development of the Theppakadu Elephant Camp in the core area of the Mudumalai Tiger Reserve (MTR). They are of the ...",
+    "content_ta": "Conservationists and யானை experts have voiced their concern over the continued development of the Theppakadu யானை Camp in the core area of the முதுமலை புலி Reserve (MTR). They are of the ...",
+    "summary_en": "• Conservationists and elephant experts have voiced their concern over the continued development of the Theppakadu Elephant Camp in the core area of the Mudumalai Tiger Reserve (MTR).\n• They are of the ...\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• Conservationists and யானை experts have voiced their concern over the continued development of the Theppakadu யானை Camp in the core area of the முதுமலை புலி Reserve (MTR).\n• They are of the ...\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Eco-Tourism & Sanctuaries",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [
+      "Elephant",
+      "Tiger"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956cb80cc45afb162afa7717d54d1&url=https%3a%2f%2fwww.thehindu.com%2fnews%2fnational%2ftamil-nadu%2fconservationists-raise-concern-over-expansion-of-theppakadu-elephant-camp-in-nilgiris%2farticle69660512.ece&c=5703002382272567409&mkt=en-in",
+    "published_at": "2025-06-05 12:11:00",
+    "tags": [
+      "Eco-Tourism & Sanctuaries",
+      "Nilgiris",
+      "Elephant",
+      "Tiger"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [
+        "Elephant",
+        "Tiger"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_8e7eef51",
+    "created_at": "2026-08-10 10:12:50.315024",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "A wild harmony: Nilgiris documentary captures nature’s quiet resilience",
+    "title_ta": "A wild harmony: நீலகிரி documentary captures nature’s quiet resilience",
+    "content_en": "A tiger and an elephant share space in the Nilgiri hills — a testament to the fragile, evolving relationship between humans, animals, and the landscapes they inhabit. (Still from Nilgiris: A Shared ...",
+    "content_ta": "A புலி and an யானை share space in the Nilgiri hills — a testament to the fragile, evolving relationship between humans, animals, and the landscapes they inhabit. (Still from நீலகிரி: A Shared ...",
+    "summary_en": "• A tiger and an elephant share space in the Nilgiri hills — a testament to the fragile, evolving relationship between humans, animals, and the landscapes they inhabit.\n• (Still from Nilgiris: A Shared ...\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• A புலி and an யானை share space in the Nilgiri hills — a testament to the fragile, evolving relationship between humans, animals, and the landscapes they inhabit.\n• (Still from நீலகிரி: A Shared ...\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "General Wildlife",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [
+      "Elephant",
+      "Tiger"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956cb80cc45afb162afa7717d54d1&url=https%3a%2f%2fwww.livemint.com%2fspecial-report%2fnilgiris-shared-wilderness-review-india-first-theatrical-wildlife-documentary-11752907897170.html&c=14043772384681605322&mkt=en-in",
+    "published_at": "2025-07-19 06:46:00",
+    "tags": [
+      "General Wildlife",
+      "Nilgiris",
+      "Elephant",
+      "Tiger"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [
+        "Elephant",
+        "Tiger"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_a3578871",
+    "created_at": "2026-08-10 10:12:50.315024",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Elephant ‘Radhakrishnan’ captured by T.N. Forest Department in the Nilgiris",
+    "title_ta": "யானை ‘Radhakrishnan’ captured by T.N. வனத்துறை in the நீலகிரி",
+    "content_en": "The elephant nicknamed ‘Radhakrishnan’ that allegedly caused 12 human deaths over the last decade, was tranquillised and captured by the Tamil Nadu Forest Department on Tuesday (September 23, 2025) ...",
+    "content_ta": "The யானை nicknamed ‘Radhakrishnan’ that allegedly caused 12 human deaths over the last decade, was tranquillised and captured by the Tamil Nadu வனத்துறை on Tuesday (September 23, 2025) ...",
+    "summary_en": "• The elephant nicknamed ‘Radhakrishnan’ that allegedly caused 12 human deaths over the last decade, was tranquillised and captured by the Tamil Nadu Forest Department on Tuesday (September 23, 2025) ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• The யானை nicknamed ‘Radhakrishnan’ that allegedly caused 12 human deaths over the last decade, was tranquillised and captured by the Tamil Nadu வனத்துறை on Tuesday (September 23, 2025) ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "Low",
+    "district": "Nilgiris",
+    "species": [
+      "Elephant"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956cb80cc45afb162afa7717d54d1&url=https%3a%2f%2fwww.thehindu.com%2fnews%2fnational%2ftamil-nadu%2felephant-radhakrishnan-captured-by-tn-forest-department-in-the-nilgiris%2farticle70085036.ece&c=4832804452464843740&mkt=en-in",
+    "published_at": "2025-09-26 10:58:00",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Nilgiris",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_5869563a",
+    "created_at": "2026-08-10 10:12:50.315024",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "‘Elephant Whisperers’ mahout hurt in jumbo attack in Mudumalai Tiger Reserve",
+    "title_ta": "‘யானை Whisperers’ mahout hurt in jumbo attack in முதுமலை புலி Reserve",
+    "content_en": "COIMBATORE: Bomman, a mahout and one of the central figures in the Oscar-winning documentary “The Elephant Whisperers”, was injured when a female captive elephant named Masini attacked him on Friday.",
+    "content_ta": "கோவை: Bomman, a mahout and one of the central figures in the Oscar-winning documentary “The யானை Whisperers”, was injured when a female captive யானை named Masini தாக்கியது him on Friday.",
+    "summary_en": "• COIMBATORE: Bomman, a mahout and one of the central figures in the Oscar-winning documentary “The Elephant Whisperers”, was injured when a female captive elephant named Masini attacked him on Friday.\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• கோவை: Bomman, a mahout and one of the central figures in the Oscar-winning documentary “The யானை Whisperers”, was injured when a female captive யானை named Masini தாக்கியது him on Friday.\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Coimbatore",
+    "species": [
+      "Elephant",
+      "Tiger"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956cb80cc45afb162afa7717d54d1&url=https%3a%2f%2fwww.newindianexpress.com%2fstates%2ftamil-nadu%2f2026%2fJun%2f27%2felephant-whisperers-mahout-hurt-in-jumbo-attack-in-mudumalai-tiger-reserve&c=12740258892734372055&mkt=en-in",
+    "published_at": "2026-06-27 01:34:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Coimbatore",
+      "Elephant",
+      "Tiger"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Coimbatore"
+      ],
+      "species": [
+        "Elephant",
+        "Tiger"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Severe conflict event"
+    },
+    "sentiment": "Critical Alert",
+    "date_status": "TODAY",
+    "id": "art_f5edb127",
+    "created_at": "2026-08-10 10:12:50.315024",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "14-year-old boy killed in wild elephant attack in Nilgiris",
+    "title_ta": "14-year-old boy killed in wild யானை attack in நீலகிரி",
+    "content_en": "A large number of people, including the boy’s relatives, gathered at the hospital, demanding immediate measures from the forest department to prevent further such incidents. NILGIRIS: A 14-year-old ...",
+    "content_ta": "A large number of people, including the boy’s relatives, gathered at the hospital, demanding immediate measures from the வனத்துறை to prevent further such incidents. நீலகிரி: A 14-year-old ...",
+    "summary_en": "• A large number of people, including the boy’s relatives, gathered at the hospital, demanding immediate measures from the forest department to prevent further such incidents.\n• NILGIRIS: A 14-year-old ...\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• A large number of people, including the boy’s relatives, gathered at the hospital, demanding immediate measures from the வனத்துறை to prevent further such incidents.\n• நீலகிரி: A 14-year-old ...\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Nilgiris",
+    "species": [
+      "Elephant"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956cb80cc45afb162afa7717d54d1&url=https%3a%2f%2fwww.newindianexpress.com%2fstates%2ftamil-nadu%2f2026%2fMay%2f27%2f14-year-old-boy-killed-in-wild-elephant-attack-in-nilgiris&c=7298108353840452447&mkt=en-in",
+    "published_at": "2026-05-27 07:17:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Nilgiris",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Severe conflict event"
+    },
+    "sentiment": "Critical Alert",
+    "date_status": "TODAY",
+    "id": "art_f059578a",
+    "created_at": "2026-08-10 10:12:50.319855",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu Budget 2026: Farmers welcome announcements to minimise man–wildlife conflict",
+    "title_ta": "Tamil Nadu Budget 2026: Farmers welcome announcements to minimise man–wildlife மனித-விலங்கு மோதல்",
+    "content_en": "The Tamil Nadu Government’s move to scientifically minimise the man – wildlife conflict, which even leads to loss of precious life in Tirunelveli and Tenkasi districts, will be a great relief to the ...",
+    "content_ta": "The Tamil Nadu Government’s move to scientifically minimise the man – wildlife மனித-விலங்கு மோதல், which even leads to loss of precious life in Tirunelveli and Tenkasi districts, will be a great relief to the ...",
+    "summary_en": "• The Tamil Nadu Government’s move to scientifically minimise the man – wildlife conflict, which even leads to loss of precious life in Tirunelveli and Tenkasi districts, will be a great relief to the ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• The Tamil Nadu Government’s move to scientifically minimise the man – wildlife மனித-விலங்கு மோதல், which even leads to loss of precious life in Tirunelveli and Tenkasi districts, will be a great relief to the ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "Low",
+    "district": "Erode & Sathyamangalam",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956cb0c2f40b2965227211f0508e3&url=https%3a%2f%2fwww.thehindu.com%2fnews%2fnational%2ftamil-nadu%2ftamil-nadu-budget-2026-farmers-welcome-announcements-to-minimise-manwildlife-conflict%2farticle71309530.ece&c=4514968531934060662&mkt=en-in",
+    "published_at": "2026-08-06 11:47:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Erode & Sathyamangalam"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Erode & Sathyamangalam"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "TODAY",
+    "id": "art_10777d5a",
+    "created_at": "2026-08-10 10:12:52.664474",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Wild Elephant Tramples Farmer To Death In Tamil Nadu",
+    "title_ta": "Wild யானை Tramples Farmer To Death In Tamil Nadu",
+    "content_en": "A farmer in Tamil Nadu tragically died after being attacked by a wild elephant near his village, highlighting the ongoing human-wildlife conflict in the region. Key Points A 40-year-old farmer in ...",
+    "content_ta": "A farmer in Tamil Nadu tragically died after being தாக்கியது by a wild யானை near his village, highlighting the ongoing human-wildlife மனித-விலங்கு மோதல் in the region. Key Points A 40-year-old farmer in ...",
+    "summary_en": "• A farmer in Tamil Nadu tragically died after being attacked by a wild elephant near his village, highlighting the ongoing human-wildlife conflict in the region.\n• Key Points A 40-year-old farmer in ...\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• A farmer in Tamil Nadu tragically died after being தாக்கியது by a wild யானை near his village, highlighting the ongoing human-wildlife மனித-விலங்கு மோதல் in the region.\n• Key Points A 40-year-old farmer in ...\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Tamil Nadu",
+    "species": [
+      "Elephant"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956cb0c2f40b2965227211f0508e3&url=https%3a%2f%2fwww.rediff.com%2fnews%2freport%2ffarmer-trampled-to-death-by-wild-elephant-in-erode%2f20260529.htm&c=10993616401682499340&mkt=en-in",
+    "published_at": "2026-05-29 04:40:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Tamil Nadu",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Tamil Nadu"
+      ],
+      "species": [
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Severe conflict event"
+    },
+    "sentiment": "Critical Alert",
+    "date_status": "TODAY",
+    "id": "art_766b48a2",
+    "created_at": "2026-08-10 10:12:52.664474",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "TN's compensation for wildlife attack victims lower than Karnataka, Kerala",
+    "title_ta": "[தமிழ் அறிக்கை] TN's compensation for wildlife attack victims lower than Karnataka, Kerala",
+    "content_en": "COIMBATORE: Even as wild animals such as tigers, elephants and leopards are protected under the Wildlife (Protection) Act, 1972, the ex gratia compensation paid to families of victims killed in wild ...",
+    "content_ta": "கோவை: Even as wild animals such as tigers, elephants and leopards are protected under the Wildlife (Protection) Act, 1972, the ex gratia compensation paid to families of victims killed in wild ...",
+    "summary_en": "• COIMBATORE: Even as wild animals such as tigers, elephants and leopards are protected under the Wildlife (Protection) Act, 1972, the ex gratia compensation paid to families of victims killed in wild ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• கோவை: Even as wild animals such as tigers, elephants and leopards are protected under the Wildlife (Protection) Act, 1972, the ex gratia compensation paid to families of victims killed in wild ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Coimbatore",
+    "species": [
+      "Elephant",
+      "Tiger",
+      "Leopard"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a7956cb0c2f40b2965227211f0508e3&url=https%3a%2f%2fwww.newindianexpress.com%2fstates%2ftamil-nadu%2f2026%2fJul%2f20%2ftns-compensation-for-wildlife-attack-victims-lower-than-karnataka-kerala&c=11712485042002021514&mkt=en-in",
+    "published_at": "2026-07-20 01:42:00",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Coimbatore",
+      "Elephant",
+      "Tiger",
+      "Leopard"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Coimbatore"
+      ],
+      "species": [
+        "Elephant",
+        "Tiger",
+        "Leopard"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Severe conflict event"
+    },
+    "sentiment": "Critical Alert",
+    "date_status": "TODAY",
+    "id": "art_e967f6bf",
+    "created_at": "2026-08-10 10:12:52.664474",
+    "views_count": 0,
+    "is_bookmarked": false
   }
 ]

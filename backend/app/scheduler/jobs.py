@@ -5,6 +5,7 @@ from zoneinfo import ZoneInfo
 from app.collectors.rss import RSSCollector
 from app.collectors.tamil_news import TamilNewsCollector
 from app.collectors.english_news import EnglishNewsCollector
+from app.collectors.bing_collector import BingNewsCollector
 from app.pdf.generator import PDFReportGenerator
 from app.services.storage import db_storage
 
@@ -20,7 +21,8 @@ def run_collection_job():
     rss_count = RSSCollector.fetch_all()
     ta_count = TamilNewsCollector.scrape_latest()
     en_count = EnglishNewsCollector.scrape_latest()
-    print(f"Job Finished. Articles fetched -> RSS: {rss_count}, Tamil: {ta_count}, English: {en_count}")
+    bing_count = BingNewsCollector.scrape_latest()
+    print(f"Job Finished. Articles fetched -> RSS: {rss_count}, Tamil: {ta_count}, English: {en_count}, Bing: {bing_count}")
 
 def generate_shift1_day_digest_job():
     """
