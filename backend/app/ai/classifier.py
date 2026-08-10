@@ -169,7 +169,7 @@ class ArticleClassifier:
         else:
             pub_date = today
 
-        if pub_date == today:
+        if pub_date >= today:
             return "TODAY"
         elif pub_date == today - timedelta(days=1):
             return "YESTERDAY"
