@@ -1,0 +1,110 @@
+diff --git a/backend/app/collectors/bing_collector.py b/backend/app/collectors/bing_collector.py
+index 0eca5f5..becaf5b 100644
+--- a/backend/app/collectors/bing_collector.py
++++ b/backend/app/collectors/bing_collector.py
+@@ -7,6 +7,7 @@ import uuid
+ from app.models.schemas import CollectorLog
+ from app.collectors.pipeline import ArticlePipeline
+ from app.services.storage import db_storage
++from app.collectors.html_utils import clean_html
+ 
+ IST = ZoneInfo("Asia/Kolkata")
+ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+@@ -54,7 +55,7 @@ class BingNewsCollector:
+                 for entry in feed.entries[:10]:
+                     title_en = entry.get("title", "")
+                     link = entry.get("link", "#")
+-                    content_en = entry.get("summary", "") or entry.get("description", "") or title_en
++                    content_en = clean_html(entry.get("summary", "") or entry.get("description", "")) or title_en
+ 
+                     source_name = "Bing News Media"
+                     if " - " in title_en:
+diff --git a/backend/app/collectors/english_news.py b/backend/app/collectors/english_news.py
+index 71dd0c7..be8bfd7 100644
+--- a/backend/app/collectors/english_news.py
++++ b/backend/app/collectors/english_news.py
+@@ -6,6 +6,7 @@ import uuid
+ from app.models.schemas import CollectorLog
+ from app.collectors.pipeline import ArticlePipeline
+ from app.services.storage import db_storage
++from app.collectors.html_utils import clean_html
+ 
+ IST = ZoneInfo("Asia/Kolkata")
+ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+@@ -49,7 +50,7 @@ class EnglishNewsCollector:
+             for entry in feed.entries[:10]:
+                 title_en = entry.get("title", "")
+                 link = entry.get("link", "#")
+-                content_en = entry.get("summary", "") or entry.get("description", "") or title_en
++                content_en = clean_html(entry.get("summary", "") or entry.get("description", "")) or title_en
+ 
+                 source_name = "Google News - TN Division"
+                 if " - " in title_en:
+diff --git a/backend/app/collectors/html_utils.py b/backend/app/collectors/html_utils.py
+new file mode 100644
+index 0000000..56fd083
+--- /dev/null
++++ b/backend/app/collectors/html_utils.py
+@@ -0,0 +1,20 @@
++"""
++Shared helpers for the news collectors.
++"""
++
++from bs4 import BeautifulSoup
++
++
++def clean_html(raw: str) -> str:
++    """
++    Strip HTML tags from RSS/API description text and collapse whitespace.
++
++    Google News RSS descriptions arrive wrapped in markup like:
++        <a href="...">Headline</a>&nbsp;&nbsp;<font color="#6f6f6f">Source</font>
++    This extracts the readable text only, so it's safe to store and display
++    as plain text (e.g. in content_en/content_ta) without leaking raw tags.
++    """
++    if not raw:
++        return ""
++    text = BeautifulSoup(raw, "html.parser").get_text(separator=" ")
++    return " ".join(text.split())
+diff --git a/backend/app/collectors/rss.py b/backend/app/collectors/rss.py
+index e562385..80a39e9 100644
+--- a/backend/app/collectors/rss.py
++++ b/backend/app/collectors/rss.py
+@@ -9,6 +9,7 @@ IST = ZoneInfo("Asia/Kolkata")
+ from app.models.schemas import Article, CollectorLog
+ from app.collectors.pipeline import ArticlePipeline
+ from app.services.storage import db_storage
++from app.collectors.html_utils import clean_html
+ 
+ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+ HEADERS = {"User-Agent": USER_AGENT}
+@@ -95,7 +96,7 @@ class RSSCollector:
+                 count = 0
+                 for entry in feed.entries[:10]:
+                     title = entry.get("title", "")
+-                    content = entry.get("summary", "") or entry.get("description", "")
++                    content = clean_html(entry.get("summary", "") or entry.get("description", ""))
+                     link = entry.get("link", "#")
+ 
+                     is_tamil = feed_info["lang"] == "ta"
+diff --git a/backend/app/collectors/tamil_news.py b/backend/app/collectors/tamil_news.py
+index b76a5b0..07dddff 100644
+--- a/backend/app/collectors/tamil_news.py
++++ b/backend/app/collectors/tamil_news.py
+@@ -6,6 +6,7 @@ import uuid
+ from app.models.schemas import CollectorLog
+ from app.collectors.pipeline import ArticlePipeline
+ from app.services.storage import db_storage
++from app.collectors.html_utils import clean_html
+ 
+ IST = ZoneInfo("Asia/Kolkata")
+ USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+@@ -49,7 +50,7 @@ class TamilNewsCollector:
+             for entry in feed.entries[:10]:
+                 title_ta = entry.get("title", "")
+                 link = entry.get("link", "#")
+-                content_ta = entry.get("summary", "") or entry.get("description", "") or title_ta
++                content_ta = clean_html(entry.get("summary", "") or entry.get("description", "")) or title_ta
+ 
+                 source_name = "Tamil News Outlet"
+                 if " - " in title_ta:
