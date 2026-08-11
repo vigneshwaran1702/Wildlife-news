@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { fetchAnalytics } from '../services/api';
 import { BarChart3, AlertTriangle, MapPin, Layers, Activity, ShieldCheck } from 'lucide-react';
+import TamilNaduMap from '../components/TamilNaduMap';
 
-export default function AnalyticsDashboard() {
+export default function AnalyticsDashboard({ onSelectDistrict }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -42,6 +43,10 @@ export default function AnalyticsDashboard() {
           </p>
         </div>
       </div>
+
+      {/* Interactive Tamil Nadu Wildlife Map */}
+      <TamilNaduMap onSelectDistrict={onSelectDistrict} />
+
 
       {/* Metric Cards Grid */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>

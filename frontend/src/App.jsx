@@ -7,8 +7,11 @@ import AnalyticsDashboard from './pages/AnalyticsDashboard';
 import CollectorJobs from './pages/CollectorJobs';
 import { fetchAnalytics, triggerCollectors } from './services/api';
 
+import TamilNaduMap from './components/TamilNaduMap';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState('feed');
+  const [selectedDistrictFilter, setSelectedDistrictFilter] = useState('All');
   const [lang, setLang] = useState('en');
   const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
   const [analytics, setAnalytics] = useState(null);
@@ -41,6 +44,11 @@ export default function App() {
     }
   };
 
+  const handleSelectMapDistrict = (districtName) => {
+    setSelectedDistrictFilter(districtName);
+    setActiveTab('feed');
+  };
+
   return (
     <div className="app-container">
       <Navbar
@@ -68,12 +76,22 @@ export default function App() {
               bookmarkedOnly={bookmarkedOnly}
               onArticlesUpdated={loadAnalyticsData}
               refreshTrigger={refreshTrigger}
+              initialDistrict={selectedDistrictFilter}
+            />
+          )}
+
+          {activeTab === 'map' && (
+            <TamilNaduMap
+              onSelectDistrict={handleSelectMapDistrict}
+              selectedDistrict={selectedDistrictFilter}
             />
           )}
 
           {activeTab === 'pdf' && <PDFDigest />}
 
-          {activeTab === 'analytics' && <AnalyticsDashboard />}
+          {activeTab === 'analytics' && (
+            <AnalyticsDashboard onSelectDistrict={handleSelectMapDistrict} />
+          )}
 
           {activeTab === 'collectors' && (
             <CollectorJobs onScanComplete={loadAnalyticsData} />
@@ -83,3 +101,4 @@ export default function App() {
     </div>
   );
 }
+

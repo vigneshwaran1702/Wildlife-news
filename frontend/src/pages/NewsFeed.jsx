@@ -5,19 +5,26 @@ import ArticleModal from '../components/ArticleModal';
 import { fetchArticles, toggleBookmark } from '../services/api';
 import { ShieldAlert, Newspaper, Sparkles } from 'lucide-react';
 
-export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated, refreshTrigger }) {
+export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated, refreshTrigger, initialDistrict }) {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
   const [filters, setFilters] = useState({
     search: '',
-    district: 'All',
+    district: initialDistrict || 'All',
     category: 'All',
     conflictLevel: 'All',
     species: 'All',
     dateFilter: 'TODAY'
   });
+
+  useEffect(() => {
+    if (initialDistrict && initialDistrict !== filters.district) {
+      setFilters(prev => ({ ...prev, district: initialDistrict }));
+    }
+  }, [initialDistrict]);
+
 
 
   const loadData = async () => {
