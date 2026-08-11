@@ -1,137 +1,158 @@
-import React, { useState } from 'react';
-import { MapPin, ShieldAlert, AlertTriangle, Trees, Compass, Eye, Filter, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, CircleMarker, useMap } from 'react-leaflet';
+import L from 'leaflet';
+import { MapPin, Compass, ShieldAlert, Trees, Layers, Filter, Eye, RefreshCw } from 'lucide-react';
 
-// Tamil Nadu Forest Divisions, Tiger Reserves & Districts Data
-const TN_REGIONS = [
+// Fix Leaflet Default Icon Asset Path Issue in Vite/React
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+  iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+  shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+});
+
+// Comprehensive Real Coordinates & Information for All Major TN Wildlife Divisions & Districts
+const TN_FULL_MAP_REGIONS = [
   {
     id: 'nilgiris',
     name: 'Nilgiris',
-    reserves: 'Mudumalai Tiger Reserve & Nilgiri Biosphere',
-    cx: 120,
-    cy: 130,
+    reserves: 'Mudumalai Tiger Reserve (MTR) & Ooty Range',
+    lat: 11.5833,
+    lng: 76.5667,
     risk: 'High',
-    species: ['Elephant', 'Tiger', 'Leopard', 'Gaur'],
-    incidents: 12,
-    description: 'Critical Elephant corridor connecting Bandipur, Wayanad & Mudumalai.'
+    species: ['Asian Elephant', 'Bengal Tiger', 'Leopard', 'Gaur'],
+    incidents: 14,
+    description: 'Nilgiri Biosphere Core corridor connecting Bandipur, Wayanad & Mudumalai.'
   },
   {
     id: 'coimbatore',
     name: 'Coimbatore',
-    reserves: 'Mettupalayam, Boluvampatti & Siruvani Ranges',
-    cx: 140,
-    cy: 200,
+    reserves: 'Mettupalayam, Boluvampatti & Siruvani Forest Ranges',
+    lat: 11.0168,
+    lng: 76.9558,
     risk: 'High',
-    species: ['Elephant', 'Leopard', 'Wild Boar'],
-    incidents: 15,
-    description: 'Major railway corridor & human-elephant conflict zone near Western Ghats.'
+    species: ['Asian Elephant', 'Leopard', 'Wild Boar', 'King Cobra'],
+    incidents: 18,
+    description: 'Major railway corridor & human-elephant conflict hotline along Western Ghats.'
   },
   {
     id: 'erode',
     name: 'Erode & Sathyamangalam',
     reserves: 'Sathyamangalam Tiger Reserve (STR)',
-    cx: 200,
-    cy: 150,
+    lat: 11.5000,
+    lng: 77.2333,
     risk: 'High',
-    species: ['Tiger', 'Elephant', 'Hyena', 'Blackbuck'],
-    incidents: 9,
-    description: 'Largest wildlife sanctuary in TN connecting Eastern & Western Ghats.'
+    species: ['Bengal Tiger', 'Elephant', 'Striped Hyena', 'Blackbuck'],
+    incidents: 11,
+    description: 'Largest wildlife sanctuary in TN bridging Eastern & Western Ghats.'
   },
   {
     id: 'tiruppur',
     name: 'Tiruppur & Anamalai',
-    reserves: 'Anamalai Buffer & Amaravathi Range',
-    cx: 170,
-    cy: 230,
+    reserves: 'Anamalai Buffer & Amaravathi Dam Range',
+    lat: 11.1085,
+    lng: 77.3411,
     risk: 'Medium',
-    species: ['Elephant', 'Gaur', 'Crocodile'],
+    species: ['Elephant', 'Gaur', 'Marsh Crocodile'],
     incidents: 6,
     description: 'Udumalpet & Amaravathi reservoir forest divisions.'
   },
   {
     id: 'theni',
     name: 'Theni & Megamalai',
-    reserves: 'Srivilliputhur Megamalai Tiger Reserve',
-    cx: 170,
-    cy: 310,
+    reserves: 'Srivilliputhur Megamalai Tiger Reserve (SMTR)',
+    lat: 10.0104,
+    lng: 77.4768,
     risk: 'High',
-    species: ['Tiger', 'Elephant', 'Nilgiri Tahr'],
-    incidents: 8,
+    species: ['Bengal Tiger', 'Elephant', 'Nilgiri Tahr', 'Lion-tailed Macaque'],
+    incidents: 9,
     description: 'High elevation cardamom hill reserve & tiger breeding habitat.'
   },
   {
     id: 'dindigul',
     name: 'Dindigul & Kodaikanal',
     reserves: 'Kodaikanal Wildlife Sanctuary & Palani Hills',
-    cx: 220,
-    cy: 280,
+    lat: 10.3673,
+    lng: 77.9803,
     risk: 'Medium',
-    species: ['Gaur', 'Indian Bison', 'Barking Deer'],
-    incidents: 5,
-    description: 'Shola-grassland ecosystem with frequent Gaur sightings in urban areas.'
+    species: ['Gaur (Indian Bison)', 'Barking Deer', 'Sloth Bear'],
+    incidents: 7,
+    description: 'Shola-grassland ecosystem with frequent Gaur sightings in hill stations.'
   },
   {
     id: 'tirunelveli',
     name: 'Tirunelveli & KMTR',
-    reserves: 'Kalakkad Mundanthurai Tiger Reserve',
-    cx: 190,
-    cy: 400,
+    reserves: 'Kalakkad Mundanthurai Tiger Reserve (KMTR)',
+    lat: 8.7139,
+    lng: 77.7567,
     risk: 'High',
-    species: ['Tiger', 'Lion-tailed Macaque', 'Leopard'],
-    incidents: 7,
-    description: 'First Tiger Reserve in TN, biodiversity hotspot with endemic fauna.'
+    species: ['Bengal Tiger', 'Lion-tailed Macaque', 'Leopard', 'Sambar Deer'],
+    incidents: 8,
+    description: 'First Tiger Reserve in TN & Agasthyamalai Biosphere water catchments.'
   },
   {
     id: 'kanyakumari',
     name: 'Kanyakumari',
     reserves: 'Kanyakumari Wildlife Sanctuary',
-    cx: 180,
-    cy: 450,
+    lat: 8.0883,
+    lng: 77.5385,
     risk: 'Low',
-    species: ['Sambar Deer', 'Leopard', 'Viper'],
+    species: ['Sambar Deer', 'Leopard', 'Russell Viper'],
     incidents: 3,
-    description: 'Southernmost tip forest reserve connecting Agasthyamalai Biosphere.'
+    description: 'Southernmost tip reserve connecting Agasthyamalai Biosphere.'
   },
   {
     id: 'dharmapuri',
     name: 'Dharmapuri & Krishnagiri',
-    reserves: 'Cauvery North Wildlife Sanctuary & Hosur',
-    cx: 260,
-    cy: 110,
+    reserves: 'Cauvery North Wildlife Sanctuary & Pennagaram',
+    lat: 12.1211,
+    lng: 78.1582,
     risk: 'High',
-    species: ['Elephant', 'Sloth Bear', 'Spotted Deer'],
-    incidents: 10,
+    species: ['Asian Elephant', 'Sloth Bear', 'Spotted Deer'],
+    incidents: 12,
     description: 'Inter-state elephant migratory path between Karnataka & Tamil Nadu.'
+  },
+  {
+    id: 'krishnagiri',
+    name: 'Krishnagiri & Hosur',
+    reserves: 'Hosur Forest Division & Cauvery Wildlife Corridor',
+    lat: 12.5186,
+    lng: 78.2137,
+    risk: 'High',
+    species: ['Asian Elephant', 'Leopard', 'Jackal'],
+    incidents: 10,
+    description: 'Bannerghatta-Hosur migratory elephant corridor.'
   },
   {
     id: 'salem',
     name: 'Salem & Yercaud',
-    reserves: 'Servarayan & Shevaroys Range',
-    cx: 260,
-    cy: 165,
+    reserves: 'Servarayan & Shevaroys Hill Range',
+    lat: 11.6643,
+    lng: 78.1460,
     risk: 'Medium',
-    species: ['Sloth Bear', 'Leopard', 'Pangolin'],
-    incidents: 4,
+    species: ['Sloth Bear', 'Leopard', 'Indian Pangolin'],
+    incidents: 5,
     description: 'Eastern Ghats isolated hill range with sloth bear human encounters.'
   },
   {
     id: 'chennai',
     name: 'Chennai & Vandalur',
     reserves: 'Guindy National Park & Arignar Anna Zoo',
-    cx: 390,
-    cy: 80,
+    lat: 13.0827,
+    lng: 80.2707,
     risk: 'Low',
-    species: ['Blackbuck', 'Jackal', 'Star Tortoise'],
+    species: ['Blackbuck', 'Golden Jackal', 'Star Tortoise'],
     incidents: 2,
-    description: 'Urban forest ecosystem & captive wildlife protection headquarters.'
+    description: 'Urban forest national park & captive wildlife rescue headquarters.'
   },
   {
     id: 'chengalpattu',
     name: 'Chengalpattu & Vedanthangal',
-    reserves: 'Vedanthangal Bird Sanctuary',
-    cx: 375,
-    cy: 115,
+    reserves: 'Vedanthangal & Karikili Bird Sanctuaries',
+    lat: 12.5447,
+    lng: 79.8608,
     risk: 'Low',
-    species: ['Migratory Waterbirds', 'Pelican', 'Heron'],
+    species: ['Migratory Waterbirds', 'Spot-billed Pelican', 'Openbill Stork'],
     incidents: 1,
     description: 'Oldest water bird sanctuary in India with international migratory species.'
   },
@@ -139,10 +160,10 @@ const TN_REGIONS = [
     id: 'ramnad',
     name: 'Ramanathapuram & Gulf of Mannar',
     reserves: 'Gulf of Mannar Marine National Park',
-    cx: 320,
-    cy: 350,
+    lat: 9.3639,
+    lng: 78.8317,
     risk: 'Medium',
-    species: ['Dugong (Sea Cow)', 'Sea Turtle', 'Coral Reefs'],
+    species: ['Dugong (Sea Cow)', 'Green Sea Turtle', 'Corals'],
     incidents: 4,
     description: 'First Marine National Park in South Asia & Dugong conservation reserve.'
   },
@@ -150,32 +171,135 @@ const TN_REGIONS = [
     id: 'nagapattinam',
     name: 'Nagapattinam & Point Calimere',
     reserves: 'Point Calimere Wildlife & Bird Sanctuary',
-    cx: 360,
-    cy: 260,
+    lat: 10.7656,
+    lng: 79.8424,
     risk: 'Low',
-    species: ['Blackbuck', 'Flamingo', 'Wild Horse'],
+    species: ['Blackbuck', 'Greater Flamingo', 'Feral Horse'],
     incidents: 2,
-    description: 'Coastal wetland sanctuary famed for flamingo flocks & feral horses.'
+    description: 'Coastal wetland sanctuary famed for flamingo wintering grounds.'
   },
   {
     id: 'tenkasi',
     name: 'Tenkasi & Virudhunagar',
-    reserves: 'Srivilliputhur Grizzled Squirrel Sanctuary',
-    cx: 190,
-    cy: 355,
+    reserves: 'Srivilliputhur Grizzled Giant Squirrel Sanctuary',
+    lat: 8.9593,
+    lng: 77.3134,
     risk: 'Medium',
-    species: ['Grizzled Giant Squirrel', 'Elephant', 'Leopard'],
+    species: ['Grizzled Giant Squirrel', 'Asian Elephant', 'Leopard'],
     incidents: 5,
     description: 'Protected canopy habitat for endangered Grizzled Giant Squirrel.'
+  },
+  {
+    id: 'trichy',
+    name: 'Tiruchirappalli & Pachaimalai',
+    reserves: 'Pachaimalai Hills Reserve Forest',
+    lat: 10.7905,
+    lng: 78.7047,
+    risk: 'Low',
+    species: ['Spotted Deer', 'Wild Boar', 'Peafowl'],
+    incidents: 3,
+    description: 'Central Tamil Nadu tribal forest hill range.'
+  },
+  {
+    id: 'villupuram',
+    name: 'Villupuram & Kalvarayan',
+    reserves: 'Kalvarayan Hills Reserve Forest',
+    lat: 11.9401,
+    lng: 79.4861,
+    risk: 'Low',
+    species: ['Sloth Bear', 'Spotted Deer', 'Python'],
+    incidents: 2,
+    description: 'Eastern Ghats dry deciduous forest division.'
+  },
+  {
+    id: 'vellore',
+    name: 'Vellore & Jawadhu Hills',
+    reserves: 'Jawadhu Hills & Kavalur Range',
+    lat: 12.9165,
+    lng: 79.1325,
+    risk: 'Medium',
+    species: ['Sloth Bear', 'Spotted Deer', 'Pangolin'],
+    incidents: 4,
+    description: 'Dense sandalwood & sloth bear habitats in Jawadhu Hills.'
+  },
+  {
+    id: 'thanjavur',
+    name: 'Thanjavur & Tiruvarur',
+    reserves: 'Udayamarthandapuram Bird Sanctuary',
+    lat: 10.7870,
+    lng: 79.1378,
+    risk: 'Low',
+    species: ['Waterbirds', 'Smooth-coated Otter'],
+    incidents: 1,
+    description: 'Delta bird sanctuaries & river otter habitats.'
   }
 ];
 
+// Custom HTML Markers helper
+const createCustomMarker = (risk, name, hasTiger) => {
+  const bg = risk === 'High' ? '#ef4444' : risk === 'Medium' ? '#f59e0b' : '#10b981';
+  const pulse = risk === 'High' ? `<div style="position:absolute; width:28px; height:28px; border-radius:50%; background:${bg}; opacity:0.35; animation: pulse 1.8s infinite; top:-4px; left:-4px;"></div>` : '';
+  const iconHtml = `
+    <div style="position:relative; cursor:pointer;">
+      ${pulse}
+      <div style="width:20px; height:20px; border-radius:50%; background:${bg}; border:2px solid #ffffff; box-shadow: 0 0 10px ${bg}; display:flex; align-items:center; justify-content:center; color:#ffffff; font-weight:bold; font-size:10px;">
+        ${hasTiger ? '🐅' : '📍'}
+      </div>
+    </div>
+  `;
+  return L.divIcon({
+    html: iconHtml,
+    className: 'custom-leaflet-pin',
+    iconSize: [20, 20],
+    iconAnchor: [10, 10]
+  });
+};
+
+// Map Recenter Helper Component
+function ChangeMapView({ center, zoom }) {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, zoom);
+  }, [center, zoom, map]);
+  return null;
+}
+
 export default function TamilNaduMap({ onSelectDistrict, selectedDistrict }) {
-  const [activeRegion, setActiveRegion] = useState(TN_REGIONS[0]);
-  const [hoveredRegion, setHoveredRegion] = useState(null);
+  const [activeRegion, setActiveRegion] = useState(TN_FULL_MAP_REGIONS[0]);
+  const [tileLayerType, setTileLayerType] = useState('dark'); // 'dark' | 'osm' | 'satellite'
+  const [filterRisk, setFilterRisk] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [mapCenter, setMapCenter] = useState([11.1271, 78.6569]);
+  const [mapZoom, setMapZoom] = useState(7.2);
+
+  const TILE_LAYERS = {
+    dark: {
+      url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    },
+    osm: {
+      url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    },
+    satellite: {
+      url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }
+  };
+
+  const filteredRegions = TN_FULL_MAP_REGIONS.filter(reg => {
+    const matchesRisk = filterRisk === 'All' || reg.risk === filterRisk;
+    const matchesSearch = !searchQuery || 
+      reg.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
+      reg.reserves.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      reg.species.some(s => s.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesRisk && matchesSearch;
+  });
 
   const handleRegionClick = (region) => {
     setActiveRegion(region);
+    setMapCenter([region.lat, region.lng]);
+    setMapZoom(9);
     if (onSelectDistrict) {
       onSelectDistrict(region.name);
     }
@@ -189,150 +313,247 @@ export default function TamilNaduMap({ onSelectDistrict, selectedDistrict }) {
 
   return (
     <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', padding: '1.25rem' }}>
-      {/* Header Bar */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.75rem' }}>
+      {/* Header Controls Bar */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <h3 style={{ fontSize: '1.15rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <Compass color="var(--primary-emerald)" size={20} />
-            Tamil Nadu Interactive Wildlife & Hotspot Map
-          </h3>
+          <h2 style={{ fontSize: '1.25rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <Compass color="var(--primary-emerald)" size={22} />
+            Full Tamil Nadu Interactive GIS & Wildlife Map
+          </h2>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.15rem' }}>
-            Click any district or tiger reserve marker to view active conflict status, key species & regional news.
+            Real-time Leaflet GIS map of Tamil Nadu forest divisions, tiger reserves, sanctuaries & conflict hotspots.
           </p>
         </div>
 
-        {/* Legend */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', background: 'rgba(0, 0, 0, 0.4)', padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid var(--border-color)', fontSize: '0.75rem' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#fca5a5' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444' }}></span> High Conflict
-          </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#fcd34d' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#f59e0b' }}></span> Medium Risk
-          </span>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#6ee7b7' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10b981' }}></span> Protected Zone
-          </span>
+        {/* Tile Layer Switcher */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'rgba(0,0,0,0.4)', padding: '3px', borderRadius: '8px', border: '1px solid var(--border-color)' }}>
+          <button
+            type="button"
+            onClick={() => setTileLayerType('dark')}
+            style={{
+              padding: '0.35rem 0.75rem',
+              borderRadius: '6px',
+              border: 'none',
+              background: tileLayerType === 'dark' ? 'var(--primary-emerald)' : 'transparent',
+              color: tileLayerType === 'dark' ? '#ffffff' : 'var(--text-muted)',
+              fontSize: '0.8rem',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            Dark GIS
+          </button>
+          <button
+            type="button"
+            onClick={() => setTileLayerType('satellite')}
+            style={{
+              padding: '0.35rem 0.75rem',
+              borderRadius: '6px',
+              border: 'none',
+              background: tileLayerType === 'satellite' ? 'var(--primary-emerald)' : 'transparent',
+              color: tileLayerType === 'satellite' ? '#ffffff' : 'var(--text-muted)',
+              fontSize: '0.8rem',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            Satellite
+          </button>
+          <button
+            type="button"
+            onClick={() => setTileLayerType('osm')}
+            style={{
+              padding: '0.35rem 0.75rem',
+              borderRadius: '6px',
+              border: 'none',
+              background: tileLayerType === 'osm' ? 'var(--primary-emerald)' : 'transparent',
+              color: tileLayerType === 'osm' ? '#ffffff' : 'var(--text-muted)',
+              fontSize: '0.8rem',
+              fontWeight: '600',
+              cursor: 'pointer'
+            }}
+          >
+            Standard Map
+          </button>
         </div>
       </div>
 
-      {/* Main Map Content Grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem', alignItems: 'center' }}>
+      {/* Filter & Search Controls */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+        <div style={{ flex: 1, minWidth: '200px' }}>
+          <input
+            type="text"
+            placeholder="Search district, tiger reserve, or species (e.g. Mudumalai, Elephant)..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              width: '100%',
+              padding: '0.45rem 0.8rem',
+              background: 'rgba(0, 0, 0, 0.4)',
+              border: '1px solid var(--border-color)',
+              borderRadius: '6px',
+              color: 'var(--text-main)',
+              fontSize: '0.85rem'
+            }}
+          />
+        </div>
+
+        {/* Risk Pill Filter */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+          {['All', 'High', 'Medium', 'Low'].map(r => (
+            <button
+              key={r}
+              type="button"
+              onClick={() => setFilterRisk(r)}
+              style={{
+                padding: '0.35rem 0.65rem',
+                borderRadius: '6px',
+                border: '1px solid var(--border-color)',
+                background: filterRisk === r ? (r === 'High' ? '#ef4444' : r === 'Medium' ? '#f59e0b' : r === 'Low' ? '#10b981' : 'var(--primary-emerald)') : 'rgba(0,0,0,0.4)',
+                color: filterRisk === r ? '#ffffff' : 'var(--text-muted)',
+                fontSize: '0.75rem',
+                fontWeight: '600',
+                cursor: 'pointer'
+              }}
+            >
+              {r === 'All' ? 'All Risk Levels' : `${r} Risk`}
+            </button>
+          ))}
+        </div>
+
+        {/* Reset Map Button */}
+        <button
+          type="button"
+          onClick={() => { setMapCenter([11.1271, 78.6569]); setMapZoom(7.2); setSearchQuery(''); setFilterRisk('All'); }}
+          className="btn btn-secondary"
+          style={{ padding: '0.35rem 0.65rem', fontSize: '0.75rem' }}
+        >
+          <RefreshCw size={14} /> Reset View
+        </button>
+      </div>
+
+      {/* Main Map & Information Grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1.25rem' }}>
         
-        {/* Geographic Vector Map View */}
+        {/* Full Leaflet Map View */}
         <div style={{
-          position: 'relative',
-          background: 'radial-gradient(circle at 40% 40%, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.02) 60%, rgba(10, 22, 16, 0.95) 100%)',
+          height: '520px',
           borderRadius: '12px',
+          overflow: 'hidden',
           border: '1px solid var(--border-color)',
-          padding: '1rem',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '430px'
+          boxShadow: '0 0 20px rgba(0,0,0,0.4)',
+          position: 'relative'
         }}>
-          <svg viewBox="0 0 450 500" style={{ width: '100%', maxHeight: '420px', filter: 'drop-shadow(0 0 16px rgba(0,0,0,0.6))' }}>
-            {/* Tamil Nadu State Outline Path */}
-            <path
-              d="M 120 100 L 250 80 L 390 60 L 410 100 L 380 160 L 360 260 L 340 320 L 310 370 L 210 430 L 170 480 L 160 440 L 170 380 L 140 300 L 110 210 L 100 150 Z"
-              fill="rgba(16, 185, 129, 0.06)"
-              stroke="rgba(16, 185, 129, 0.4)"
-              strokeWidth="2"
-              strokeDasharray="4 2"
+          <MapContainer
+            center={mapCenter}
+            zoom={mapZoom}
+            scrollWheelZoom={true}
+            style={{ width: '100%', height: '100%' }}
+          >
+            <ChangeMapView center={mapCenter} zoom={mapZoom} />
+            
+            <TileLayer
+              url={TILE_LAYERS[tileLayerType].url}
+              attribution={TILE_LAYERS[tileLayerType].attribution}
             />
-            {/* Bay of Bengal & Arabian Sea Coastal Labels */}
-            <text x="360" y="200" fill="rgba(255,255,255,0.15)" fontSize="10" fontWeight="700" letterSpacing="1.5">BAY OF BENGAL</text>
-            <text x="80" y="380" fill="rgba(255,255,255,0.12)" fontSize="9" fontWeight="700" letterSpacing="1">WESTERN GHATS</text>
 
-            {/* Connecting Corridor Lines */}
-            <line x1="120" y1="130" x2="140" y2="200" stroke="rgba(245,158,11,0.3)" strokeWidth="1.5" strokeDasharray="3 3" />
-            <line x1="120" y1="130" x2="200" y2="150" stroke="rgba(16,185,129,0.3)" strokeWidth="1.5" strokeDasharray="3 3" />
-            <line x1="170" y1="310" x2="190" y2="400" stroke="rgba(239,68,68,0.3)" strokeWidth="1.5" strokeDasharray="3 3" />
-
-            {/* Region Interactive Nodes */}
-            {TN_REGIONS.map((region) => {
-              const isSelected = activeRegion.id === region.id || selectedDistrict === region.name;
-              const isHovered = hoveredRegion?.id === region.id;
-              const color = getRiskColor(region.risk);
+            {filteredRegions.map((region) => {
+              const hasTiger = region.reserves.includes('Tiger Reserve');
+              const customIcon = createCustomMarker(region.risk, region.name, hasTiger);
 
               return (
-                <g
-                  key={region.id}
-                  onClick={() => handleRegionClick(region)}
-                  onMouseEnter={() => setHoveredRegion(region)}
-                  onMouseLeave={() => setHoveredRegion(null)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {/* Glowing outer pulse for high risk */}
+                <React.Fragment key={region.id}>
+                  {/* Outer circle halo for high risk */}
                   {region.risk === 'High' && (
-                    <circle
-                      cx={region.cx}
-                      cy={region.cy}
-                      r={isSelected ? "18" : "12"}
-                      fill={color}
-                      opacity="0.25"
-                      className="pulse-glow"
+                    <CircleMarker
+                      center={[region.lat, region.lng]}
+                      radius={16}
+                      pathOptions={{
+                        color: '#ef4444',
+                        fillColor: '#ef4444',
+                        fillOpacity: 0.2,
+                        weight: 1
+                      }}
                     />
                   )}
 
-                  {/* Base Circle Marker */}
-                  <circle
-                    cx={region.cx}
-                    cy={region.cy}
-                    r={isSelected ? "10" : isHovered ? "9" : "7"}
-                    fill={isSelected ? color : "rgba(10, 22, 16, 0.9)"}
-                    stroke={color}
-                    strokeWidth={isSelected ? "3" : "2"}
-                    style={{ transition: 'all 0.2s ease' }}
-                  />
-
-                  {/* Tiger Reserve Indicator */}
-                  {region.reserves.includes('Tiger Reserve') && (
-                    <text x={region.cx - 4} y={region.cy + 3} fontSize="8" fill="#ffffff">🐅</text>
-                  )}
-
-                  {/* Label Text */}
-                  <text
-                    x={region.cx + 12}
-                    y={region.cy + 4}
-                    fill={isSelected ? '#ffffff' : 'var(--text-muted)'}
-                    fontSize={isSelected ? "11" : "9.5"}
-                    fontWeight={isSelected ? "800" : "500"}
-                    style={{ transition: 'all 0.2s ease', pointerEvents: 'none' }}
+                  <Marker
+                    position={[region.lat, region.lng]}
+                    icon={customIcon}
+                    eventHandlers={{
+                      click: () => handleRegionClick(region)
+                    }}
                   >
-                    {region.name}
-                  </text>
-                </g>
+                    <Popup>
+                      <div style={{ padding: '4px', maxWidth: '220px', color: '#0f172a' }}>
+                        <div style={{ fontSize: '12px', fontWeight: 'bold', color: '#059669', marginBottom: '2px' }}>
+                          📍 {region.name}
+                        </div>
+                        <div style={{ fontSize: '11px', fontWeight: '600', color: '#334155', marginBottom: '4px' }}>
+                          🌲 {region.reserves}
+                        </div>
+                        <div style={{ fontSize: '10px', color: '#475569', marginBottom: '6px' }}>
+                          {region.description}
+                        </div>
+                        <div style={{ fontSize: '10px', fontWeight: 'bold', color: getRiskColor(region.risk), marginBottom: '6px' }}>
+                          ● {region.risk} Risk ({region.incidents} Reports Today)
+                        </div>
+                        <button
+                          onClick={() => onSelectDistrict && onSelectDistrict(region.name)}
+                          style={{
+                            width: '100%',
+                            padding: '4px 8px',
+                            background: '#059669',
+                            color: '#ffffff',
+                            border: 'none',
+                            borderRadius: '4px',
+                            fontSize: '10px',
+                            fontWeight: 'bold',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          Filter News Feed
+                        </button>
+                      </div>
+                    </Popup>
+                  </Marker>
+                </React.Fragment>
               );
             })}
-          </svg>
+          </MapContainer>
 
-          {/* Quick Map Floating Badge */}
+          {/* Floating Map Info Overlay */}
           <div style={{
             position: 'absolute',
-            bottom: '12px',
-            left: '12px',
-            background: 'rgba(0, 0, 0, 0.75)',
+            bottom: '10px',
+            left: '10px',
+            zIndex: 1000,
+            background: 'rgba(10, 22, 16, 0.85)',
             backdropFilter: 'blur(8px)',
             padding: '0.4rem 0.75rem',
             borderRadius: '6px',
             border: '1px solid var(--border-color)',
-            fontSize: '0.7rem',
-            color: 'var(--text-muted)'
+            fontSize: '0.75rem',
+            color: 'var(--text-muted)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.75rem'
           }}>
-            🐅 = Recognized Tiger Reserve Division
+            <span>Showing {filteredRegions.length} Wildlife Divisions</span>
+            <span>🐅 Tiger Reserve</span>
           </div>
         </div>
 
-        {/* Selected Region Detailed Card */}
+        {/* Selected Division Sidebar Panel */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
           <div className="glass-card" style={{
-            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(10, 22, 16, 0.8) 100%)',
+            background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(10, 22, 16, 0.95) 100%)',
             borderLeft: `4px solid ${getRiskColor(activeRegion.risk)}`,
             padding: '1.25rem'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
               <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                District & Forest Division Details
+                Division GIS Metadata
               </span>
               <span style={{
                 fontSize: '0.7rem',
@@ -343,7 +564,7 @@ export default function TamilNaduMap({ onSelectDistrict, selectedDistrict }) {
                 color: getRiskColor(activeRegion.risk),
                 border: `1px solid ${getRiskColor(activeRegion.risk)}44`
               }}>
-                {activeRegion.risk} Risk Conflict Zone
+                {activeRegion.risk} Risk Division
               </span>
             </div>
 
@@ -361,10 +582,16 @@ export default function TamilNaduMap({ onSelectDistrict, selectedDistrict }) {
               {activeRegion.description}
             </p>
 
+            {/* GIS Coordinates */}
+            <div style={{ display: 'flex', gap: '1rem', fontSize: '0.75rem', color: 'var(--text-dim)', marginBottom: '1rem', background: 'rgba(0,0,0,0.3)', padding: '0.4rem 0.75rem', borderRadius: '6px' }}>
+              <span>Lat: <b>{activeRegion.lat.toFixed(4)}° N</b></span>
+              <span>Lng: <b>{activeRegion.lng.toFixed(4)}° E</b></span>
+            </div>
+
             {/* Key Species Pills */}
             <div style={{ marginBottom: '1rem' }}>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', marginBottom: '0.4rem', fontWeight: '600' }}>
-                Protected Key Wildlife Species:
+                Protected Key Species:
               </div>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                 {activeRegion.species.map(sp => (
@@ -382,54 +609,47 @@ export default function TamilNaduMap({ onSelectDistrict, selectedDistrict }) {
               </div>
             </div>
 
-            {/* Metrics */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', background: 'rgba(0, 0, 0, 0.3)', padding: '0.75rem', borderRadius: '8px', marginBottom: '1rem' }}>
-              <div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Recorded Events Today</div>
-                <div style={{ fontSize: '1.2rem', fontWeight: '800', color: '#ffffff' }}>{activeRegion.incidents} Reports</div>
-              </div>
-              <div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>Status Filter</div>
-                <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--primary-emerald)', marginTop: '0.2rem' }}>
-                  {selectedDistrict === activeRegion.name ? 'Active Filter' : 'Click to Filter'}
-                </div>
-              </div>
-            </div>
-
-            {/* Filter Feed Action Button */}
+            {/* Filter Action Button */}
             <button
               onClick={() => onSelectDistrict && onSelectDistrict(activeRegion.name)}
               className="btn btn-primary"
               style={{ width: '100%', justifyContent: 'center', padding: '0.65rem' }}
             >
               <Filter size={16} />
-              Filter Feed For {activeRegion.name}
+              Filter Today's News Feed For {activeRegion.name}
             </button>
           </div>
 
-          {/* District Selector List */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem', maxHeight: '140px', overflowY: 'auto', paddingRight: '4px' }}>
-            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-dim)', marginBottom: '0.2rem' }}>
-              Select Division Directly:
+          {/* All Divisions Quick List */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-dim)', textTransform: 'uppercase' }}>
+              All TN Forest Divisions ({filteredRegions.length}):
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
-              {TN_REGIONS.map(reg => (
-                <button
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem', maxHeight: '190px', overflowY: 'auto', paddingRight: '4px' }}>
+              {filteredRegions.map(reg => (
+                <div
                   key={reg.id}
                   onClick={() => handleRegionClick(reg)}
                   style={{
-                    fontSize: '0.75rem',
-                    padding: '3px 8px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    padding: '0.45rem 0.75rem',
                     borderRadius: '6px',
-                    border: '1px solid var(--border-color)',
-                    background: activeRegion.id === reg.id ? 'var(--primary-emerald)' : 'rgba(0, 0, 0, 0.4)',
-                    color: activeRegion.id === reg.id ? '#ffffff' : 'var(--text-muted)',
+                    background: activeRegion.id === reg.id ? 'rgba(16, 185, 129, 0.18)' : 'rgba(0, 0, 0, 0.4)',
+                    border: activeRegion.id === reg.id ? '1px solid var(--primary-emerald)' : '1px solid var(--border-color)',
                     cursor: 'pointer',
+                    fontSize: '0.8rem',
+                    color: activeRegion.id === reg.id ? '#ffffff' : 'var(--text-muted)',
                     transition: 'all 0.15s'
                   }}
                 >
-                  {reg.name}
-                </button>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+                    <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: getRiskColor(reg.risk) }}></span>
+                    <span style={{ fontWeight: activeRegion.id === reg.id ? '700' : '500' }}>{reg.name}</span>
+                  </div>
+                  <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)' }}>{reg.incidents} reports</span>
+                </div>
               ))}
             </div>
           </div>
