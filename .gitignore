@@ -38,3 +38,7 @@ n8n_downloads/
 __pycache__/
 *.pyc
 n8n_workflows/
+
+env files
+.env
+
