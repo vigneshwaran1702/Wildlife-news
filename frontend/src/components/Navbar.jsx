@@ -1,15 +1,16 @@
 import React from 'react';
-import { ShieldAlert, RefreshCw, Bookmark, FileText, Globe } from 'lucide-react';
+import { ShieldAlert, RefreshCw, Bookmark, FileText, Globe, Sun, Moon } from 'lucide-react';
 
-export default function Navbar({ lang, setLang, activeTab, setActiveTab, bookmarkedOnly, setBookmarkedOnly, onRefresh, isRefreshing }) {
+export default function Navbar({ lang, setLang, theme, toggleTheme, activeTab, setActiveTab, bookmarkedOnly, setBookmarkedOnly, onRefresh, isRefreshing }) {
   return (
     <header style={{
-      background: 'rgba(10, 22, 16, 0.9)',
+      background: 'var(--navbar-bg)',
       backdropFilter: 'blur(16px)',
       borderBottom: '1px solid var(--border-color)',
       position: 'sticky',
       top: 0,
-      zIndex: 100
+      zIndex: 100,
+      transition: 'background 0.3s ease'
     }}>
       <div style={{
         maxWidth: '1440px',
@@ -34,7 +35,7 @@ export default function Navbar({ lang, setLang, activeTab, setActiveTab, bookmar
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '-0.02em', color: '#ffffff' }}>WildTN</span>
+              <span style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '-0.02em', color: 'var(--heading-color)' }}>WildTN</span>
               <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--primary-emerald)' }}>News</span>
               <span style={{
                 fontSize: '0.65rem',
@@ -51,7 +52,26 @@ export default function Navbar({ lang, setLang, activeTab, setActiveTab, bookmar
         </div>
 
         {/* Right Controls */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+          {/* Theme Toggle Button */}
+          <button 
+            className="theme-btn"
+            onClick={toggleTheme}
+            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          >
+            {theme === 'dark' ? (
+              <>
+                <Sun size={16} color="#f59e0b" />
+                <span>Light</span>
+              </>
+            ) : (
+              <>
+                <Moon size={16} color="#3b82f6" />
+                <span>Dark</span>
+              </>
+            )}
+          </button>
+
           {/* Language Switcher */}
           <div className="lang-toggle">
             <button 

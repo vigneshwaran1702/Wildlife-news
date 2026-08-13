@@ -128,7 +128,7 @@ export default function PDFDigest() {
         justifyContent: 'space-between'
       }}>
         <div>
-          <h2 style={{ fontSize: '1.25rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', color: 'var(--heading-color)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <FileText color="var(--primary-emerald)" />
             Automated PDF Wildlife Bulletins
           </h2>
@@ -153,10 +153,10 @@ export default function PDFDigest() {
       </div>
 
       {/* Date-Specific On-Demand Shift PDF Generator */}
-      <div className="glass-card" style={{ background: 'rgba(5, 18, 12, 0.8)', border: '1px solid rgba(16, 185, 129, 0.4)' }}>
+      <div className="glass-card" style={{ background: 'var(--card-box-bg)', border: '1px solid var(--border-color)' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
           <div>
-            <h3 style={{ fontSize: '1rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <h3 style={{ fontSize: '1rem', color: 'var(--heading-color)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <Clock color="var(--primary-emerald)" size={18} />
               On-Demand Shift Bulletin Generator
             </h3>
@@ -165,15 +165,15 @@ export default function PDFDigest() {
             </p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <label style={{ fontSize: '0.78rem', color: '#34d399', fontWeight: '600' }}>Select Date:</label>
+            <label style={{ fontSize: '0.78rem', color: 'var(--primary-emerald)', fontWeight: '600' }}>Select Date:</label>
             <input
               type="date"
               value={selectedDate}
               onChange={(e) => setSelectedDate(e.target.value)}
               style={{
-                background: 'rgba(0, 0, 0, 0.6)',
-                border: '1px solid rgba(16, 185, 129, 0.4)',
-                color: '#ffffff',
+                background: 'var(--input-bg)',
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-main)',
                 padding: '0.35rem 0.65rem',
                 borderRadius: '6px',
                 fontSize: '0.8rem',
@@ -189,7 +189,7 @@ export default function PDFDigest() {
             const isGenerating = generatingShift === s.shiftId;
             return (
               <div key={s.shiftId} style={{
-                background: 'rgba(0, 0, 0, 0.4)',
+                background: 'var(--input-bg)',
                 border: `1px solid ${s.color}40`,
                 borderRadius: '8px',
                 padding: '0.9rem',
@@ -205,9 +205,9 @@ export default function PDFDigest() {
                     </span>
                     <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', fontFamily: 'monospace' }}>Shift {s.shiftId}</span>
                   </div>
-                  <div style={{ fontSize: '0.95rem', fontWeight: '700', color: '#fff', marginTop: '0.4rem' }}>{s.label}</div>
+                  <div style={{ fontSize: '0.95rem', fontWeight: '700', color: 'var(--heading-color)', marginTop: '0.4rem' }}>{s.label}</div>
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>{s.range}</div>
-                  <div style={{ fontSize: '0.72rem', color: '#34d399', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: '0.4rem' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--primary-emerald)', display: 'flex', alignItems: 'center', gap: '0.3rem', marginTop: '0.4rem' }}>
                     <CheckCircle size={12} /> Strictly Filtered ({selectedDate})
                   </div>
                 </div>
@@ -245,7 +245,7 @@ export default function PDFDigest() {
       {/* Automatically Generated Reports Archive */}
       <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem' }}>
-          <h3 style={{ fontSize: '1.05rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+          <h3 style={{ fontSize: '1.05rem', color: 'var(--heading-color)', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
             <FileText color="var(--primary-emerald)" size={18} />
             Automated PDF Bulletins Archive ({reports.length})
           </h3>
@@ -286,7 +286,7 @@ export default function PDFDigest() {
               const isDownloading = downloadingId === rep.id;
               return (
                 <div key={rep.id} style={{
-                  background: 'rgba(0, 0, 0, 0.3)',
+                  background: 'var(--input-bg)',
                   border: '1px solid var(--border-color)',
                   borderRadius: '8px',
                   padding: '0.85rem 1rem',
@@ -297,7 +297,7 @@ export default function PDFDigest() {
                   flexWrap: 'wrap'
                 }}>
                   <div>
-                    <div style={{ fontSize: '0.92rem', fontWeight: '700', color: '#fff' }}>{rep.title}</div>
+                    <div style={{ fontSize: '0.92rem', fontWeight: '700', color: 'var(--heading-color)' }}>{rep.title}</div>
                     <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: '0.25rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                       <span>🏷️ {rep.report_type}</span>
                       <span>📰 {rep.article_count} Articles</span>

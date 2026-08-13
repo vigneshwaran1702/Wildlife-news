@@ -13,10 +13,22 @@ export default function App() {
   const [activeTab, setActiveTab] = useState('feed');
   const [selectedDistrictFilter, setSelectedDistrictFilter] = useState('All');
   const [lang, setLang] = useState('en');
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('wildtn_theme') || 'dark';
+  });
   const [bookmarkedOnly, setBookmarkedOnly] = useState(false);
   const [analytics, setAnalytics] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('wildtn_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const loadAnalyticsData = async () => {
     try {
@@ -54,6 +66,8 @@ export default function App() {
       <Navbar
         lang={lang}
         setLang={setLang}
+        theme={theme}
+        toggleTheme={toggleTheme}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
         bookmarkedOnly={bookmarkedOnly}

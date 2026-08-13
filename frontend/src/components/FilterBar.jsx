@@ -53,7 +53,7 @@ export default function FilterBar({ filters, setFilters }) {
           style={{
             width: '100%',
             padding: '0.6rem 1rem 0.6rem 2.4rem',
-            background: 'rgba(0, 0, 0, 0.4)',
+            background: 'var(--input-bg)',
             border: '1px solid var(--border-color)',
             borderRadius: '8px',
             color: 'var(--text-main)',
@@ -72,7 +72,7 @@ export default function FilterBar({ filters, setFilters }) {
           </label>
           <div style={{
             display: 'flex',
-            background: 'rgba(0, 0, 0, 0.4)',
+            background: 'var(--input-bg)',
             border: '1px solid var(--border-color)',
             borderRadius: '6px',
             padding: '2px',
@@ -123,7 +123,7 @@ export default function FilterBar({ filters, setFilters }) {
                 borderRadius: '4px',
                 border: 'none',
                 background: currentDay === 'YESTERDAY' ? 'var(--accent-amber)' : 'transparent',
-                color: currentDay === 'YESTERDAY' ? '#000000' : 'var(--text-muted)',
+                color: currentDay === 'YESTERDAY' ? '#ffffff' : 'var(--text-muted)',
                 fontSize: '0.8rem',
                 fontWeight: currentDay === 'YESTERDAY' ? '700' : '500',
                 cursor: 'pointer',
@@ -146,14 +146,14 @@ export default function FilterBar({ filters, setFilters }) {
             style={{
               width: '100%',
               padding: '0.45rem 0.6rem',
-              background: 'rgba(0, 0, 0, 0.4)',
+              background: 'var(--input-bg)',
               border: '1px solid var(--border-color)',
               borderRadius: '6px',
               color: 'var(--text-main)',
               fontSize: '0.85rem'
             }}
           >
-            {DISTRICTS.map(d => <option key={d} value={d} style={{ background: '#0a1610' }}>{d}</option>)}
+            {DISTRICTS.map(d => <option key={d} value={d} style={{ background: 'var(--modal-bg)', color: 'var(--text-main)' }}>{d}</option>)}
           </select>
         </div>
 
@@ -168,14 +168,14 @@ export default function FilterBar({ filters, setFilters }) {
             style={{
               width: '100%',
               padding: '0.45rem 0.6rem',
-              background: 'rgba(0, 0, 0, 0.4)',
+              background: 'var(--input-bg)',
               border: '1px solid var(--border-color)',
               borderRadius: '6px',
               color: 'var(--text-main)',
               fontSize: '0.85rem'
             }}
           >
-            {CATEGORIES.map(c => <option key={c} value={c} style={{ background: '#0a1610' }}>{c}</option>)}
+            {CATEGORIES.map(c => <option key={c} value={c} style={{ background: 'var(--modal-bg)', color: 'var(--text-main)' }}>{c}</option>)}
           </select>
         </div>
 
@@ -190,14 +190,14 @@ export default function FilterBar({ filters, setFilters }) {
             style={{
               width: '100%',
               padding: '0.45rem 0.6rem',
-              background: 'rgba(0, 0, 0, 0.4)',
+              background: 'var(--input-bg)',
               border: '1px solid var(--border-color)',
               borderRadius: '6px',
               color: 'var(--text-main)',
               fontSize: '0.85rem'
             }}
           >
-            {CONFLICT_LEVELS.map(cl => <option key={cl} value={cl} style={{ background: '#0a1610' }}>{cl}</option>)}
+            {CONFLICT_LEVELS.map(cl => <option key={cl} value={cl} style={{ background: 'var(--modal-bg)', color: 'var(--text-main)' }}>{cl}</option>)}
           </select>
         </div>
       </div>
