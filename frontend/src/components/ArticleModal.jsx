@@ -51,7 +51,7 @@ export default function ArticleModal({ article, onClose, onToggleBookmark }) {
         </div>
 
         {/* Title */}
-        <h2 className={isTamil ? 'tamil-font' : ''} style={{ fontSize: '1.35rem', fontWeight: '800', lineHeight: '1.35', color: '#ffffff', marginBottom: '0.75rem' }}>
+        <h2 className={isTamil ? 'tamil-font' : ''} style={{ fontSize: '1.35rem', fontWeight: '800', lineHeight: '1.35', color: 'var(--heading-color)', marginBottom: '0.75rem' }}>
           {title}
         </h2>
 
@@ -77,7 +77,7 @@ export default function ArticleModal({ article, onClose, onToggleBookmark }) {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem', fontSize: '0.8rem' }}>
               <div>
                 <span style={{ color: 'var(--text-dim)' }}>Target Locations:</span>
-                <div style={{ fontWeight: '600', color: '#fff' }}>{article.key_entities.locations?.join(', ') || article.district}</div>
+                <div style={{ fontWeight: '600', color: 'var(--heading-color)' }}>{article.key_entities.locations?.join(', ') || article.district}</div>
               </div>
               <div>
                 <span style={{ color: 'var(--text-dim)' }}>Species Involved:</span>
@@ -85,11 +85,11 @@ export default function ArticleModal({ article, onClose, onToggleBookmark }) {
               </div>
               <div>
                 <span style={{ color: 'var(--text-dim)' }}>Forest Authorities:</span>
-                <div style={{ fontWeight: '600', color: '#fff' }}>{article.key_entities.authorities?.join(', ')}</div>
+                <div style={{ fontWeight: '600', color: 'var(--heading-color)' }}>{article.key_entities.authorities?.join(', ')}</div>
               </div>
               <div>
                 <span style={{ color: 'var(--text-dim)' }}>Assessed Impact:</span>
-                <div style={{ fontWeight: '600', color: '#fff' }}>{article.key_entities.impact}</div>
+                <div style={{ fontWeight: '600', color: 'var(--heading-color)' }}>{article.key_entities.impact}</div>
               </div>
             </div>
           </div>

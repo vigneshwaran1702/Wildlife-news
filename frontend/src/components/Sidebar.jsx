@@ -90,7 +90,7 @@ export default function Sidebar({ activeTab, setActiveTab, analytics }) {
                 <MapPin size={14} color="var(--primary-emerald)" />
                 Top Incident Hotspot
               </div>
-              <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#ffffff' }}>
+              <div style={{ fontSize: '0.85rem', fontWeight: '700', color: 'var(--heading-color)' }}>
                 {analytics.top_districts[0].district} ({analytics.top_districts[0].count} events)
               </div>
             </div>

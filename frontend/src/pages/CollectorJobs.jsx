@@ -47,7 +47,7 @@ export default function CollectorJobs({ onScanComplete }) {
         justifyContent: 'space-between'
       }}>
         <div>
-          <h2 style={{ fontSize: '1.25rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', color: 'var(--heading-color)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Radio color="var(--primary-emerald)" />
             Web Scrapers & RSS Collector Control Center
           </h2>
@@ -63,8 +63,8 @@ export default function CollectorJobs({ onScanComplete }) {
       </div>
 
       {/* Live Logs Terminal View */}
-      <div className="glass-card" style={{ background: '#050c09', border: '1px solid #143525' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid #143525', paddingBottom: '0.75rem' }}>
+      <div className="glass-card" style={{ background: 'var(--card-box-bg)', border: '1px solid var(--border-color)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid var(--border-color)', paddingBottom: '0.75rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--primary-emerald)', fontWeight: '700' }}>
             <Terminal size={16} />
             Collector Log Stream ({logs.length} entries)
@@ -80,8 +80,8 @@ export default function CollectorJobs({ onScanComplete }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', maxHeight: '450px', overflowY: 'auto', fontFamily: 'monospace' }}>
             {logs.map(log => (
               <div key={log.id} style={{
-                background: 'rgba(15, 31, 23, 0.4)',
-                border: '1px solid rgba(34, 77, 56, 0.3)',
+                background: 'var(--input-bg)',
+                border: '1px solid var(--border-color)',
                 borderRadius: '6px',
                 padding: '0.6rem 0.8rem',
                 fontSize: '0.8rem',
@@ -93,7 +93,7 @@ export default function CollectorJobs({ onScanComplete }) {
                   <span style={{ color: log.status === 'Success' ? '#34d399' : '#fcd34d', fontWeight: '700' }}>
                     [{log.status.toUpperCase()}]
                   </span>
-                  <span style={{ color: '#ffffff', fontWeight: '600' }}>{log.collector_name}</span>
+                  <span style={{ color: 'var(--heading-color)', fontWeight: '600' }}>{log.collector_name}</span>
                   <span style={{ color: 'var(--text-muted)' }}>— {log.log_message}</span>
                 </div>
                 <span style={{ color: 'var(--text-dim)', fontSize: '0.75rem' }}>

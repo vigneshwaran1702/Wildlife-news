@@ -70,7 +70,7 @@ export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated, refr
         justifyContent: 'space-between'
       }}>
         <div>
-          <h2 style={{ fontSize: '1.25rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <h2 style={{ fontSize: '1.25rem', color: 'var(--heading-color)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Newspaper color="var(--primary-emerald)" />
             {bookmarkedOnly ? 'Bookmarked Wildlife News' : 'Tamil Nadu Wildlife News Feed'}
           </h2>

@@ -100,7 +100,7 @@ export default function ArticleCard({ article, lang, onSelect, onToggleBookmark 
             fontSize: '1.1rem',
             fontWeight: '700',
             lineHeight: '1.4',
-            color: '#ffffff',
+            color: 'var(--heading-color)',
             cursor: 'pointer',
             marginTop: '0.2rem',
             transition: 'color 0.2s'
@@ -120,20 +120,20 @@ export default function ArticleCard({ article, lang, onSelect, onToggleBookmark 
         display: 'flex',
         alignItems: 'center',
         gap: '0.4rem',
-        color: '#93c5fd'
+        color: 'var(--accent-blue)'
       }}>
-        <MapPin size={14} color="#60a5fa" />
+        <MapPin size={14} color="var(--accent-blue)" />
         <span><b>📍 WHERE:</b> {article.district}</span>
       </div>
 
       {/* What Happened - Brief Explanation */}
       <div style={{
-        background: 'rgba(15, 23, 42, 0.6)',
+        background: 'var(--card-box-bg)',
         borderRadius: '8px',
         padding: '0.75rem',
-        border: '1px solid rgba(255, 255, 255, 0.08)'
+        border: '1px solid var(--border-color)'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: '700', color: '#60a5fa', marginBottom: '0.4rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', fontWeight: '700', color: 'var(--accent-blue)', marginBottom: '0.4rem' }}>
           <Sparkles size={12} /> 📖 BRIEF EXPLANATION
         </div>
         <div className={lang === 'ta' ? 'tamil-font' : ''} style={{ fontSize: '0.88rem', color: 'var(--text-main)', lineHeight: '1.5' }}>
@@ -143,7 +143,7 @@ export default function ArticleCard({ article, lang, onSelect, onToggleBookmark 
 
       {/* AI Key Highlights */}
       <div style={{
-        background: 'rgba(0, 0, 0, 0.3)',
+        background: 'var(--highlight-box-bg)',
         borderRadius: '8px',
         padding: '0.75rem',
         borderLeft: '3px solid var(--primary-emerald)'
