@@ -132,6 +132,24 @@ export default function FilterBar({ filters, setFilters }) {
             >
               Yesterday
             </button>
+            <button
+              type="button"
+              onClick={() => setFilters({ ...filters, dateFilter: 'OLD' })}
+              style={{
+                flex: 1,
+                padding: '0.4rem 0.2rem',
+                borderRadius: '4px',
+                border: 'none',
+                background: currentDay === 'OLD' ? '#64748b' : 'transparent',
+                color: currentDay === 'OLD' ? '#ffffff' : 'var(--text-muted)',
+                fontSize: '0.8rem',
+                fontWeight: currentDay === 'OLD' ? '700' : '500',
+                cursor: 'pointer',
+                transition: 'all 0.15s'
+              }}
+            >
+              Older
+            </button>
           </div>
         </div>
 

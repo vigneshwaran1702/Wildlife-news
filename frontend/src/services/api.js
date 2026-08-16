@@ -9,7 +9,7 @@ export async function fetchArticles(params = {}) {
   if (params.species && params.species !== 'All') query.append('species', params.species);
   if (params.search) query.append('search', params.search);
   if (params.bookmarkedOnly) query.append('bookmarked_only', 'true');
-  if (params.date_status && params.date_status !== 'All') query.append('date_status', params.date_status);
+  if (params.date_status) query.append('date_status', params.date_status);
 
   const res = await fetch(`${API_BASE}/articles?${query.toString()}`);
   if (!res.ok) throw new Error('Failed to fetch articles');

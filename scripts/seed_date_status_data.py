@@ -167,10 +167,8 @@ for art in status_articles:
         species=art["species"],
         source_name=art["source"],
         source_url=art["url"],
-        published_at=art["time"],
-        collected_at=now,
-        verification_status="VERIFIED" if art["date_status"] == "TODAY" else "REJECTED_OLD",
-        verification_reason="Original source verified" if art["date_status"] == "TODAY" else "Original date is older than today",
+        verification_status="VERIFIED",
+        verification_reason="Original source metadata verified",
         tags=[art["category"], art["district"]] + art["species"],
         key_entities=KeyEntities(
             locations=[art["district"]],

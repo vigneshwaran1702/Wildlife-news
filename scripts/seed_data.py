@@ -214,6 +214,8 @@ def seed_database():
                 impact="Active ground monitoring by Forest Division."
             ),
             sentiment=data["sentiment"],
+            verification_status="VERIFIED",
+            verification_reason="Original source metadata verified",
             created_at=pub_time
         )
         db_storage.add_article(art)
