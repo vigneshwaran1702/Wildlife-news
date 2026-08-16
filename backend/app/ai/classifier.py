@@ -1,6 +1,11 @@
+import os
 import re
-from typing import Dict, List, Tuple
+import json
+import logging
+from typing import Dict, List, Tuple, Any, Optional
 from app.models.schemas import KeyEntities
+
+logger = logging.getLogger(__name__)
 
 DISTRICT_KEYWORDS = {
     "Coimbatore": ["coimbatore", "valparai", "pollachi", "boluvampatti", "mettupalayam", "thondamuthur", "marudhamalai", "கோவை", "வால்பாறை"],
@@ -11,7 +16,7 @@ DISTRICT_KEYWORDS = {
     "Dindigul & Kodaikanal": ["kodaikanal", "dindigul", "palani", "sirumalai", "திண்டுக்கல்", "கொடைக்கானல்"],
     "Tirunelveli & KMTR": ["kalakad", "mundanthurai", "kmtr", "tirunelveli", "papanasam", "manjolai", "திருநெல்வேலி", "களக்காடு"],
     "Kanyakumari": ["kanyakumari", "pechiparai", "marunthuvazh malai", "asambu", "கன்னியாகுமரி"],
-    "Dharmapuri & Krishnagiri": ["dharmapuri", "krishnagiri", "hogenakkal", "denkanikottai", "cauvery north", "தர்மபுரி", "கிருஷ்ணகிரி"],
+    "Dharmapuri & Krishnagiri": ["dharmapuri", "krishnagiri", "hogenakkal", "denkanikottai", "hosur", "cauvery north", "தர்மபுரி", "கிருஷ்ணகிரி"],
     "Salem & Yercaud": ["salem", "shevaroys", "yercaud", "mettur", "சேலம்", "ஏற்காடு"],
     "Ramanathapuram & Gulf of Mannar": ["ramanathapuram", "gulf of mannar", "dugong", "rameshwaram", "இராமநாதபுரம்"],
     "Chennai & Vandalur": ["chennai", "vandalur", "guindy", "nanmangalam", "சென்னை", "வண்டலூர்"],
@@ -54,107 +59,194 @@ CATEGORY_KEYWORDS = {
     "Forest Dept & Policy": ["forest department", "officials", "patrol", "wildlife act", "chief wildlife warden", "forest policy", "policy development", "வனத்துறை", "அரசு"]
 }
 
-class ArticleClassifier:
-    @staticmethod
-    def is_tamil_nadu_relevant(title: str, content: str) -> bool:
-        text = f"{title} {content}".lower()
-        tn_keywords = [
-            "tamil nadu", "tamilnadu", "tn forest", "madras", "chennai", "தமிழ்நாடு", "வனத்துறை",
-            "coimbatore", "valparai", "pollachi", "boluvampatti", "mettupalayam", "thondamuthur", "marudhamalai", "கோவை", "வால்பாறை",
-            "nilgiris", "ooty", "udhagamandalam", "coonoor", "gudalur", "kotagiri", "mudumalai", "pykara", "நீலகிரி", "ஊட்டி", "கூடலூர்",
-            "sathyamangalam", "str", "bhavanisagar", "erode", "hasanur", "thalavadi", "ஈரோடு", "சத்தியமங்கலம்",
-            "anamalai", "atr", "udumalpet", "tiruppur", "amaravathi", "ஆனைமலை", "திருப்பூர்",
-            "megamalai", "theni", "cumbum", "andipatti", "periyar", "தேனி", "மேகமலை",
-            "kodaikanal", "dindigul", "palani", "sirumalai", "திண்டுக்கல்", "கொடைக்கானல்",
-            "kalakad", "mundanthurai", "kmtr", "tirunelveli", "papanasam", "manjolai", "திருநெல்வேலி", "களக்காடு",
-            "kanyakumari", "pechiparai", "marunthuvazh malai", "asambu", "கன்னியாகுமரி",
-            "dharmapuri", "krishnagiri", "hogenakkal", "denkanikottai", "hosur", "cauvery north", "தர்மபுரி", "கிருஷ்ணகிரி",
-            "salem", "shevaroys", "yercaud", "mettur", "சேலம்", "ஏற்காடு",
-            "ramanathapuram", "gulf of mannar", "dugong", "rameshwaram", "இராமநாதபுரம்",
-            "vandalur", "guindy", "nanmangalam", "சென்னை", "வண்டலூர்",
-            "chengalpattu", "vedanthangal", "karikili", "காஞ்சிபுரம்", "செங்கல்பட்டு",
-            "nagapattinam", "point calimere", "kodiyakarai", "கொடாய்க்கரை", "நாகப்பட்டினம்",
-            "tiruchirappalli", "trichy", "namakkal", "kolli hills", "கொல்லிமலை", "திருச்சி",
-            "tiruvannamalai", "vellore", "jawadhu hills", "javadi", "ஜவாது மலை", "திருவண்ணாமலை",
-            "thanjavur", "tiruvarur", "muthupet", "மன்னார்குடி", "தஞ்சாவூர்",
-            "tenkasi", "courtallam", "virudhunagar", "தென்காசி", "விருதுநகர்",
-            "villupuram", "cuddalore", "pitchavaram", "பிச்சாவரம்", "கடலூர்"
-        ]
-        return any(kw in text for kw in tn_keywords)
+TAMIL_NADU_LOCATIONS = [
+    "tamil nadu", "tamilnadu", "tn forest", "tn police", "tnfwccb", "madras", "chennai", "தமிழ்நாடு", "வனத்துறை",
+    "coimbatore", "valparai", "pollachi", "boluvampatti", "mettupalayam", "thondamuthur", "marudhamalai", "கோவை", "வால்பாறை", "பொள்ளாச்சி", "மேட்டுப்பாளையம்",
+    "nilgiris", "ooty", "udhagamandalam", "coonoor", "gudalur", "kotagiri", "mudumalai", "pykara", "நீலகிரி", "ஊட்டி", "கூடலூர்", "முதுமலை",
+    "sathyamangalam", "str", "bhavanisagar", "erode", "hasanur", "thalavadi", "ஈரோடு", "சத்தியமங்கலம்",
+    "anamalai", "atr", "udumalpet", "tiruppur", "amaravathi", "ஆனைமலை", "திருப்பூர்", "உடுமலைப்பேட்டை",
+    "megamalai", "theni", "cumbum", "andipatti", "periyar", "தேனி", "மேகமலை", "கம்பம்",
+    "kodaikanal", "dindigul", "palani", "sirumalai", "திண்டுக்கல்", "கொடைக்கானல்", "பழனி",
+    "kalakad", "mundanthurai", "kmtr", "tirunelveli", "papanasam", "manjolai", "திருநெல்வேலி", "களக்காடு", "பாபநாசம்",
+    "kanyakumari", "pechiparai", "marunthuvazh malai", "asambu", "கன்னியாகுமரி",
+    "dharmapuri", "krishnagiri", "hogenakkal", "denkanikottai", "hosur", "cauvery north", "தர்மபுரி", "கிருஷ்ணகிரி", "ஓசூர்", "ஒகேனக்கல்",
+    "salem", "shevaroys", "yercaud", "mettur", "சேலம்", "ஏற்காடு", "மேட்டூர்",
+    "ramanathapuram", "gulf of mannar", "dugong", "rameshwaram", "இராமநாதபுரம்", "இராமேஸ்வரம்",
+    "vandalur", "guindy", "nanmangalam", "சென்னை", "வண்டலூர்", "கிண்டி",
+    "chengalpattu", "vedanthangal", "karikili", "காஞ்சிபுரம்", "செங்கல்பட்டு", "வேடந்தாங்கல்",
+    "nagapattinam", "point calimere", "kodiyakarai", "கொடாய்க்கரை", "நாகப்பட்டினம்",
+    "tiruchirappalli", "trichy", "namakkal", "kolli hills", "கொல்லிமலை", "திருச்சி", "நாமக்கல்",
+    "tiruvannamalai", "vellore", "jawadhu hills", "javadi", "ஜவாது மலை", "திருவண்ணாமலை", "வேலூர்",
+    "thanjavur", "tiruvarur", "muthupet", "மன்னார்குடி", "தஞ்சாவூர்", "திருவாரூர்",
+    "tenkasi", "courtallam", "virudhunagar", "தென்காசி", "குற்றாலம்", "விருதுநகர்",
+    "villupuram", "cuddalore", "pitchavaram", "பிச்சாவரம்", "கடலூர்", "விழுப்புரம்",
+    "madurai", "sivaganga", "pudukkottai", "thoothukudi", "tuticorin", "karur", "perambalur", "ariyalur", "ranipet", "tirupathur", "kallakurichi", "mayiladuthurai",
+    "மதுரை", "சிவகங்கை", "புதுக்கோட்டை", "தூத்துக்குடி", "கரூர்", "பெரம்பலூர்", "அரியலூர்", "ராணிப்பேட்டை", "திருப்பத்தூர்", "கள்ளக்குறிச்சி", "மயிலாடுதுறை"
+]
 
-    @staticmethod
-    def is_forest_or_wildlife_relevant(title: str, content: str) -> bool:
-        text = f"{title} {content}".lower()
+SEMANTIC_FAUNA_CONCEPTS = {
+    "elephant", "tusker", "makna", "herd", "wild elephant", "ஆனை", "யானை", "காட்டு யானை",
+    "tiger", "tigress", "panthera tigris", "stripes", "புலி", "சிறுத்தை புலி",
+    "leopard", "panther", "spotted cat", "சிறுத்தை",
+    "gaur", "bison", "indian bison", "காட்டெருமை",
+    "wild boar", "boar", "swine", "காட்டுப்பன்றி",
+    "sloth bear", "bear", "கரடி",
+    "tahr", "nilgiri tahr", "varaiyaadu", "வரைஆடு",
+    "crocodile", "mugger", "gharial", "முதலை",
+    "macaque", "lion-tailed macaque", "ltm", "சிங்கம் போன்ற வாலுள்ள குரங்கு",
+    "sea turtle", "turtle", "olive ridley", "ஆமை", "கடல் ஆமை",
+    "dugong", "sea cow", "dhole", "wild dog", "செந்நாய்",
+    "pangolin", "hornbill", "king cobra", "python", "vulture", "loris", "sloth",
+    "deer", "sambar", "chital", "spotted deer", "barking deer", "wild animal", "wild species",
+    "fauna", "carnivore", "herbivore", "mammal", "reptile", "avian", "raptor", "endangered species",
+    "wildlife", "wild animal", "wild beasts", "விலங்கு", "பறவை", "காட்டு உயிரினங்கள்"
+}
 
-        # Explicitly exclude pure farming/crop-spraying/budget/non-wildlife news
-        farm_exclusions = [
-            "ppfm spraying", "crop spraying", "fertilizer subsidy", "paddy procurement", "sugarcane price",
-            "revenue receipts", "liquor sales", "quota to muslim converts", "drought-proofing", "heatwaves and lightning",
-            "farm spraying", "agricultural subsidy", "kisan credit"
-        ]
-        if any(ex in text for ex in farm_exclusions):
+SEMANTIC_HABITAT_CONCEPTS = {
+    "forest", "jungle", "sanctuary", "tiger reserve", "reserve", "national park", "biosphere",
+    "elephant corridor", "corridor", "shola", "mangrove", "wetland", "protected area",
+    "forest range", "forest division", "forest beat", "canopy", "timber", "wilderness",
+    "காடு", "வனம்", "வனப்பகுதி", "காப்பகம்", "சரணாலயம்", "உயிர்க்கோளம்"
+}
+
+SEMANTIC_CONSERVATION_CONCEPTS = {
+    "poaching", "anti-poaching", "snare", "ivory", "tiger skin", "venom", "wildlife crime",
+    "rescue", "rescued", "tranquilized", "relocated", "rehabilitation", "rehab", "camera trap",
+    "census", "population count", "forest fire", "wildfire", "fire line", "blaze", "firefighting",
+    "human-wildlife", "human animal", "man animal", "conflict", "crop raid", "trampled",
+    "forest department", "forest dept", "forest guard", "forest ranger", "chief wildlife warden",
+    "tnfwccb", "rrt", "rapid response team", "eco-tourism", "safari", "forest policy",
+    "wildlife act", "encroachment", "eviction", "habitat protection", "biodiversity",
+    "வனத்துறை", "வேட்டை", "கைது", "மீட்ப்பு", "தீ", "அக்னி", "ஆக்கிரமிப்பு", "பாதுகாப்பு"
+}
+
+SEMANTIC_DISTRACTORS = {
+    "ppfm spraying", "crop spraying", "fertilizer subsidy", "paddy procurement", "sugarcane price",
+    "revenue receipts", "liquor sales", "quota to muslim converts", "drought-proofing", "heatwaves and lightning",
+    "farm spraying", "agricultural subsidy", "kisan credit", "election campaign", "political party",
+    "municipal budget", "traffic police", "it park", "real estate", "stock market", "film release"
+}
+
+
+def _extract_text(article: Any, content: Optional[str] = None) -> Tuple[str, str]:
+    """Helper to cleanly unpack title and content from string, dict, or Pydantic model."""
+    if isinstance(article, str):
+        return article, content or ""
+    
+    title_text = ""
+    content_text = ""
+
+    if hasattr(article, "title_en"):
+        title_en = getattr(article, "title_en", "") or ""
+        title_ta = getattr(article, "title_ta", "") or ""
+        title_text = f"{title_en} {title_ta}".strip()
+        
+        content_en = getattr(article, "content_en", "") or ""
+        content_ta = getattr(article, "content_ta", "") or ""
+        content_text = f"{content_en} {content_ta}".strip()
+    elif isinstance(article, dict):
+        title_text = f"{article.get('title_en', '')} {article.get('title_ta', '')} {article.get('title', '')}".strip()
+        content_text = f"{article.get('content_en', '')} {article.get('content_ta', '')} {article.get('content', '')}".strip()
+    
+    return title_text, content_text
+
+
+def is_tamil_nadu(article: Any, content: Optional[str] = None) -> bool:
+    """
+    Determines if an article is geographically or institutionally relevant to Tamil Nadu.
+    Accepts an Article schema instance, dict, or string title (with optional content).
+    """
+    title_text, content_text = _extract_text(article, content)
+    text = f"{title_text} {content_text}".lower().strip()
+    if not text:
+        return False
+
+    return any(loc in text for loc in TAMIL_NADU_LOCATIONS)
+
+
+def is_wildlife_or_forest(article: Any, content: Optional[str] = None) -> bool:
+    """
+    Determines if an article is semantically relevant to Forest or Wildlife topics.
+    Uses OpenAI semantic classification if API key is configured, or multi-dimensional
+    local semantic concept density and relevance engine.
+    """
+    title_text, content_text = _extract_text(article, content)
+    text = f"{title_text} {content_text}".lower().strip()
+    if not text:
+        return False
+
+    # Check for hard distractor topics (pure non-wildlife agriculture/politics/finance)
+    if any(dis in text for dis in SEMANTIC_DISTRACTORS):
+        strong_fauna_count = sum(1 for word in SEMANTIC_FAUNA_CONCEPTS if word in text)
+        if strong_fauna_count == 0:
             return False
 
-        wildlife_keywords = [
-            "wildlife", "forest department", "forest dept", "forest guard", "sanctuary", "reserve", "national park",
-            "protected area", "protected areas", "biosphere reserve", "wildlife sanctuary", "forest fire", "wildfire", "fire alert", "firefighting", "blaze",
-            "tiger", "leopard", "elephant", "gaur", "wild boar", "sloth bear", "tahr", "crocodile", "macaque",
-            "poaching", "wildlife crime", "seizure", "seized", "illegal wildlife trade", "animal", "rescue", "habitat", "biodiversity", "conservation", "anti-poaching", "patrol",
-            "forest policy", "policy development", "encroachment", "forest encroachment", "illegal encroachment", "human-wildlife", "human animal", "human conflict", "man animal", "village", "crop raid", "attack",
-            "trapped", "relocated", "wild animal", "forest range", "animal movement", "wildlife act", "eco tourism", "ecotourism", "safari", "tourist",
-            "வனத்துறை", "காட்டு", "விலங்கு", "புலி", "யானை", "சிறுத்தை", "காட்டுப்பன்றி", "கரடி", "ஆமை", "பராமரிப்பு", "அக்னி", "தீ", "சுற்றுலா", "ஆக்கிரமிப்பு"
-        ]
-        return any(kw in text for kw in wildlife_keywords)
+    # OpenAI zero-shot semantic call if API key present
+    api_key = os.getenv("OPENAI_API_KEY", "")
+    if api_key:
+        try:
+            import httpx
+            payload = {
+                "model": "gpt-4o-mini",
+                "messages": [
+                    {
+                        "role": "system",
+                        "content": (
+                            "You are a semantic article relevance classifier for a Wildlife & Forest Intelligence platform. "
+                            "Determine if the article title and text are semantically focused on wildlife, fauna, flora, "
+                            "forest department operations, habitat conservation, human-wildlife encounters, poaching, "
+                            "forest fires, or eco-tourism. "
+                            "Return JSON with key 'is_wildlife_or_forest' (boolean) and 'confidence' (float 0.0-1.0)."
+                        )
+                    },
+                    {
+                        "role": "user",
+                        "content": f"Title: {title_text}\nContent: {content_text}"
+                    }
+                ],
+                "response_format": {"type": "json_object"},
+                "temperature": 0.1
+            }
+            res = httpx.post(
+                "https://api.openai.com/v1/chat/completions",
+                json=payload,
+                headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+                timeout=3.0
+            )
+            if res.status_code == 200:
+                data = res.json()
+                parsed = json.loads(data['choices'][0]['message']['content'])
+                if "is_wildlife_or_forest" in parsed:
+                    return bool(parsed["is_wildlife_or_forest"])
+        except Exception as e:
+            logger.debug(f"OpenAI semantic check skipped/failed: {e}")
+
+    # Local Semantic Concept Density Scoring Engine
+    fauna_score = sum(1 for kw in SEMANTIC_FAUNA_CONCEPTS if kw in text)
+    habitat_score = sum(1 for kw in SEMANTIC_HABITAT_CONCEPTS if kw in text)
+    conservation_score = sum(1 for kw in SEMANTIC_CONSERVATION_CONCEPTS if kw in text)
+
+    total_semantic_score = fauna_score * 2.0 + habitat_score * 1.5 + conservation_score * 1.5
+
+    return total_semantic_score >= 1.5
+
+
+class ArticleClassifier:
+    @staticmethod
+    def is_tamil_nadu(article: Any, content: Optional[str] = None) -> bool:
+        return is_tamil_nadu(article, content)
 
     @staticmethod
-    def classify(title: str, content: str) -> Dict:
-        text = f"{title} {content}".lower()
+    def is_tamil_nadu_relevant(title: str, content: str = "") -> bool:
+        return is_tamil_nadu(title, content)
 
-        # 1. District Identification
-        detected_district = "Tamil Nadu (State Wide)"
-        for dist, keywords in DISTRICT_KEYWORDS.items():
-            if any(kw in text for kw in keywords):
-                detected_district = dist
-                break
+    @staticmethod
+    def is_wildlife_or_forest(article: Any, content: Optional[str] = None) -> bool:
+        return is_wildlife_or_forest(article, content)
 
-        # 2. Species Identification
-        detected_species = []
-        for species, keywords in SPECIES_KEYWORDS.items():
-            if any(kw in text for kw in keywords):
-                detected_species.append(species)
-        if not detected_species:
-            detected_species = ["Wildlife"]
-
-        # 3. Conflict Level
-        conflict_level = "None"
-        for level, keywords in CONFLICT_KEYWORDS.items():
-            if any(kw in text for kw in keywords):
-                conflict_level = level
-                break
-
-        # 4. Category Identification
-        detected_category = "General Wildlife"
-        max_score = 0
-        for cat, keywords in CATEGORY_KEYWORDS.items():
-            score = sum(1 for kw in keywords if kw in text)
-            if score > max_score:
-                max_score = score
-                detected_category = cat
-
-        # 5. Key Entities Extraction
-        authorities = []
-        if "forest department" in text or "வனத்துறை" in text:
-            authorities.append("Tamil Nadu Forest Department")
-        if "police" in text or "காவல்துறை" in text:
-            authorities.append("Tamil Nadu Police")
-        if "rapid response team" in text or "rrt" in text:
-            authorities.append("TN Forest Rapid Response Team")
-
-        impact = "No reported human casualties."
-        if conflict_level == "High":
-            impact = "High severity conflict: Human casualty or major agricultural loss in TN."
-        elif conflict_level == "Medium":
-            impact = "Moderate disruption: Animal movement monitored by TN forest squad."
+    @staticmethod
+    def is_forest_or_wildlife_relevant(title: str, content: str = "") -> bool:
+        return is_wildlife_or_forest(title, content)
 
     @staticmethod
     def compute_date_status(published_at) -> str:
@@ -180,7 +272,7 @@ class ArticleClassifier:
     def classify(title: str, content: str, published_at=None) -> Dict:
         text = f"{title} {content}".lower()
 
-        # Date status calculation according to user specification
+        # Date status calculation
         date_status = ArticleClassifier.compute_date_status(published_at)
 
         detected_district = "Tamil Nadu"
@@ -193,6 +285,8 @@ class ArticleClassifier:
         for species, keywords in SPECIES_KEYWORDS.items():
             if any(kw in text for kw in keywords):
                 detected_species.append(species)
+        if not detected_species:
+            detected_species = ["Wildlife"]
 
         conflict_level = "Low"
         for level, keywords in CONFLICT_KEYWORDS.items():

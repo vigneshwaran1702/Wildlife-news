@@ -6,7 +6,7 @@ import uuid
 import logging
 
 from app.models.schemas import Article
-from app.ai.classifier import ArticleClassifier
+from app.ai.classifier import ArticleClassifier, is_tamil_nadu, is_wildlife_or_forest
 from app.ai.summarizer import ArticleSummarizer
 from app.ai.translator import ArticleTranslator
 from app.collectors.verifier import SourcePageVerifier, parse_entry_datetime
@@ -111,14 +111,15 @@ class ArticlePipeline:
             logger.info(f"REJECTED [REJECTED_FUTURE] Source: {source_name} | Orig Date IST: {pub_date_ist} | Today IST: {today_date_ist} | Reason: Original date is in the future ({pub_date_ist} > {today_date_ist}).")
             return None
 
-        # ── 3. TAMIL NADU RELEVANCE CHECK ──
-        if not ArticleClassifier.is_tamil_nadu_relevant(title_clean, content_clean):
-            logger.info(f"REJECTED [REJECTED_NOT_TAMIL_NADU] Source: {source_name} | Title: '{title_clean}' | Today IST: {today_date_ist} | Reason: Content not relevant to Tamil Nadu.")
-            return None
-
-        # ── 4. FOREST / WILDLIFE TOPIC CHECK ──
-        if not ArticleClassifier.is_forest_or_wildlife_relevant(title_clean, content_clean):
-            logger.info(f"REJECTED [REJECTED_NOT_WILDLIFE] Source: {source_name} | Title: '{title_clean}' | Today IST: {today_date_ist} | Reason: Content not relevant to Forest/Wildlife topics.")
+        # ── 3 & 4. TAMIL NADU RELEVANCE & SEMANTIC WILDLIFE/FOREST TOPIC CHECK ──
+        if is_tamil_nadu(title_clean, content_clean) and is_wildlife_or_forest(title_clean, content_clean):
+            # Article accepted for location & semantic topic: proceed to duplicate check
+            pass
+        else:
+            if not is_tamil_nadu(title_clean, content_clean):
+                logger.info(f"REJECTED [REJECTED_NOT_TAMIL_NADU] Source: {source_name} | Title: '{title_clean}' | Today IST: {today_date_ist} | Reason: Content not relevant to Tamil Nadu.")
+            else:
+                logger.info(f"REJECTED [REJECTED_NOT_WILDLIFE] Source: {source_name} | Title: '{title_clean}' | Today IST: {today_date_ist} | Reason: Content not semantically relevant to Forest/Wildlife topics.")
             return None
 
         # ── 5. DUPLICATE CHECK (Canonical URL & Normalized Headline) ──
