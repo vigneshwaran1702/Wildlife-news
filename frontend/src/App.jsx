@@ -103,10 +103,6 @@ export default function App() {
 
           {activeTab === 'pdf' && <PDFDigest />}
 
-          {activeTab === 'analytics' && (
-            <AnalyticsDashboard onSelectDistrict={handleSelectMapDistrict} />
-          )}
-
           {activeTab === 'collectors' && (
             <CollectorJobs onScanComplete={loadAnalyticsData} />
           )}
