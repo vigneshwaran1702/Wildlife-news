@@ -31,7 +31,12 @@ def get_articles(
         except Exception as e:
             pass
 
-    target_date_status = date_status if date_status is not None else "TODAY"
+    if todays_only:
+        target_date_status = "TODAY"
+    elif date_status is not None and date_status.strip().upper() not in ["ALL", "ANY", "NONE"]:
+        target_date_status = date_status.strip().upper()
+    else:
+        target_date_status = None
 
     return db_storage.get_articles(
         category=category,
@@ -44,6 +49,7 @@ def get_articles(
         date_status=target_date_status,
         verified_only=True
     )
+
 
 
 @router.get("/{article_id}", response_model=Article)

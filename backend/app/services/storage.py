@@ -1,10 +1,13 @@
 import json
 import os
 from typing import List, Optional, Dict
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 import uuid
 from app.ai.classifier import ArticleClassifier, is_tamil_nadu, is_wildlife_or_forest
 from app.models.schemas import Article, PDFReport, CollectorLog
+
+IST = ZoneInfo("Asia/Kolkata")
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")
 ARTICLES_FILE = os.path.join(DATA_DIR, "articles.json")
@@ -93,16 +96,24 @@ class StorageService:
         date_status: Optional[str] = None,
         verified_only: bool = True
     ) -> List[Article]:
-        today_date = datetime.now().date()
+        now_ist = datetime.now(timezone.utc).astimezone(IST)
+        today_date_ist = now_ist.date()
         results = list(self.articles.values())
 
-        # Update date_status on every article dynamically according to exact formula
+        # Update date_status on every article dynamically according to exact IST formula
         for a in results:
             if a.published_at:
-                pub_date = a.published_at.date() if isinstance(a.published_at, datetime) else today_date
-                if pub_date == today_date:
+                if isinstance(a.published_at, datetime):
+                    if a.published_at.tzinfo is not None:
+                        pub_date = a.published_at.astimezone(IST).date()
+                    else:
+                        pub_date = a.published_at.date()
+                else:
+                    pub_date = today_date_ist
+
+                if pub_date == today_date_ist:
                     a.date_status = "TODAY"
-                elif pub_date == today_date - timedelta(days=1):
+                elif pub_date == today_date_ist - timedelta(days=1):
                     a.date_status = "YESTERDAY"
                 else:
                     a.date_status = "OLD"
@@ -117,14 +128,12 @@ class StorageService:
             if is_tamil_nadu(a) and is_wildlife_or_forest(a)
         ]
 
-        if date_status and date_status != "All":
-            results = [a for a in results if a.date_status.upper() == date_status.upper()]
+        if date_status and date_status.upper() not in ["ALL", "ANY", "NONE"]:
+            results = [a for a in results if (a.date_status or "").upper() == date_status.upper()]
 
         if todays_only:
-            today_str = datetime.now().strftime('%Y-%m-%d')
-            todays_results = [a for a in results if a.published_at and a.published_at.strftime('%Y-%m-%d') == today_str]
-            if todays_results:
-                results = todays_results
+            results = [a for a in results if (a.date_status or "").upper() == "TODAY"]
+
 
         if category and category != "All":
             results = [a for a in results if a.category.lower() == category.lower()]
