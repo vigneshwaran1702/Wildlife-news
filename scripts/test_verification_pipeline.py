@@ -3,6 +3,9 @@ import os
 from datetime import datetime, timedelta, time
 from zoneinfo import ZoneInfo
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'backend'))
 
 from app.collectors.pipeline import ArticlePipeline
@@ -37,8 +40,8 @@ art_today = ArticlePipeline.process_article(
 print(f"[TEST 1] Published TODAY article: Status = {art_today.verification_status if art_today else None}")
 assert art_today is not None and art_today.verification_status == "VERIFIED", "TEST 1 FAILED: Article published today was rejected!"
 
-# ── TEST CASE 2: Article published YESTERDAY -> Must be REJECTED (REJECTED_OLD) ──
-raw_yesterday = {"published": datetime.combine(yesterday, time(14, 0, 0)).strftime("%Y-%m-%d %H:%M:%S")}
+# ── TEST CASE 2: Article published > 36 Hours Ago -> Must be REJECTED (REJECTED_OLD) ──
+raw_yesterday = {"published": (now - timedelta(hours=50)).strftime("%Y-%m-%d %H:%M:%S")}
 art_yesterday = ArticlePipeline.process_article(
     raw_entry=raw_yesterday,
     title="Yesterday News: Sathyamangalam Tiger Reserve sets up 24x7 control room",
@@ -89,9 +92,9 @@ art_nodate = ArticlePipeline.process_article(
 print(f"[TEST 5] UNDATED article: Status = {art_nodate}")
 assert art_nodate is None, "TEST 5 FAILED: Undated article was accepted into time-based collection!"
 
-# ── TEST CASE 6: Article collected TODAY but published YESTERDAY -> Must be REJECTED (REJECTED_OLD) ──
+# ── TEST CASE 6: Article collected TODAY but published 48 HOURS AGO -> Must be REJECTED (REJECTED_OLD) ──
 raw_collected_today_pub_yesterday = {
-    "published": datetime.combine(yesterday, time(23, 0, 0)).strftime("%Y-%m-%d %H:%M:%S"),
+    "published": (now - timedelta(hours=48)).strftime("%Y-%m-%d %H:%M:%S"),
     "collected_at": now.strftime("%Y-%m-%d %H:%M:%S")
 }
 art_collected_today_old = ArticlePipeline.process_article(

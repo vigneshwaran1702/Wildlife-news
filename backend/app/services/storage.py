@@ -3,7 +3,7 @@ import os
 from typing import List, Optional, Dict
 from datetime import datetime, timedelta
 import uuid
-from app.ai.classifier import ArticleClassifier
+from app.ai.classifier import ArticleClassifier, is_tamil_nadu, is_wildlife_or_forest
 from app.models.schemas import Article, PDFReport, CollectorLog
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")
@@ -114,8 +114,7 @@ class StorageService:
         # Expose only Tamil Nadu wildlife / forest department news
         results = [
             a for a in results
-            if ArticleClassifier.is_tamil_nadu_relevant(a.title_en, a.content_en)
-            and ArticleClassifier.is_forest_or_wildlife_relevant(a.title_en, a.content_en)
+            if is_tamil_nadu(a) and is_wildlife_or_forest(a)
         ]
 
         if date_status and date_status != "All":
