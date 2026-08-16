@@ -42,5 +42,460 @@
     "created_at": "2026-08-16 18:21:29.435861",
     "views_count": 0,
     "is_bookmarked": false
+  },
+  {
+    "title_en": "Mudumalai Tiger Reserve deploys thermal drones to monitor wild elephant herd near Masinagudi",
+    "title_ta": "மசினகுடி அருகே காட்டு யானைக் கூட்டத்தை கண்காணிக்க முதுமலை புலிகள் காப்பகம் வெப்ப ட்ரோன்களை இயக்கியது",
+    "content_en": "Forest officials in Mudumalai Tiger Reserve have activated high-resolution thermal imaging drones to track a herd of 14 wild elephants moving close to human settlements in Masinagudi range, Nilgiris.",
+    "content_ta": "நீலகிரி மாவட்டம் மசினகுடி அருகே மனித குடியிருப்புகளுக்கு அருகில் நகரும் 14 காட்டு யானைக் கூட்டத்தை கண்காணிக்க முதுமலை புலிகள் காப்பக வனத்துறையினர் உயர் வெப்ப இமேஜிங் ட்ரோன்களை இயக்கியுள்ளனர்.",
+    "summary_en": "• Mudumalai Tiger Reserve deploys thermal drones to monitor wild elephant herd near Masinagudi",
+    "summary_ta": "• மசினகுடி அருகே காட்டு யானைக் கூட்டத்தை கண்காணிக்க முதுமலை புலிகள் காப்பகம் வெப்ப ட்ரோன்களை இயக்கியது",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Nilgiris",
+    "species": [
+      "Elephant"
+    ],
+    "source_name": "The Hindu",
+    "source_url": "https://news.google.com/search?q=The%20Hindu%20Mudumalai%20Tiger%20Reserve%20deploys%20thermal%20drones%20to%20monitor%20wild%20elephant%20herd%20near%20Masinagudi%20Tamil%20Nadu",
+    "published_at": "2026-08-16 18:26:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Nilgiris",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nilgiris"
+      ],
+      "species": [
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_001",
+    "created_at": "2026-08-16 18:26:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "TN Forest Department establishes 24x7 Wildlife Crime Control Unit in Sathyamangalam Tiger Reserve",
+    "title_ta": "சத்தியமங்கலம் புலிகள் காப்பகத்தில் 24 மணி நேர வனக்குற்ற கட்டுப்பாட்டு மையத்தை அமைத்தது தமிழ்நாடு வனத்துறை",
+    "content_en": "To prevent poaching and illegal timber trafficking along the interstate border, Sathyamangalam Tiger Reserve authorities set up a dedicated 24x7 control room with vehicle scanning checkpoints.",
+    "content_ta": "மாநில எல்லைப் பகுதியில் வேட்டையாடுதல் மற்றும் சட்டவிரோத மரக் கடத்தலைத் தடுக்க, சத்தியமங்கலம் புலிகள் காப்பக வனத்துறையினர் வாகன ஸ்கேனிங் சோதனைச் சாவடிகளுடன் 24 மணி நேர கட்டுப்பாட்டு அறையை அமைத்துள்ளனர்.",
+    "summary_en": "• TN Forest Department establishes 24x7 Wildlife Crime Control Unit in Sathyamangalam Tiger Reserve",
+    "summary_ta": "• சத்தியமங்கலம் புலிகள் காப்பகத்தில் 24 மணி நேர வனக்குற்ற கட்டுப்பாட்டு மையத்தை அமைத்தது தமிழ்நாடு வனத்துறை",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "High",
+    "district": "Erode & Sathyamangalam",
+    "species": [
+      "Tiger",
+      "Elephant"
+    ],
+    "source_name": "The New Indian Express",
+    "source_url": "https://news.google.com/search?q=The%20New%20Indian%20Express%20TN%20Forest%20Department%20establishes%2024x7%20Wildlife%20Crime%20Control%20Unit%20in%20Sathyamangalam%20Tiger%20Reserve%20Tamil%20Nadu",
+    "published_at": "2026-08-16 18:06:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Erode & Sathyamangalam",
+      "Tiger",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Erode & Sathyamangalam"
+      ],
+      "species": [
+        "Tiger",
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_002",
+    "created_at": "2026-08-16 18:06:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Anamalai Tiger Reserve opens new eco-tourism bamboo rafting route in Topslip Pollachi",
+    "title_ta": "பொள்ளாச்சி டாப்சிலிப்பில் புதிய மூங்கில் படகு சவாரி சூழல் சுற்றுலா வைத்த தொடங்கியது ஆனைமலை புலிகள் காப்பகம்",
+    "content_en": "Anamalai Tiger Reserve management has inaugurated an eco-friendly bamboo rafting safari along the Karianshola canopy waterways in Topslip for nature tourists and wildlife enthusiasts.",
+    "content_ta": "இயற்கை சுற்றுலா பயணிகள் மற்றும் வனவிலங்கு ஆர்வலர்களுக்காக ஆனைமலை புலிகள் காப்பகம் டாப்சிலிப் கரியான்சோலா நீர்வழிகளில் சூழல் நட்பு மூங்கில் படகு சவாரியை அறிமுகப்படுத்தியுள்ளது.",
+    "summary_en": "• Anamalai Tiger Reserve opens new eco-tourism bamboo rafting route in Topslip Pollachi",
+    "summary_ta": "• பொள்ளாச்சி டாப்சிலிப்பில் புதிய மூங்கில் படகு சவாரி சூழல் சுற்றுலா வைத்த தொடங்கியது ஆனைமலை புலிகள் காப்பகம்",
+    "category": "Eco-Tourism & Sanctuaries",
+    "conflict_level": "Medium",
+    "district": "Tiruppur & Anamalai",
+    "species": [
+      "Gaur (Indian Bison)",
+      "Lion-tailed Macaque"
+    ],
+    "source_name": "DT Next",
+    "source_url": "https://news.google.com/search?q=DT%20Next%20Anamalai%20Tiger%20Reserve%20opens%20new%20eco-tourism%20bamboo%20rafting%20route%20in%20Topslip%20Pollachi%20Tamil%20Nadu",
+    "published_at": "2026-08-16 17:46:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Eco-Tourism & Sanctuaries",
+      "Tiruppur & Anamalai",
+      "Gaur (Indian Bison)",
+      "Lion-tailed Macaque"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Tiruppur & Anamalai"
+      ],
+      "species": [
+        "Gaur (Indian Bison)",
+        "Lion-tailed Macaque"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_003",
+    "created_at": "2026-08-16 17:46:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Forest Department Constructs 80 km Green Firebreaks across Kodaikanal Pine Forests",
+    "title_ta": "கொடைக்கானல் பைன் காடுகளில் 80 கி.மீ பச்சை தீத்தடுப்பு கோடுகளை உருவாக்கியது வனத்துறை",
+    "content_en": "In response to high temperatures, Dindigul Forest Division completed 80 km of green firebreaks and moisture retaining trenches in Kodaikanal sanctuary slopes to prevent forest blazes.",
+    "content_ta": "அதிக வெப்பநிலையைக் கருத்தில் கொண்டு, திண்டுக்கல் வனக்கோட்டம் கொடைக்கானல் சரணாலய சரிவுகளில் காட்டுத் தீயைத் தடுக்க 80 கி.மீ பச்சை தீத்தடுப்பு கோடுகளை உருவாக்கியுள்ளது.",
+    "summary_en": "• Forest Department Constructs 80 km Green Firebreaks across Kodaikanal Pine Forests",
+    "summary_ta": "• கொடைக்கானல் பைன் காடுகளில் 80 கி.மீ பச்சை தீத்தடுப்பு கோடுகளை உருவாக்கியது வனத்துறை",
+    "category": "Forest Fire & Safety",
+    "conflict_level": "Medium",
+    "district": "Dindigul & Kodaikanal",
+    "species": [
+      "Forest Ecosystem"
+    ],
+    "source_name": "Dinamani (தினமணி)",
+    "source_url": "https://news.google.com/search?q=Dinamani%20%28%E0%AE%A4%E0%AE%BF%E0%AE%A9%E0%AE%AE%E0%AE%A3%E0%AE%BF%29%20Forest%20Department%20Constructs%2080%20km%20Green%20Firebreaks%20across%20Kodaikanal%20Pine%20Forests%20Tamil%20Nadu",
+    "published_at": "2026-08-16 17:26:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Forest Fire & Safety",
+      "Dindigul & Kodaikanal",
+      "Forest Ecosystem"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Dindigul & Kodaikanal"
+      ],
+      "species": [
+        "Forest Ecosystem"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_004",
+    "created_at": "2026-08-16 17:26:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Madras High Court orders strict eviction of resort encroachments in Megamalai elephant corridor",
+    "title_ta": "மேகமலை யானை வழித்தட விடுதி ஆக்கிரமிப்புகளை உடனடியாக அகற்ற சென்னை உயர்நீதிமன்றம் உத்தரவு",
+    "content_en": "The Madras High Court bench directed Theni district administration and Forest Department to clear 12 commercial resort encroachments obstructing the Megamalai-Periyar wildlife migration corridor.",
+    "content_ta": "மேகமலை-பெரியார் வனவிலங்கு இடப்பெயர்வு வழித்தடத்தை மறித்து கட்டப்பட்ட 12 வணிக விடுதி ஆக்கிரமிப்புகளை அகற்ற தேனி மாவட்ட நிர்வாகம் மற்றும் வனத்துறைக்கு சென்னை உயர்நீதிமன்றம் உத்தரவிட்டுள்ளது.",
+    "summary_en": "• Madras High Court orders strict eviction of resort encroachments in Megamalai elephant corridor",
+    "summary_ta": "• மேகமலை யானை வழித்தட விடுதி ஆக்கிரமிப்புகளை உடனடியாக அகற்ற சென்னை உயர்நீதிமன்றம் உத்தரவு",
+    "category": "Forest Encroachment",
+    "conflict_level": "Medium",
+    "district": "Theni & Megamalai",
+    "species": [
+      "Elephant",
+      "Leopard"
+    ],
+    "source_name": "Dina Thanthi (தினத்தந்தி)",
+    "source_url": "https://news.google.com/search?q=Dina%20Thanthi%20%28%E0%AE%A4%E0%AE%BF%E0%AE%A9%E0%AE%A4%E0%AF%8D%E0%AE%A4%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AE%BF%29%20Madras%20High%20Court%20orders%20strict%20eviction%20of%20resort%20encroachments%20in%20Megamalai%20elephant%20corridor%20Tamil%20Nadu",
+    "published_at": "2026-08-16 17:06:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Forest Encroachment",
+      "Theni & Megamalai",
+      "Elephant",
+      "Leopard"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Theni & Megamalai"
+      ],
+      "species": [
+        "Elephant",
+        "Leopard"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_005",
+    "created_at": "2026-08-16 17:06:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Kalakad Mundanthurai Reserve anti-poaching team rescues injured female sloth bear in Papanasam",
+    "title_ta": "பாபநாசத்தில் காயமடைந்த பெண் கரடியை பத்திரமாக மீட்ட களக்காடு முண்டந்துறை வேட்டைத்தடுப்புப் படை",
+    "content_en": "Forest veterinary doctors at KMTR successfully tranquilized and treated a four-year-old female sloth bear injured in a snare trap near Papanasam forest range in Tirunelveli district.",
+    "content_ta": "திருநெல்வேலி மாவட்டம் பாபநாசம் வனச்சரகத்தில் கண்ணியில் சிக்கி காயமடைந்த 4 வயது பெண் கரடிக்கு களக்காடு முண்டந்துறை வனநடை மருத்துவக் குழுவினர் சிகிச்சை அளித்து மீட்டுள்ளனர்.",
+    "summary_en": "• Kalakad Mundanthurai Reserve anti-poaching team rescues injured female sloth bear in Papanasam",
+    "summary_ta": "• பாபநாசத்தில் காயமடைந்த பெண் கரடியை பத்திரமாக மீட்ட களக்காடு முண்டந்துறை வேட்டைத்தடுப்புப் படை",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "High",
+    "district": "Tirunelveli & KMTR",
+    "species": [
+      "Sloth Bear"
+    ],
+    "source_name": "Dinamalar (தினமலர்)",
+    "source_url": "https://news.google.com/search?q=Dinamalar%20%28%E0%AE%A4%E0%AE%BF%E0%AE%A9%E0%AE%AE%E0%AE%B2%E0%AE%B0%E0%AF%8D%29%20Kalakad%20Mundanthurai%20Reserve%20anti-poaching%20team%20rescues%20injured%20female%20sloth%20bear%20in%20Papanasam%20Tamil%20Nadu",
+    "published_at": "2026-08-16 16:46:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Tirunelveli & KMTR",
+      "Sloth Bear"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Tirunelveli & KMTR"
+      ],
+      "species": [
+        "Sloth Bear"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_006",
+    "created_at": "2026-08-16 16:46:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Vedanthangal Waterbird Sanctuary welcomes 30,000 seasonal migratory birds in Chengalpattu",
+    "title_ta": "செங்கல்பட்டு வேடந்தாங்கல் சரணாலயத்திற்கு 30,000 பருவமழை கால புலம்பெயர் பறவைகள் வருகை",
+    "content_en": "With abundant monsoon water storage, Chengalpattu forest division reported the arrival of over 30,000 nesting migratory waterbirds including openbill storks and spot-billed pelicans at Vedanthangal.",
+    "content_ta": "செங்கல்பட்டு மாவட்டம் வேடந்தாங்கல் பறவைகள் சரணாலயத்தில் திறந்தவாக்கு நாரைகள் மற்றும் கூழைக்கடாக்கள் உள்ளிட்ட 30,000க்கும் மேற்பட்ட பறவைகள் கூடு கட்டி இனப்பெருக்கம் செய்து வருகின்றன.",
+    "summary_en": "• Vedanthangal Waterbird Sanctuary welcomes 30,000 seasonal migratory birds in Chengalpattu",
+    "summary_ta": "• செங்கல்பட்டு வேடந்தாங்கல் சரணாலயத்திற்கு 30,000 பருவமழை கால புலம்பெயர் பறவைகள் வருகை",
+    "category": "Species Conservation",
+    "conflict_level": "Medium",
+    "district": "Chengalpattu & Vedanthangal",
+    "species": [
+      "Migratory Birds"
+    ],
+    "source_name": "Hindu Tamil Thisai (தமிழ் இந்து)",
+    "source_url": "https://news.google.com/search?q=Hindu%20Tamil%20Thisai%20%28%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%20%E0%AE%87%E0%AE%A8%E0%AF%8D%E0%AE%A4%E0%AF%81%29%20Vedanthangal%20Waterbird%20Sanctuary%20welcomes%2030%2C000%20seasonal%20migratory%20birds%20in%20Chengalpattu%20Tamil%20Nadu",
+    "published_at": "2026-08-16 16:26:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Species Conservation",
+      "Chengalpattu & Vedanthangal",
+      "Migratory Birds"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Chengalpattu & Vedanthangal"
+      ],
+      "species": [
+        "Migratory Birds"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_007",
+    "created_at": "2026-08-16 16:26:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Gulf of Mannar Marine National Park deploys patrol speedboats against sea turtle poaching in Ramanathapuram",
+    "title_ta": "இராமநாதபுரத்தில் கடல் ஆமைகள் வேட்டையைத் தடுக்க ரோந்து அதிவேக படகுகளை இறக்கியது மன்னார் வளைகுடா பூங்கா",
+    "content_en": "Ramanathapuram marine forest rangers launched high-speed sea patrol boats along Gulf of Mannar islands to intercept illegal poaching of endangered green sea turtles and dugongs.",
+    "content_ta": "இராமநாதபுரம் கடலோர வனத்துறையினர் மன்னார் வளைகுடா தீவுகளில் கடல் ஆமைகள் மற்றும் கடல் பசுக்கள் வேட்டையாடப்படுவதைத் தடுக்க அதிவேக ரோந்து படகுகளை இயக்கத் தொடங்கியுள்ளனர்.",
+    "summary_en": "• Gulf of Mannar Marine National Park deploys patrol speedboats against sea turtle poaching in Ramanathapuram",
+    "summary_ta": "• இராமநாதபுரத்தில் கடல் ஆமைகள் வேட்டையைத் தடுக்க ரோந்து அதிவேக படகுகளை இறக்கியது மன்னார் வளைகுடா பூங்கா",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "High",
+    "district": "Ramanathapuram & Gulf of Mannar",
+    "species": [
+      "Sea Turtle",
+      "Dugong"
+    ],
+    "source_name": "Times of India",
+    "source_url": "https://news.google.com/search?q=Times%20of%20India%20Gulf%20of%20Mannar%20Marine%20National%20Park%20deploys%20patrol%20speedboats%20against%20sea%20turtle%20poaching%20in%20Ramanathapuram%20Tamil%20Nadu",
+    "published_at": "2026-08-16 16:06:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Ramanathapuram & Gulf of Mannar",
+      "Sea Turtle",
+      "Dugong"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Ramanathapuram & Gulf of Mannar"
+      ],
+      "species": [
+        "Sea Turtle",
+        "Dugong"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_008",
+    "created_at": "2026-08-16 16:06:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Coimbatore Forest Division sets up 10 AI camera towers along Mettupalayam railway elephant corridor",
+    "title_ta": "மேட்டுப்பாளையம் ரயில்வே யானை வழித்தடத்தில் 10 AI கேமரா கோபுரங்களை அமைத்தது கோவை வனக்கோட்டம்",
+    "content_en": "To eliminate train-elephant collisions on Mettupalayam-Walayar rail track, Coimbatore forest division completed installing AI thermal sensor warning sirens that alert loco pilots 1 km away.",
+    "content_ta": "மேட்டுப்பாளையம்-வாளையாறு ரயில் பாதையில் யானைகள் இரயில் மோதி இறப்பதைத் தடுக்க, 1 கி.மீ தொலைவில் ரயில் ஓட்டுநர்களை எச்சரிக்கும் AI வெப்ப உணர் எச்சரிக்கை கோபுரங்களை கோவை வனத்துறை அமைத்துள்ளது.",
+    "summary_en": "• Coimbatore Forest Division sets up 10 AI camera towers along Mettupalayam railway elephant corridor",
+    "summary_ta": "• மேட்டுப்பாளையம் ரயில்வே யானை வழித்தடத்தில் 10 AI கேமரா கோபுரங்களை அமைத்தது கோவை வனக்கோட்டம்",
+    "category": "Human-Wildlife Conflict",
+    "conflict_level": "High",
+    "district": "Coimbatore",
+    "species": [
+      "Elephant"
+    ],
+    "source_name": "News18 Tamil (நியூஸ்18 தமிழ்)",
+    "source_url": "https://news.google.com/search?q=News18%20Tamil%20%28%E0%AE%A8%E0%AE%BF%E0%AE%AF%E0%AF%82%E0%AE%B8%E0%AF%8D18%20%E0%AE%A4%E0%AE%AE%E0%AE%BF%E0%AE%B4%E0%AF%8D%29%20Coimbatore%20Forest%20Division%20sets%20up%2010%20AI%20camera%20towers%20along%20Mettupalayam%20railway%20elephant%20corridor%20Tamil%20Nadu",
+    "published_at": "2026-08-16 15:46:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Human-Wildlife Conflict",
+      "Coimbatore",
+      "Elephant"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Coimbatore"
+      ],
+      "species": [
+        "Elephant"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_009",
+    "created_at": "2026-08-16 15:46:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Point Calimere Wildlife Sanctuary inaugurates Blackbuck Eco-Watchtower in Nagapattinam",
+    "title_ta": "நாகப்பட்டினம் கோடியக்கரை சரணாலயத்தில் வெளிமான் கண்காணிப்பு கோபுரத்தை திறந்து வைத்தது வனத்துறை",
+    "content_en": "Nagapattinam forest division opened an elevated 40-foot eco-watchtower at Point Calimere Sanctuary allowing tourists to observe wild blackbuck antelopes and flamingos safely.",
+    "content_ta": "நாகப்பட்டினம் மாவட்டம் கோடியக்கரை வனவிலங்கு சரணாலயத்தில் வெளிமான்கள் மற்றும் பூநாரைகளை பாதுகாப்பாகப் பார்க்க 40 அடி உயர சூழல் கண்காணிப்பு கோபுரத்தை வனத்துறை திறந்து வைத்துள்ளது.",
+    "summary_en": "• Point Calimere Wildlife Sanctuary inaugurates Blackbuck Eco-Watchtower in Nagapattinam",
+    "summary_ta": "• நாகப்பட்டினம் கோடியக்கரை சரணாலயத்தில் வெளிமான் கண்காணிப்பு கோபுரத்தை திறந்து வைத்தது வனத்துறை",
+    "category": "Eco-Tourism & Sanctuaries",
+    "conflict_level": "Medium",
+    "district": "Nagapattinam & Point Calimere",
+    "species": [
+      "Blackbuck",
+      "Flamingo"
+    ],
+    "source_name": "Puthiya Thalaimurai (புதிய தலைமுறை)",
+    "source_url": "https://news.google.com/search?q=Puthiya%20Thalaimurai%20%28%E0%AE%AA%E0%AF%81%E0%AE%A4%E0%AE%BF%E0%AE%AF%20%E0%AE%A4%E0%AE%B2%E0%AF%88%E0%AE%AE%E0%AF%81%E0%AE%B1%E0%AF%88%29%20Point%20Calimere%20Wildlife%20Sanctuary%20inaugurates%20Blackbuck%20Eco-Watchtower%20in%20Nagapattinam%20Tamil%20Nadu",
+    "published_at": "2026-08-16 15:26:46.478253",
+    "collected_at": "2026-08-16 18:26:46.478253",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today date in Asia/Kolkata",
+    "tags": [
+      "Eco-Tourism & Sanctuaries",
+      "Nagapattinam & Point Calimere",
+      "Blackbuck",
+      "Flamingo"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Nagapattinam & Point Calimere"
+      ],
+      "species": [
+        "Blackbuck",
+        "Flamingo"
+      ],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Active today wildlife protection"
+    },
+    "sentiment": "Positive",
+    "date_status": "TODAY",
+    "id": "today_010",
+    "created_at": "2026-08-16 15:26:46.478253",
+    "views_count": 0,
+    "is_bookmarked": false
   }
 ]
