@@ -4,10 +4,10 @@ import { Newspaper, FileText, BarChart3, Radio, AlertTriangle, ShieldCheck, MapP
 export default function Sidebar({ activeTab, setActiveTab, analytics }) {
   const navItems = [
     { id: 'feed', label: 'Live News Feed', icon: Newspaper },
-    { id: 'map', label: 'Tamil Nadu Wildlife Map', icon: MapPin },
     { id: 'pdf', label: 'PDF Bulletins & Digest', icon: FileText },
     { id: 'analytics', label: 'Conflict & Hotspot Analytics', icon: BarChart3 },
     { id: 'collectors', label: 'Collectors & Feeds', icon: Radio },
+    { id: 'map', label: 'Tamil Nadu Wildlife Map', icon: MapPin },
   ];
 
 
