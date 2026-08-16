@@ -5,7 +5,6 @@ export default function Sidebar({ activeTab, setActiveTab, analytics }) {
   const navItems = [
     { id: 'feed', label: 'Live News Feed', icon: Newspaper },
     { id: 'pdf', label: 'PDF Bulletins & Digest', icon: FileText },
-    { id: 'analytics', label: 'Conflict & Hotspot Analytics', icon: BarChart3 },
     { id: 'collectors', label: 'Collectors & Feeds', icon: Radio },
     { id: 'map', label: 'Tamil Nadu Wildlife Map', icon: MapPin },
   ];
