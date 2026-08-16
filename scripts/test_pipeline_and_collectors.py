@@ -3,6 +3,9 @@ import os
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+
 sys.path.append(os.path.join(os.path.dirname(os.path.dirname(__file__)), 'backend'))
 
 from app.collectors.pipeline import ArticlePipeline
@@ -10,24 +13,24 @@ from app.services.storage import db_storage
 
 IST = ZoneInfo("Asia/Kolkata")
 today = datetime.now(IST).date()
-yesterday = today - timedelta(days=1)
+three_days_ago = today - timedelta(days=3)
 
 print("==================================================")
 print("TESTING ARTICLE PIPELINE STRICT FILTERING FLOW")
 print(f"Today's date (IST): {today}")
 print("==================================================")
 
-# Test 1: Date Filter Check (Yesterday's article => REJECT)
-raw_yesterday = {"published": yesterday.strftime("%Y-%m-%d 10:00:00")}
-res_yesterday = ArticlePipeline.process_article(
-    raw_entry=raw_yesterday,
-    title="Yesterday News: Elephant spotted in Mudumalai forest range",
-    content="A wild elephant was spotted yesterday moving in Mudumalai.",
-    link="https://example.com/yesterday_01",
+# Test 1: Date Filter Check (Older than 36h article => REJECT)
+raw_old = {"published": three_days_ago.strftime("%Y-%m-%d 10:00:00")}
+res_old = ArticlePipeline.process_article(
+    raw_entry=raw_old,
+    title="Old News: Elephant spotted in Mudumalai forest range",
+    content="A wild elephant was spotted moving in Mudumalai.",
+    link="https://example.com/old_01",
     source_name="The Hindu"
 )
-print(f"Test 1 (Yesterday Date Filter): Expected None, Got: {res_yesterday}")
-assert res_yesterday is None, "Failed: Yesterday article was not rejected by Date Filter!"
+print(f"Test 1 (Old Date Filter): Expected None, Got: {res_old}")
+assert res_old is None, "Failed: Old article was not rejected by Date Filter!"
 
 # Test 2: Location Filter Check (Delhi news => REJECT)
 raw_today_delhi = {"published": datetime.now(IST).strftime("%Y-%m-%d %H:%M:%S")}

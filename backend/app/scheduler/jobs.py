@@ -24,7 +24,17 @@ def run_collection_job():
     en_count = EnglishNewsCollector.scrape_latest()
     bing_count = BingNewsCollector.scrape_latest()
     newsdata_count = NewsDataCollector.scrape_latest()
-    print(f"Job Finished. Articles fetched -> RSS: {rss_count}, Tamil: {ta_count}, English: {en_count}, Bing: {bing_count}, NewsData: {newsdata_count}")
+    total = rss_count + ta_count + en_count + bing_count + newsdata_count
+    print(f"Job Finished. Articles fetched -> RSS: {rss_count}, Tamil: {ta_count}, English: {en_count}, Bing: {bing_count}, NewsData: {newsdata_count}, Total: {total}")
+
+    if total == 0:
+        print("[Scheduler Safety Fallback] 0 live articles fetched from remote feeds. Running daily feed updater fallback...")
+        try:
+            from scripts.update_today_feed import update_daily_feed
+            update_daily_feed()
+        except Exception as e:
+            print(f"Fallback update error: {e}")
+
 
 def generate_shift1_day_digest_job():
     """

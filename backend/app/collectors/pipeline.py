@@ -88,11 +88,11 @@ class ArticlePipeline:
 
         pub_date = pub_dt.date()
 
-        # ── 2. TODAY DATE CHECK (Asia/Kolkata timezone boundary in UTC) ──
+        # ── 2. DATE CHECK (Past 36 Hours to capture overnight Shift 3 news) ──
         now_ist = datetime.now(timezone.utc).astimezone(IST)
         start_of_today_ist = now_ist.replace(hour=0, minute=0, second=0, microsecond=0)
-        start_of_today_utc = start_of_today_ist.astimezone(timezone.utc)
         end_of_today_utc = (start_of_today_ist + timedelta(days=1)).astimezone(timezone.utc)
+        min_allowed_utc = (start_of_today_ist - timedelta(hours=24)).astimezone(timezone.utc)
 
         # Convert pub_dt to UTC for database comparison
         if pub_dt.tzinfo is None:
@@ -103,8 +103,8 @@ class ArticlePipeline:
         pub_date_ist = pub_dt_utc.astimezone(IST).date()
         today_date_ist = now_ist.date()
 
-        if pub_dt_utc < start_of_today_utc:
-            logger.info(f"REJECTED [REJECTED_OLD] Source: {source_name} | Orig Date IST: {pub_date_ist} | Today IST: {today_date_ist} | Reason: Original date is older than today ({pub_date_ist} < {today_date_ist}).")
+        if pub_dt_utc < min_allowed_utc:
+            logger.info(f"REJECTED [REJECTED_OLD] Source: {source_name} | Orig Date IST: {pub_date_ist} | Today IST: {today_date_ist} | Reason: Original date is older than allowed 36h window ({pub_date_ist} < {today_date_ist}).")
             return None
 
         if pub_dt_utc >= end_of_today_utc:

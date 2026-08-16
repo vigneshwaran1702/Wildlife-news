@@ -22,7 +22,7 @@ class TamilNewsCollector:
         new_articles = []
         try:
             try:
-                response = httpx.get(feed_url, headers=HEADERS, timeout=15.0, follow_redirects=True)
+                response = httpx.get(feed_url, headers=HEADERS, timeout=4.0, follow_redirects=True)
                 if response.status_code != 200:
                     db_storage.add_log(CollectorLog(
                         id=f"log_{uuid.uuid4().hex[:8]}",
