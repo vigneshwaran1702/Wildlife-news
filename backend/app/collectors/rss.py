@@ -81,7 +81,7 @@ class RSSCollector:
             url = feed_info["url"]
             try:
                 try:
-                    response = httpx.get(url, headers=HEADERS, timeout=15.0, follow_redirects=True)
+                    response = httpx.get(url, headers=HEADERS, timeout=4.0, follow_redirects=True)
                     if response.status_code != 200:
                         log_msg = f"Google blocked request: status {response.status_code}" if "google.com" in url else f"Request blocked: status {response.status_code}"
                         log_msgs.append(f"{name}: {log_msg}")

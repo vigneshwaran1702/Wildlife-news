@@ -40,7 +40,7 @@ class BingNewsCollector:
             url = feed_info["url"]
             try:
                 try:
-                    response = httpx.get(url, headers=HEADERS, timeout=15.0, follow_redirects=True)
+                    response = httpx.get(url, headers=HEADERS, timeout=4.0, follow_redirects=True)
                     if response.status_code != 200:
                         log_msgs.append(f"{name}: Bing request blocked (status {response.status_code})")
                         continue

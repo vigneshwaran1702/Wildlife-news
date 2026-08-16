@@ -120,5 +120,21 @@
       "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-10",
       "Downloaded At": "Date: Aug 10, 2026"
     }
+  },
+  {
+    "id": "pdf_407f0943",
+    "title": "Shift 3 Night & Early Morning Bulletin (9:00 PM - 8:00 AM) - 16 Aug 2026",
+    "report_type": "Shift 3: Night & Early Morning Bulletin (09:00 PM - 08:00 AM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_407f0943.pdf",
+    "download_url": "/api/pdf/download/pdf_407f0943",
+    "created_at": "2026-08-16 11:22:17.708698",
+    "article_count": 0,
+    "filter_criteria": {
+      "Time Window": "Aug 15 09:00 PM to Aug 16 08:00 AM",
+      "Deduplication": "Excludes Daytime (8am-5pm) & Evening (5pm-9pm) News",
+      "Auto Schedule": "08:00 (8:00 AM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/3?target_date=2026-08-16",
+      "Downloaded At": "Date: Aug 16, 2026"
+    }
   }
 ]

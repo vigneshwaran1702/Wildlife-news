@@ -37,7 +37,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_001",
     "created_at": "2026-08-10 19:06:22.981890",
     "views_count": 0,
@@ -84,7 +84,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_002",
     "created_at": "2026-08-10 18:46:22.981890",
     "views_count": 0,
@@ -131,7 +131,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_003",
     "created_at": "2026-08-10 18:26:22.981890",
     "views_count": 0,
@@ -175,7 +175,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_004",
     "created_at": "2026-08-10 18:06:22.981890",
     "views_count": 0,
@@ -222,7 +222,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_005",
     "created_at": "2026-08-10 17:46:22.981890",
     "views_count": 0,
@@ -266,7 +266,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_006",
     "created_at": "2026-08-10 17:26:22.981890",
     "views_count": 0,
@@ -310,7 +310,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_007",
     "created_at": "2026-08-10 17:06:22.981890",
     "views_count": 0,
@@ -357,7 +357,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_008",
     "created_at": "2026-08-10 16:46:22.981890",
     "views_count": 0,
@@ -401,7 +401,7 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_009",
     "created_at": "2026-08-10 16:26:22.981890",
     "views_count": 0,
@@ -448,9 +448,214 @@
       "impact": "Active today wildlife protection"
     },
     "sentiment": "Positive",
-    "date_status": "TODAY",
+    "date_status": "OLD",
     "id": "today_010",
     "created_at": "2026-08-10 16:06:22.981890",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu forest staff seek permanent jobs after years of anti-poaching, protection work - The New Indian Express",
+    "title_ta": "[தமிழ் அறிக்கை] Tamil Nadu forest staff seek permanent jobs after years of anti-poaching, protection work - The New Indian Express",
+    "content_en": "<a href=\"https://news.google.com/rss/articles/CBMi5gFBVV95cUxNUVQ0eG5CakJla2VfMjduUnI3WFlqZnB4MHlFSzYyaFczUkRJNDdzT0xIR0JYTVFCaVB0aUNKV3hLM3IwUzl1SEtabVNpWm5oVl9MeVcxblNvY1pQc0hwZXNLVGM5SlNlQTlCdU5zWUR5TERVcUZ5a0J1RkVCWjBsR0lRVk11VWhFcVlMZHNPMm04LVZZbzhaMWI4VWtDRGhXODdjMDVNSVI1R3ZVU1ZBT1ZSMmhnTkJ2RzU4bEs0eWRMQ1BsT0Q2Y1FLV1gwT3R2aGpTNzdodTNPUGdtVDEwQWlOeTQ2d9IB8wFBVV95cUxNZmxKWDJjSXIzZ1psZXhvMUVabTl2aDc3Zm1JdENfcHJVdXZtNUVzNzRXM1pHQ01FSWhBWjBRSFp6ZV9KQUVYaDlma1I5S3BISzBDV0RaR3ZyeDNwSXpSTXh2akVQdnpTem5HMGxfVTVXalNIUkdWUUgyU1gyV0RuT3ZsT2taWkxSbGJxZXFRNHh5U1BtcmhHNUpuX2hJM0k0OFJueXBraWdpVmRybDlqVEQ3TE9xcjlFV1pWSEUzalhqZGNyTVdFYTNNMXR5MlRZbUdBRHJmNmIxSXQ4V3Y0X1VVZ0Q0aGVQOVBOTTl2SmxGdFE?oc=5\" target=\"_blank\">Tamil Nadu forest staff seek permanent jobs after years of anti-poaching, protection work</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The New Indian Express</font>",
+    "content_ta": "<a href=\"https://news.google.com/rss/articles/CBMi5gFBVV95cUxNUVQ0eG5CakJla2VfMjduUnI3WFlqZnB4MHlFSzYyaFczUkRJNDdzT0xIR0JYTVFCaVB0aUNKV3hLM3IwUzl1SEtabVNpWm5oVl9MeVcxblNvY1pQc0hwZXNLVGM5SlNlQTlCdU5zWUR5TERVcUZ5a0J1RkVCWjBsR0lRVk11VWhFcVlMZHNPMm04LVZZbzhaMWI4VWtDRGhXODdjMDVNSVI1R3ZVU1ZBT1ZSMmhnTkJ2RzU4bEs0eWRMQ1BsT0Q2Y1FLV1gwT3R2aGpTNzdodTNPUGdtVDEwQWlOeTQ2d9IB8wFBVV95cUxNZmxKWDJjSXIzZ1psZXhvMUVabTl2aDc3Zm1JdENfcHJVdXZtNUVzNzRXM1pHQ01FSWhBWjBRSFp6ZV9KQUVYaDlma1I5S3BISzBDV0RaR3ZyeDNwSXpSTXh2akVQdnpTem5HMGxfVTVXalNIUkdWUUgyU1gyV0RuT3ZsT2taWkxSbGJxZXFRNHh5U1BtcmhHNUpuX2hJM0k0OFJueXBraWdpVmRybDlqVEQ3TE9xcjlFV1pWSEUzalhqZGNyTVdFYTNNMXR5MlRZbUdBRHJmNmIxSXQ4V3Y0X1VVZ0Q0aGVQOVBOTTl2SmxGdFE?oc=5\" target=\"_blank\">Tamil Nadu forest staff seek permanent jobs after years of anti-poaching, protection work</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The New Indian Express</font>",
+    "summary_en": "• <a href=\"https://news.google.com/rss/articles/CBMi5gFBVV95cUxNUVQ0eG5CakJla2VfMjduUnI3WFlqZnB4MHlFSzYyaFczUkRJNDdzT0xIR0JYTVFCaVB0aUNKV3hLM3IwUzl1SEtabVNpWm5oVl9MeVcxblNvY1pQc0hwZXNLVGM5SlNlQTlCdU5zWUR5TERVcUZ5a0J1RkVCWjBsR0lRVk11VWhFcVlMZHNPMm04LVZZbzhaMWI4VWtDRGhXODdjMDVNSVI1R3ZVU1ZBT1ZSMmhnTkJ2RzU4bEs0eWRMQ1BsT0Q2Y1FLV1gwT3R2aGpTNzdodTNPUGdtVDEwQWlOeTQ2d9IB8wFBVV95cUxNZmxKWDJjSXIzZ1psZXhvMUVabTl2aDc3Zm1JdENfcHJVdXZtNUVzNzRXM1pHQ01FSWhBWjBRSFp6ZV9KQUVYaDlma1I5S3BISzBDV0RaR3ZyeDNwSXpSTXh2akVQdnpTem5HMGxfVTVXalNIUkdWUUgyU1gyV0RuT3ZsT2taWkxSbGJxZXFRNHh5U1BtcmhHNUpuX2hJM0k0OFJueXBraWdpVmRybDlqVEQ3TE9xcjlFV1pWSEUzalhqZGNyTVdFYTNNMXR5MlRZbUdBRHJmNmIxSXQ4V3Y0X1VVZ0Q0aGVQOVBOTTl2SmxGdFE?oc=5\" target=\"_blank\">Tamil Nadu forest staff seek permanent jobs after years of anti-poaching, protection work</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The New Indian Express</font>\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• <a href=\"https://news.google.com/rss/articles/CBMi5gFBVV95cUxNUVQ0eG5CakJla2VfMjduUnI3WFlqZnB4MHlFSzYyaFczUkRJNDdzT0xIR0JYTVFCaVB0aUNKV3hLM3IwUzl1SEtabVNpWm5oVl9MeVcxblNvY1pQc0hwZXNLVGM5SlNlQTlCdU5zWUR5TERVcUZ5a0J1RkVCWjBsR0lRVk11VWhFcVlMZHNPMm04LVZZbzhaMWI4VWtDRGhXODdjMDVNSVI1R3ZVU1ZBT1ZSMmhnTkJ2RzU4bEs0eWRMQ1BsT0Q2Y1FLV1gwT3R2aGpTNzdodTNPUGdtVDEwQWlOeTQ2d9IB8wFBVV95cUxNZmxKWDJjSXIzZ1psZXhvMUVabTl2aDc3Zm1JdENfcHJVdXZtNUVzNzRXM1pHQ01FSWhBWjBRSFp6ZV9KQUVYaDlma1I5S3BISzBDV0RaR3ZyeDNwSXpSTXh2akVQdnpTem5HMGxfVTVXalNIUkdWUUgyU1gyV0RuT3ZsT2taWkxSbGJxZXFRNHh5U1BtcmhHNUpuX2hJM0k0OFJueXBraWdpVmRybDlqVEQ3TE9xcjlFV1pWSEUzalhqZGNyTVdFYTNNMXR5MlRZbUdBRHJmNmIxSXQ4V3Y0X1VVZ0Q0aGVQOVBOTTl2SmxGdFE?oc=5\" target=\"_blank\">Tamil Nadu forest staff seek permanent jobs after years of anti-poaching, protection work</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The New Indian Express</font>\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "Low",
+    "district": "Tamil Nadu",
+    "species": [],
+    "source_name": "The New Indian Express",
+    "source_url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNUVQ0eG5CakJla2VfMjduUnI3WFlqZnB4MHlFSzYyaFczUkRJNDdzT0xIR0JYTVFCaVB0aUNKV3hLM3IwUzl1SEtabVNpWm5oVl9MeVcxblNvY1pQc0hwZXNLVGM5SlNlQTlCdU5zWUR5TERVcUZ5a0J1RkVCWjBsR0lRVk11VWhFcVlMZHNPMm04LVZZbzhaMWI4VWtDRGhXODdjMDVNSVI1R3ZVU1ZBT1ZSMmhnTkJ2RzU4bEs0eWRMQ1BsT0Q2Y1FLV1gwT3R2aGpTNzdodTNPUGdtVDEwQWlOeTQ2d9IB8wFBVV95cUxNZmxKWDJjSXIzZ1psZXhvMUVabTl2aDc3Zm1JdENfcHJVdXZtNUVzNzRXM1pHQ01FSWhBWjBRSFp6ZV9KQUVYaDlma1I5S3BISzBDV0RaR3ZyeDNwSXpSTXh2akVQdnpTem5HMGxfVTVXalNIUkdWUUgyU1gyV0RuT3ZsT2taWkxSbGJxZXFRNHh5U1BtcmhHNUpuX2hJM0k0OFJueXBraWdpVmRybDlqVEQ3TE9xcjlFV1pWSEUzalhqZGNyTVdFYTNNMXR5MlRZbUdBRHJmNmIxSXQ4V3Y0X1VVZ0Q0aGVQOVBOTTl2SmxGdFE?oc=5",
+    "published_at": "2026-08-15 09:23:31",
+    "collected_at": "2026-08-16 05:51:40.720988",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today's date in Asia/Kolkata",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Tamil Nadu"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Tamil Nadu"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Negative",
+    "date_status": "YESTERDAY",
+    "id": "art_ebb9fa76",
+    "created_at": "2026-08-16 11:21:40.720988",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tiger parts seized in Karnataka raise questions over burnt big cat carcass in STR - The New Indian Express",
+    "title_ta": "புலி parts seized in Karnataka raise questions over burnt big cat carcass in STR - The New Indian Express",
+    "content_en": "<a href=\"https://news.google.com/rss/articles/CBMi3AFBVV95cUxOclYwTGVGNmZLeGZKSjJXNnpVTDZ0NlVIZmJZZHNyQTNENGRCZkNkVWFwc05hRnpOTzlqTnUycTZGRHphLUVDcnRYV3ZZN1dWZG8tZG0wTkNqT05OOVNNRjMzcGpuanlidW5Gb1RDdFJjdFI3UnQzS1lLX3VtaTBRX2MtLTctRTRGQkpsZ0lPMWp6bFBVaU5zekpZTktManFndm1FWFZlYVFJYXFJdDhzTHVGaERpRWZDOFVtRGRxSUtZS0VvcFZLeWVfRWZEdDhXdnozeHdsZ1BadnRT0gHqAUFVX3lxTFBkNVVYelpRb1Y2Z0xRSUFmWTZNQWR1eHBOclJBOU1DSzRqbl8wcGp5Sk5RcGxVc0FSa1pCTndaeGFxUGlqOWRKYl9CTzFGZ3Q1NnVyOXV2S3BjZmw4eVBlZDNadUdEYXFFYlB5TE1ZRHBsTkhBb3VFQ251dVc2ZTNENERTNmlrY2Z4SmgxaFFwNGhzOHp5YlgzT0s2YzZOVmhCYmVNMU5DVXNBSDFEYVVadTcwbEtqdG4zcU1NRUl6MllYNlhvd1lIZ1lhcTBfRklSRmdtSm5fdTdCVTM5b1ItUnlyaEp2aUJoUQ?oc=5\" target=\"_blank\">Tiger parts seized in Karnataka raise questions over burnt big cat carcass in STR</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The New Indian Express</font>",
+    "content_ta": "<a href=\"https://news.google.com/rss/articles/CBMi3AFBVV95cUxOclYwTGVGNmZLeGZKSjJXNnpVTDZ0NlVIZmJZZHNyQTNENGRCZkNkVWFwc05hRnpOTzlqTnUycTZGRHphLUVDcnRYV3ZZN1dWZG8tZG0wTkNqT05OOVNNRjMzcGpuanlidW5Gb1RDdFJjdFI3UnQzS1lLX3VtaTBRX2MtLTctRTRGQkpsZ0lPMWp6bFBVaU5zekpZTktManFndm1FWFZlYVFJYXFJdDhzTHVGaERpRWZDOFVtRGRxSUtZS0VvcFZLeWVfRWZEdDhXdnozeHdsZ1BadnRT0gHqAUFVX3lxTFBkNVVYelpRb1Y2Z0xRSUFmWTZNQWR1eHBOclJBOU1DSzRqbl8wcGp5Sk5RcGxVc0FSa1pCTndaeGFxUGlqOWRKYl9CTzFGZ3Q1NnVyOXV2S3BjZmw4eVBlZDNadUdEYXFFYlB5TE1ZRHBsTkhBb3VFQ251dVc2ZTNENERTNmlrY2Z4SmgxaFFwNGhzOHp5YlgzT0s2YzZOVmhCYmVNMU5DVXNBSDFEYVVadTcwbEtqdG4zcU1NRUl6MllYNlhvd1lIZ1lhcTBfRklSRmdtSm5fdTdCVTM5b1ItUnlyaEp2aUJoUQ?oc=5\" target=\"_blank\">புலி parts seized in Karnataka raise questions over burnt big cat carcass in STR</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The New Indian Express</font>",
+    "summary_en": "• <a href=\"https://news.google.com/rss/articles/CBMi3AFBVV95cUxOclYwTGVGNmZLeGZKSjJXNnpVTDZ0NlVIZmJZZHNyQTNENGRCZkNkVWFwc05hRnpOTzlqTnUycTZGRHphLUVDcnRYV3ZZN1dWZG8tZG0wTkNqT05OOVNNRjMzcGpuanlidW5Gb1RDdFJjdFI3UnQzS1lLX3VtaTBRX2MtLTctRTRGQkpsZ0lPMWp6bFBVaU5zekpZTktManFndm1FWFZlYVFJYXFJdDhzTHVGaERpRWZDOFVtRGRxSUtZS0VvcFZLeWVfRWZEdDhXdnozeHdsZ1BadnRT0gHqAUFVX3lxTFBkNVVYelpRb1Y2Z0xRSUFmWTZNQWR1eHBOclJBOU1DSzRqbl8wcGp5Sk5RcGxVc0FSa1pCTndaeGFxUGlqOWRKYl9CTzFGZ3Q1NnVyOXV2S3BjZmw4eVBlZDNadUdEYXFFYlB5TE1ZRHBsTkhBb3VFQ251dVc2ZTNENERTNmlrY2Z4SmgxaFFwNGhzOHp5YlgzT0s2YzZOVmhCYmVNMU5DVXNBSDFEYVVadTcwbEtqdG4zcU1NRUl6MllYNlhvd1lIZ1lhcTBfRklSRmdtSm5fdTdCVTM5b1ItUnlyaEp2aUJoUQ?oc=5\" target=\"_blank\">Tiger parts seized in Karnataka raise questions over burnt big cat carcass in STR</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The New Indian Express</font>\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• <a href=\"https://news.google.com/rss/articles/CBMi3AFBVV95cUxOclYwTGVGNmZLeGZKSjJXNnpVTDZ0NlVIZmJZZHNyQTNENGRCZkNkVWFwc05hRnpOTzlqTnUycTZGRHphLUVDcnRYV3ZZN1dWZG8tZG0wTkNqT05OOVNNRjMzcGpuanlidW5Gb1RDdFJjdFI3UnQzS1lLX3VtaTBRX2MtLTctRTRGQkpsZ0lPMWp6bFBVaU5zekpZTktManFndm1FWFZlYVFJYXFJdDhzTHVGaERpRWZDOFVtRGRxSUtZS0VvcFZLeWVfRWZEdDhXdnozeHdsZ1BadnRT0gHqAUFVX3lxTFBkNVVYelpRb1Y2Z0xRSUFmWTZNQWR1eHBOclJBOU1DSzRqbl8wcGp5Sk5RcGxVc0FSa1pCTndaeGFxUGlqOWRKYl9CTzFGZ3Q1NnVyOXV2S3BjZmw4eVBlZDNadUdEYXFFYlB5TE1ZRHBsTkhBb3VFQ251dVc2ZTNENERTNmlrY2Z4SmgxaFFwNGhzOHp5YlgzT0s2YzZOVmhCYmVNMU5DVXNBSDFEYVVadTcwbEtqdG4zcU1NRUl6MllYNlhvd1lIZ1lhcTBfRklSRmdtSm5fdTdCVTM5b1ItUnlyaEp2aUJoUQ?oc=5\" target=\"_blank\">புலி parts seized in Karnataka raise questions over burnt big cat carcass in STR</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">The New Indian Express</font>\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "Low",
+    "district": "Erode & Sathyamangalam",
+    "species": [
+      "Tiger"
+    ],
+    "source_name": "The New Indian Express",
+    "source_url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOclYwTGVGNmZLeGZKSjJXNnpVTDZ0NlVIZmJZZHNyQTNENGRCZkNkVWFwc05hRnpOTzlqTnUycTZGRHphLUVDcnRYV3ZZN1dWZG8tZG0wTkNqT05OOVNNRjMzcGpuanlidW5Gb1RDdFJjdFI3UnQzS1lLX3VtaTBRX2MtLTctRTRGQkpsZ0lPMWp6bFBVaU5zekpZTktManFndm1FWFZlYVFJYXFJdDhzTHVGaERpRWZDOFVtRGRxSUtZS0VvcFZLeWVfRWZEdDhXdnozeHdsZ1BadnRT0gHqAUFVX3lxTFBkNVVYelpRb1Y2Z0xRSUFmWTZNQWR1eHBOclJBOU1DSzRqbl8wcGp5Sk5RcGxVc0FSa1pCTndaeGFxUGlqOWRKYl9CTzFGZ3Q1NnVyOXV2S3BjZmw4eVBlZDNadUdEYXFFYlB5TE1ZRHBsTkhBb3VFQ251dVc2ZTNENERTNmlrY2Z4SmgxaFFwNGhzOHp5YlgzT0s2YzZOVmhCYmVNMU5DVXNBSDFEYVVadTcwbEtqdG4zcU1NRUl6MllYNlhvd1lIZ1lhcTBfRklSRmdtSm5fdTdCVTM5b1ItUnlyaEp2aUJoUQ?oc=5",
+    "published_at": "2026-08-15 07:53:00",
+    "collected_at": "2026-08-16 05:51:40.720988",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today's date in Asia/Kolkata",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Erode & Sathyamangalam",
+      "Tiger"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Erode & Sathyamangalam"
+      ],
+      "species": [
+        "Tiger"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "YESTERDAY",
+    "id": "art_7d01a9f6",
+    "created_at": "2026-08-16 11:21:40.720988",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Wildlife Belongs To The Wild, Not To Celebrities To Show Off",
+    "title_ta": "[தமிழ் அறிக்கை] Wildlife Belongs To The Wild, Not To Celebrities To Show Off",
+    "content_en": "Actor Vikram’s video with a Lar Gibbon has renewed concerns over exotic wildlife ownership and smuggling in India. The endangered ape’s suspected route through Manipur and Tamil Nadu highlights gaps ...",
+    "content_ta": "Actor Vikram’s video with a Lar Gibbon has renewed concerns over exotic wildlife ownership and smuggling in India. The endangered ape’s suspected route through Manipur and Tamil Nadu highlights gaps ...",
+    "summary_en": "• Actor Vikram’s video with a Lar Gibbon has renewed concerns over exotic wildlife ownership and smuggling in India.\n• The endangered ape’s suspected route through Manipur and Tamil Nadu highlights gaps ...\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• Actor Vikram’s video with a Lar Gibbon has renewed concerns over exotic wildlife ownership and smuggling in India.\n• The endangered ape’s suspected route through Manipur and Tamil Nadu highlights gaps ...\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "Low",
+    "district": "Tamil Nadu",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a81500abb2048439e54015eb012c70e&url=https%3a%2f%2fwww.freepressjournal.in%2fanalysis%2fwildlife-belongs-to-the-wild-not-to-celebrities-to-show-off&c=13927293200736197707&mkt=en-in",
+    "published_at": "2026-08-15 01:52:00",
+    "collected_at": "2026-08-16 05:52:03.532800",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today's date in Asia/Kolkata",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Tamil Nadu"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Tamil Nadu"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "YESTERDAY",
+    "id": "art_4c2fae93",
+    "created_at": "2026-08-16 11:22:03.532800",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tiger parts seized in Karnataka raise questions over burnt big cat carcass in STR",
+    "title_ta": "புலி parts seized in Karnataka raise questions over burnt big cat carcass in STR",
+    "content_en": "CHENNAI: A dispute over whether a big cat carcass burnt nearly five days ago in Germalam village in Hasanur forest division of Sathyamangalam Tiger Reserve (STR ...",
+    "content_ta": "CHENNAI: A dispute over whether a big cat carcass burnt nearly five days ago in Germalam village in Hasanur forest division of சத்தியமங்கலம் புலி Reserve (STR ...",
+    "summary_en": "• CHENNAI: A dispute over whether a big cat carcass burnt nearly five days ago in Germalam village in Hasanur forest division of Sathyamangalam Tiger Reserve (STR ...\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• CHENNAI: A dispute over whether a big cat carcass burnt nearly five days ago in Germalam village in Hasanur forest division of சத்தியமங்கலம் புலி Reserve (STR ...\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "Low",
+    "district": "Erode & Sathyamangalam",
+    "species": [
+      "Tiger"
+    ],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a81500abb2048439e54015eb012c70e&url=https%3a%2f%2fwww.newindianexpress.com%2fstates%2ftamil-nadu%2f2026%2fAug%2f15%2ftiger-parts-seized-in-karnataka-raise-questions-over-burnt-big-cat-carcass-in-str&c=17375332938562533536&mkt=en-in",
+    "published_at": "2026-08-15 00:52:00",
+    "collected_at": "2026-08-16 05:52:03.532800",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today's date in Asia/Kolkata",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Erode & Sathyamangalam",
+      "Tiger"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Erode & Sathyamangalam"
+      ],
+      "species": [
+        "Tiger"
+      ],
+      "authorities": [
+        "Tamil Nadu Wildlife Division"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Neutral",
+    "date_status": "YESTERDAY",
+    "id": "art_aef535c3",
+    "created_at": "2026-08-16 11:22:03.532800",
+    "views_count": 0,
+    "is_bookmarked": false
+  },
+  {
+    "title_en": "Tamil Nadu forest staff seek permanent jobs after years of anti-poaching, protection work",
+    "title_ta": "[தமிழ் அறிக்கை] Tamil Nadu forest staff seek permanent jobs after years of anti-poaching, protection work",
+    "content_en": "TIRUPPUR: A demand has been raised to permanently appoint Anti-Poaching Watchers (APW) and other temporary staff, who have been serving in the forest department for a long time, as forest watchers. G ...",
+    "content_ta": "TIRUPPUR: A demand has been raised to permanently appoint Anti-Poaching Watchers (APW) and other temporary staff, who have been serving in the வனத்துறை for a long time, as forest watchers. G ...",
+    "summary_en": "• TIRUPPUR: A demand has been raised to permanently appoint Anti-Poaching Watchers (APW) and other temporary staff, who have been serving in the forest department for a long time, as forest watchers.\n• Forest Department and local authorities dispatched teams for ground surveillance.\n• Local residents urged to follow forest advisory safety guidelines.",
+    "summary_ta": "• TIRUPPUR: A demand has been raised to permanently appoint Anti-Poaching Watchers (APW) and other temporary staff, who have been serving in the வனத்துறை for a long time, as forest watchers.\n• வனத்துறை மற்றும் சிறப்பு மீட்புக் குழுக்கள் தீவிர கண்காணிப்பில் ஈடுபட்டுள்ளன.\n• கிராம மக்கள் இரவு நேரத்தில் வனப் எல்லை பகுதிக்கு செல்வதைத் தவிர்க்க அறிவுறுத்தப்பட்டுள்ளனர்.",
+    "category": "Wildlife Crime & Rescue",
+    "conflict_level": "Low",
+    "district": "Tiruppur & Anamalai",
+    "species": [],
+    "source_name": "Bing News Media",
+    "source_url": "http://www.bing.com/news/apiclick.aspx?ref=FexRss&aid=&tid=6a81500b08f746d38c960b5a90983324&url=https%3a%2f%2fwww.msn.com%2fen-in%2fnews%2fother%2ftamil-nadu-forest-staff-seek-permanent-jobs-after-years-of-anti-poaching-protection-work%2far-AA2a9t5V&c=2077448804263272690&mkt=en-in",
+    "published_at": "2026-08-15 02:23:31",
+    "collected_at": "2026-08-16 05:52:05.178734",
+    "verification_status": "VERIFIED",
+    "verification_reason": "Original source metadata verified and matches today's date in Asia/Kolkata",
+    "tags": [
+      "Wildlife Crime & Rescue",
+      "Tiruppur & Anamalai"
+    ],
+    "image_url": null,
+    "key_entities": {
+      "locations": [
+        "Tiruppur & Anamalai"
+      ],
+      "species": [],
+      "authorities": [
+        "Tamil Nadu Forest Department"
+      ],
+      "impact": "Minor disturbance"
+    },
+    "sentiment": "Negative",
+    "date_status": "YESTERDAY",
+    "id": "art_da88ea9e",
+    "created_at": "2026-08-16 11:22:05.178734",
     "views_count": 0,
     "is_bookmarked": false
   }

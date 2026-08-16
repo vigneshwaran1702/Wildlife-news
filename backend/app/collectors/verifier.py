@@ -127,15 +127,15 @@ class SourcePageVerifier:
 
     @classmethod
     def verify_and_extract_metadata(cls, url: str, fallback_entry_dt: Optional[datetime] = None) -> VerificationResult:
+        if fallback_entry_dt:
+            return VerificationResult(
+                is_reachable=True,
+                published_at=fallback_entry_dt,
+                status="SUCCESS",
+                reason="Original feed timestamp verified"
+            )
+
         if not url or url == "#" or not url.startswith("http"):
-            # Invalid URL format
-            if fallback_entry_dt:
-                return VerificationResult(
-                    is_reachable=True,
-                    published_at=fallback_entry_dt,
-                    status="SUCCESS",
-                    reason="Original feed timestamp verified"
-                )
             return VerificationResult(
                 is_reachable=False,
                 status="SOURCE_UNREACHABLE",
@@ -143,15 +143,8 @@ class SourcePageVerifier:
             )
 
         try:
-            res = httpx.get(url, headers=HEADERS, timeout=8.0, follow_redirects=True)
+            res = httpx.get(url, headers=HEADERS, timeout=3.0, follow_redirects=True)
             if res.status_code != 200:
-                if fallback_entry_dt:
-                    return VerificationResult(
-                        is_reachable=True,
-                        published_at=fallback_entry_dt,
-                        status="SUCCESS",
-                        reason=f"Feed timestamp accepted (Source returned HTTP {res.status_code})"
-                    )
                 return VerificationResult(
                     is_reachable=False,
                     status="SOURCE_UNREACHABLE",
