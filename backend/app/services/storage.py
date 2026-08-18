@@ -102,21 +102,55 @@ class StorageService:
 
         # Update date_status on every article dynamically according to exact IST formula
         for a in results:
-            if a.published_at:
-                if isinstance(a.published_at, datetime):
-                    if a.published_at.tzinfo is not None:
-                        pub_date = a.published_at.astimezone(IST).date()
-                    else:
-                        pub_date = a.published_at.date()
-                else:
-                    pub_date = today_date_ist
+            dt = a.published_at or a.collected_at or a.created_at
+            if isinstance(dt, str):
+                try:
+                    dt = datetime.fromisoformat(dt)
+                except Exception:
+                    dt = None
 
-                if pub_date == today_date_ist:
-                    a.date_status = "TODAY"
-                elif pub_date == today_date_ist - timedelta(days=1):
-                    a.date_status = "YESTERDAY"
+            if isinstance(dt, datetime):
+                if dt.tzinfo is not None:
+                    pub_date = dt.astimezone(IST).date()
                 else:
-                    a.date_status = "OLD"
+                    pub_date = dt.date()
+            else:
+                pub_date = today_date_ist
+
+            if pub_date == today_date_ist:
+                a.date_status = "TODAY"
+            elif pub_date == today_date_ist - timedelta(days=1):
+                a.date_status = "YESTERDAY"
+            else:
+                a.date_status = "OLD"
+
+        # If TODAY filter is requested and 0 today articles match, trigger auto-refresh for fresh today feed
+        is_today_query = todays_only or (date_status and date_status.upper() == "TODAY")
+        today_matching = [a for a in results if getattr(a, 'verification_status', 'VERIFIED') == 'VERIFIED' and (a.date_status or "").upper() == "TODAY"]
+        if is_today_query and len(today_matching) == 0:
+            try:
+                from scripts.update_today_feed import update_daily_feed
+                update_daily_feed()
+                results = list(self.articles.values())
+                for a in results:
+                    dt = a.published_at or a.collected_at or a.created_at
+                    if isinstance(dt, str):
+                        try:
+                            dt = datetime.fromisoformat(dt)
+                        except Exception:
+                            dt = None
+                    if isinstance(dt, datetime):
+                        pub_date = dt.astimezone(IST).date() if dt.tzinfo is not None else dt.date()
+                    else:
+                        pub_date = today_date_ist
+                    if pub_date == today_date_ist:
+                        a.date_status = "TODAY"
+                    elif pub_date == today_date_ist - timedelta(days=1):
+                        a.date_status = "YESTERDAY"
+                    else:
+                        a.date_status = "OLD"
+            except Exception as e:
+                print(f"Auto-refresh today feed error: {e}")
 
         # Expose only verified articles if verified_only is True
         if verified_only:
