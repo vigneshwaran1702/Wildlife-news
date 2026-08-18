@@ -152,5 +152,21 @@
       "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-16",
       "Downloaded At": "Date: Aug 16, 2026"
     }
+  },
+  {
+    "id": "pdf_740acf1e",
+    "title": "Shift 1 Day Bulletin (8:00 AM - 5:00 PM) - 18 Aug 2026",
+    "report_type": "Shift 1: Day Bulletin (08:00 AM - 05:00 PM)",
+    "file_path": "C:\\Users\\hp\\Downloads\\wild life news\\backend\\pdfs\\TN_Forest_Media_Scan_pdf_740acf1e.pdf",
+    "download_url": "/api/pdf/download/pdf_740acf1e",
+    "created_at": "2026-08-18 10:03:21.125831",
+    "article_count": 1,
+    "filter_criteria": {
+      "Time Window": "Aug 18, 2026 08:00 AM to 05:00 PM",
+      "Deduplication": "Excludes Evening (5pm-9pm) & Night (9pm-8am) News",
+      "Auto Schedule": "17:00 (5:00 PM) Daily Trigger",
+      "Endpoint": "/api/pdf/trigger-shift/1?target_date=2026-08-18",
+      "Downloaded At": "Date: Aug 18, 2026"
+    }
   }
 ]
