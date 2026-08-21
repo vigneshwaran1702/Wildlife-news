@@ -1,15 +1,30 @@
 import React from 'react';
 import { Bookmark, ExternalLink, ShieldAlert, MapPin, Tag, Clock, Eye, Sparkles } from 'lucide-react';
 
+function stripHtml(raw) {
+  if (!raw) return '';
+  if (typeof raw !== 'string') return String(raw);
+  try {
+    const doc = new DOMParser().parseFromString(raw, 'text/html');
+    return (doc.body.textContent || '').replace(/\s+/g, ' ').trim();
+  } catch (e) {
+    return raw.replace(/<[^>]*>?/gm, '').replace(/&nbsp;/g, ' ').trim();
+  }
+}
+
 export default function ArticleCard({ article, lang, onSelect, onToggleBookmark }) {
   const isHighRisk = article.conflict_level === 'High';
   const isMedRisk = article.conflict_level === 'Medium';
 
   const riskClass = isHighRisk ? 'badge-risk-high' : isMedRisk ? 'badge-risk-medium' : 'badge-risk-low';
 
-  const title = (lang === 'ta' && article.title_ta) ? article.title_ta : article.title_en;
-  const summary = (lang === 'ta' && article.summary_ta) ? article.summary_ta : article.summary_en;
-  const content = (lang === 'ta' && article.content_ta) ? article.content_ta : article.content_en;
+  const rawTitle = (lang === 'ta' && article.title_ta) ? article.title_ta : article.title_en;
+  const rawSummary = (lang === 'ta' && article.summary_ta) ? article.summary_ta : article.summary_en;
+  const rawContent = (lang === 'ta' && article.content_ta) ? article.content_ta : article.content_en;
+
+  const title = stripHtml(rawTitle);
+  const summary = stripHtml(rawSummary);
+  const content = stripHtml(rawContent);
 
   const formatArticleDate = (dateStr) => {
     if (!dateStr) return '';

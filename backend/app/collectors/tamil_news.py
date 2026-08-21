@@ -6,6 +6,7 @@ import uuid
 from app.models.schemas import CollectorLog
 from app.collectors.pipeline import ArticlePipeline
 from app.services.storage import db_storage
+from app.collectors.html_utils import clean_html
 
 IST = ZoneInfo("Asia/Kolkata")
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
@@ -49,7 +50,7 @@ class TamilNewsCollector:
             for entry in feed.entries[:10]:
                 title_ta = entry.get("title", "")
                 link = entry.get("link", "#")
-                content_ta = entry.get("summary", "") or entry.get("description", "") or title_ta
+                content_ta = clean_html(entry.get("summary", "") or entry.get("description", "")) or title_ta
 
                 source_name = "Tamil News Outlet"
                 if " - " in title_ta:
