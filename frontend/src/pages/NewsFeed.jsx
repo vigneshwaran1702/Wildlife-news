@@ -69,10 +69,10 @@ export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated, refr
         <div>
           <h2 style={{ fontSize: '1.25rem', color: 'var(--heading-color)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <Newspaper color="var(--primary-emerald)" />
-            {bookmarkedOnly ? 'Bookmarked Wildlife News' : 'Tamil Nadu Wildlife News Feed'}
+            {bookmarkedOnly ? 'Bookmarked Forest News' : 'Tamilnadu Forest News'}
           </h2>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginTop: '0.2rem' }}>
-            Continuous AI analysis of human-animal conflicts, forest department bulletins, & conservation news across TN reserves.
+            Continuous AI analysis of forest department bulletins, human-animal conflicts, & conservation news across TN reserves.
           </p>
         </div>
         <div style={{
@@ -95,12 +95,12 @@ export default function NewsFeed({ lang, bookmarkedOnly, onArticlesUpdated, refr
       {loading ? (
         <div style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
           <Sparkles className="spin-icon" size={24} color="var(--primary-emerald)" />
-          <p style={{ marginTop: '0.5rem' }}>Loading Tamil Nadu Wildlife Reports...</p>
+          <p style={{ marginTop: '0.5rem' }}>Loading Tamil Nadu Forest News Reports...</p>
         </div>
       ) : articles.length === 0 ? (
         <div className="glass-card" style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>
           <ShieldAlert size={36} color="var(--accent-amber)" style={{ margin: '0 auto 0.75rem' }} />
-          <h3>No Wildlife Reports Found</h3>
+          <h3>No Forest News Reports Found</h3>
           <p style={{ fontSize: '0.85rem', marginTop: '0.3rem' }}>Try clearing filters or search term to see more news.</p>
         </div>
       ) : (
