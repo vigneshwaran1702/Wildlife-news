@@ -35,17 +35,8 @@ export default function Navbar({ lang, setLang, theme, toggleTheme, activeTab, s
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '-0.02em', color: 'var(--heading-color)' }}>WildTN</span>
-              <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--primary-emerald)' }}>News</span>
-              <span style={{
-                fontSize: '0.65rem',
-                fontWeight: '700',
-                background: 'rgba(245, 158, 11, 0.2)',
-                color: 'var(--accent-amber)',
-                padding: '2px 6px',
-                borderRadius: '4px',
-                border: '1px solid rgba(245, 158, 11, 0.4)'
-              }}>TAMIL NADU</span>
+              <span style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '-0.02em', color: 'var(--heading-color)' }}>Tamil Nadu</span>
+              <span style={{ fontSize: '1.25rem', fontWeight: '700', color: 'var(--primary-emerald)' }}>Forest News</span>
             </div>
             <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Wildlife & Conservation Intelligence Platform</p>
           </div>
