@@ -6,6 +6,7 @@ import uuid
 from app.models.schemas import CollectorLog
 from app.collectors.pipeline import ArticlePipeline
 from app.services.storage import db_storage
+from app.collectors.html_utils import clean_html
 
 IST = ZoneInfo("Asia/Kolkata")
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
@@ -49,7 +50,7 @@ class EnglishNewsCollector:
             for entry in feed.entries[:10]:
                 title_en = entry.get("title", "")
                 link = entry.get("link", "#")
-                content_en = entry.get("summary", "") or entry.get("description", "") or title_en
+                content_en = clean_html(entry.get("summary", "") or entry.get("description", "")) or title_en
 
                 source_name = "Google News - TN Division"
                 if " - " in title_en:

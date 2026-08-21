@@ -1,20 +1,37 @@
 import React, { useState } from 'react';
 import { X, ExternalLink, Bookmark, Sparkles, MapPin, ShieldAlert, Building, AlertTriangle } from 'lucide-react';
 
+function stripHtml(raw) {
+  if (!raw) return '';
+  if (typeof raw !== 'string') return String(raw);
+  try {
+    const doc = new DOMParser().parseFromString(raw, 'text/html');
+    return (doc.body.textContent || '').replace(/\s+/g, ' ').trim();
+  } catch (e) {
+    return raw.replace(/<[^>]*>?/gm, '').replace(/&nbsp;/g, ' ').trim();
+  }
+}
+
 export default function ArticleModal({ article, onClose, onToggleBookmark }) {
   const [viewLang, setViewLang] = useState('en');
 
   if (!article) return null;
 
   const isTamil = viewLang === 'ta';
-  const title = (isTamil && article.title_ta) ? article.title_ta : article.title_en;
-  const content = (isTamil && article.content_ta) ? article.content_ta : article.content_en;
-  const summary = (isTamil && article.summary_ta) ? article.summary_ta : article.summary_en;
+  const rawTitle = (isTamil && article.title_ta) ? article.title_ta : article.title_en;
+  const rawContent = (isTamil && article.content_ta) ? article.content_ta : article.content_en;
+  const rawSummary = (isTamil && article.summary_ta) ? article.summary_ta : article.summary_en;
+
+  const title = stripHtml(rawTitle);
+  const content = stripHtml(rawContent);
+  const summary = stripHtml(rawSummary);
+
+  const sourceLink = article.source_url || article.url;
 
   const handleOpenSource = (e, url) => {
     e.stopPropagation();
     e.preventDefault();
-    if (!url) return;
+    if (!url || url === '#') return;
     try {
       const win = window.open(url, '_blank', 'noopener,noreferrer');
       if (!win) {
@@ -107,13 +124,33 @@ export default function ArticleModal({ article, onClose, onToggleBookmark }) {
 
         {/* Footer Actions */}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderTop: '1px solid var(--border-color)', paddingTop: '1rem', flexWrap: 'wrap', gap: '0.75rem' }}>
-          <button 
-            className="btn btn-secondary"
-            onClick={() => onToggleBookmark(article.id)}
-          >
-            <Bookmark size={16} fill={article.is_bookmarked ? "#10b981" : "none"} />
-            {article.is_bookmarked ? 'Saved in Bookmarks' : 'Save Article'}
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+            <button 
+              className="btn btn-secondary"
+              onClick={() => onToggleBookmark(article.id)}
+            >
+              <Bookmark size={16} fill={article.is_bookmarked ? "#10b981" : "none"} />
+              {article.is_bookmarked ? 'Saved' : 'Save Article'}
+            </button>
+            {sourceLink && sourceLink !== '#' && (
+              <button
+                className="btn btn-secondary"
+                onClick={(e) => handleOpenSource(e, sourceLink)}
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.45rem',
+                  color: 'var(--accent-blue)',
+                  borderColor: 'rgba(59, 130, 246, 0.4)',
+                  cursor: 'pointer'
+                }}
+                title="Open original news source in new tab"
+              >
+                <ExternalLink size={15} />
+                <span>Visit Source ({article.source_name || 'News Source'})</span>
+              </button>
+            )}
+          </div>
           <button className="btn btn-primary" onClick={onClose}>
             Close Brief
           </button>

@@ -9,6 +9,7 @@ IST = ZoneInfo("Asia/Kolkata")
 from app.models.schemas import Article, CollectorLog
 from app.collectors.pipeline import ArticlePipeline
 from app.services.storage import db_storage
+from app.collectors.html_utils import clean_html
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 HEADERS = {"User-Agent": USER_AGENT}
@@ -95,7 +96,7 @@ class RSSCollector:
                 count = 0
                 for entry in feed.entries[:10]:
                     title = entry.get("title", "")
-                    content = entry.get("summary", "") or entry.get("description", "")
+                    content = clean_html(entry.get("summary", "") or entry.get("description", ""))
                     link = entry.get("link", "#")
 
                     is_tamil = feed_info["lang"] == "ta"
